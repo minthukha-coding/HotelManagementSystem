@@ -1,20 +1,1239 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
 
+<html dir="ltr" lang="en" xml:lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="/" />
-    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="app.css" />
-    <link rel="stylesheet" href="HotelManagementSystem.App.styles.css" />
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <HeadOutlet />
+    <title>All courses | Scholastica</title>
+    <meta property="og:title" content="All courses | Scholastica" />
+
+    <!--
+        Theme: Scholastica Premium Moodle Theme
+
+        Author: Marcin Czaja - Rosea Themes (https://rosea.io)
+        Version: 1.5.0
+
+        Copyright (c) 2024 onwards, Marcin Czaja (https://rosea.io)
+        All rights reserved.
+    -->
+
+
+    <meta name="theme-color" content="0#fff">
+
+    <link rel="shortcut icon" href="https://scholastica.rosea.dev/theme/image.php/scholastica/theme/1739051164/favicon" />
+
+
+
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="moodle, All courses | Scholastica" />
+    <link rel="stylesheet" type="text/css" href="https://scholastica.rosea.dev/theme/yui_combo.php?rollup/3.18.1/yui-moodlesimple-min.css" />
+    <script id="firstthemesheet" type="text/css">/** Required in order to fix style inclusion problems in IE with YUI **/</script>
+    <link rel="stylesheet" type="text/css" href="https://scholastica.rosea.dev/theme/styles.php/scholastica/1739051164_1/all" />
+    <script>
+        //<![CDATA[
+        var M = {}; M.yui = {};
+        M.pageloadstarttime = new Date();
+        M.cfg = {"wwwroot":"https:\/\/scholastica.rosea.dev","apibase":"https:\/\/scholastica.rosea.dev\/r.php\/api","homeurl":{},"sesskey":"9FLfInh3Jm","sessiontimeout":"28800","sessiontimeoutwarning":"1200","themerev":"1739051164","slasharguments":1,"theme":"scholastica","iconsystemmodule":"core\/icon_system_fontawesome","jsrev":"1739051164","admin":"admin","svgicons":true,"usertimezone":"America\/New_York","language":"en","courseId":1,"courseContextId":2,"contextid":15,"contextInstanceId":3,"langrev":1739051164,"templaterev":"1739051164","siteId":1,"userId":0};var yui1ConfigFn = function(me) {if(/-skin|reset|fonts|grids|base/.test(me.name)){me.type='css';me.path=me.path.replace(/\.js/,'.css');me.path=me.path.replace(/\/yui2-skin/,'/assets/skins/sam/yui2-skin')}};
+        var yui2ConfigFn = function(me) {var parts=me.name.replace(/^moodle-/,'').split('-'),component=parts.shift(),module=parts[0],min='-min';if(/-(skin|core)$/.test(me.name)){parts.pop();me.type='css';min=''}
+        if(module){var filename=parts.join('-');me.path=component+'/'+module+'/'+filename+min+'.'+me.type}else{me.path=component+'/'+component+'.'+me.type}};
+        YUI_config = {"debug":false,"base":"https:\/\/scholastica.rosea.dev\/lib\/yuilib\/3.18.1\/","comboBase":"https:\/\/scholastica.rosea.dev\/theme\/yui_combo.php?","combine":true,"filter":null,"insertBefore":"firstthemesheet","groups":{"yui2":{"base":"https:\/\/scholastica.rosea.dev\/lib\/yuilib\/2in3\/2.9.0\/build\/","comboBase":"https:\/\/scholastica.rosea.dev\/theme\/yui_combo.php?","combine":true,"ext":false,"root":"2in3\/2.9.0\/build\/","patterns":{"yui2-":{"group":"yui2","configFn":yui1ConfigFn}}},"moodle":{"name":"moodle","base":"https:\/\/scholastica.rosea.dev\/theme\/yui_combo.php?m\/1739051164\/","combine":true,"comboBase":"https:\/\/scholastica.rosea.dev\/theme\/yui_combo.php?","ext":false,"root":"m\/1739051164\/","patterns":{"moodle-":{"group":"moodle","configFn":yui2ConfigFn}},"filter":null,"modules":{"moodle-core-handlebars":{"condition":{"trigger":"handlebars","when":"after"}},"moodle-core-event":{"requires":["event-custom"]},"moodle-core-actionmenu":{"requires":["base","event","node-event-simulate"]},"moodle-core-notification":{"requires":["moodle-core-notification-dialogue","moodle-core-notification-alert","moodle-core-notification-confirm","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-core-notification-dialogue":{"requires":["base","node","panel","escape","event-key","dd-plugin","moodle-core-widget-focusafterclose","moodle-core-lockscroll"]},"moodle-core-notification-alert":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-confirm":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-exception":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-ajaxexception":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-lockscroll":{"requires":["plugin","base-build"]},"moodle-core-maintenancemodetimer":{"requires":["base","node"]},"moodle-core-dragdrop":{"requires":["base","node","io","dom","dd","event-key","event-focus","moodle-core-notification"]},"moodle-core-blocks":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification"]},"moodle-core-chooserdialogue":{"requires":["base","panel","moodle-core-notification"]},"moodle-core_availability-form":{"requires":["base","node","event","event-delegate","panel","moodle-core-notification-dialogue","json"]},"moodle-course-management":{"requires":["base","node","io-base","moodle-core-notification-exception","json-parse","dd-constrain","dd-proxy","dd-drop","dd-delegate","node-event-delegate"]},"moodle-course-util":{"requires":["node"],"use":["moodle-course-util-base"],"submodules":{"moodle-course-util-base":{},"moodle-course-util-section":{"requires":["node","moodle-course-util-base"]},"moodle-course-util-cm":{"requires":["node","moodle-course-util-base"]}}},"moodle-course-categoryexpander":{"requires":["node","event-key"]},"moodle-course-dragdrop":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification","moodle-course-coursebase","moodle-course-util"]},"moodle-form-dateselector":{"requires":["base","node","overlay","calendar"]},"moodle-form-shortforms":{"requires":["node","base","selector-css3","moodle-core-event"]},"moodle-question-searchform":{"requires":["base","node"]},"moodle-question-chooser":{"requires":["moodle-core-chooserdialogue"]},"moodle-availability_completion-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_date-form":{"requires":["base","node","event","io","moodle-core_availability-form"]},"moodle-availability_grade-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_group-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_grouping-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_profile-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-mod_assign-history":{"requires":["node","transition"]},"moodle-mod_quiz-util":{"requires":["node","moodle-core-actionmenu"],"use":["moodle-mod_quiz-util-base"],"submodules":{"moodle-mod_quiz-util-base":{},"moodle-mod_quiz-util-slot":{"requires":["node","moodle-mod_quiz-util-base"]},"moodle-mod_quiz-util-page":{"requires":["node","moodle-mod_quiz-util-base"]}}},"moodle-mod_quiz-questionchooser":{"requires":["moodle-core-chooserdialogue","moodle-mod_quiz-util","querystring-parse"]},"moodle-mod_quiz-quizbase":{"requires":["base","node"]},"moodle-mod_quiz-modform":{"requires":["base","node","event"]},"moodle-mod_quiz-autosave":{"requires":["base","node","event","event-valuechange","node-event-delegate","io-form","datatype-date-format"]},"moodle-mod_quiz-dragdrop":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification","moodle-mod_quiz-quizbase","moodle-mod_quiz-util-base","moodle-mod_quiz-util-page","moodle-mod_quiz-util-slot","moodle-course-util"]},"moodle-mod_quiz-toolboxes":{"requires":["base","node","event","event-key","io","moodle-mod_quiz-quizbase","moodle-mod_quiz-util-slot","moodle-core-notification-ajaxexception"]},"moodle-message_airnotifier-toolboxes":{"requires":["base","node","io"]},"moodle-editor_atto-rangy":{"requires":[]},"moodle-editor_atto-editor":{"requires":["node","transition","io","overlay","escape","event","event-simulate","event-custom","node-event-html5","node-event-simulate","yui-throttle","moodle-core-notification-dialogue","moodle-editor_atto-rangy","handlebars","timers","querystring-stringify"]},"moodle-editor_atto-plugin":{"requires":["node","base","escape","event","event-outside","handlebars","event-custom","timers","moodle-editor_atto-menu"]},"moodle-editor_atto-menu":{"requires":["moodle-core-notification-dialogue","node","event","event-custom"]},"moodle-report_eventlist-eventfilter":{"requires":["base","event","node","node-event-delegate","datatable","autocomplete","autocomplete-filters"]},"moodle-report_loglive-fetchlogs":{"requires":["base","event","node","io","node-event-delegate"]},"moodle-gradereport_history-userselector":{"requires":["escape","event-delegate","event-key","handlebars","io-base","json-parse","moodle-core-notification-dialogue"]},"moodle-qbank_editquestion-chooser":{"requires":["moodle-core-chooserdialogue"]},"moodle-tool_lp-dragdrop-reorder":{"requires":["moodle-core-dragdrop"]},"moodle-assignfeedback_editpdf-editor":{"requires":["base","event","node","io","graphics","json","event-move","event-resize","transition","querystring-stringify-simple","moodle-core-notification-dialog","moodle-core-notification-alert","moodle-core-notification-warning","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-atto_accessibilitychecker-button":{"requires":["color-base","moodle-editor_atto-plugin"]},"moodle-atto_accessibilityhelper-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_align-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_bold-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_charmap-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_clear-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_collapse-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_emojipicker-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_emoticon-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_equation-button":{"requires":["moodle-editor_atto-plugin","moodle-core-event","io","event-valuechange","tabview","array-extras"]},"moodle-atto_h5p-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_html-button":{"requires":["promise","moodle-editor_atto-plugin","moodle-atto_html-beautify","moodle-atto_html-codemirror","event-valuechange"]},"moodle-atto_html-codemirror":{"requires":["moodle-atto_html-codemirror-skin"]},"moodle-atto_html-beautify":{},"moodle-atto_image-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_indent-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_italic-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_link-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_managefiles-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_managefiles-usedfiles":{"requires":["node","escape"]},"moodle-atto_media-button":{"requires":["moodle-editor_atto-plugin","moodle-form-shortforms"]},"moodle-atto_noautolink-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_orderedlist-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_recordrtc-button":{"requires":["moodle-editor_atto-plugin","moodle-atto_recordrtc-recording"]},"moodle-atto_recordrtc-recording":{"requires":["moodle-atto_recordrtc-button"]},"moodle-atto_rtl-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_strike-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_subscript-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_superscript-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_table-button":{"requires":["moodle-editor_atto-plugin","moodle-editor_atto-menu","event","event-valuechange"]},"moodle-atto_title-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_underline-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_undo-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_unorderedlist-button":{"requires":["moodle-editor_atto-plugin"]}}},"gallery":{"name":"gallery","base":"https:\/\/scholastica.rosea.dev\/lib\/yuilib\/gallery\/","combine":true,"comboBase":"https:\/\/scholastica.rosea.dev\/theme\/yui_combo.php?","ext":false,"root":"gallery\/1739051164\/","patterns":{"gallery-":{"group":"gallery"}}}},"modules":{"core_filepicker":{"name":"core_filepicker","fullpath":"https:\/\/scholastica.rosea.dev\/lib\/javascript.php\/1739051164\/repository\/filepicker.js","requires":["base","node","node-event-simulate","json","async-queue","io-base","io-upload-iframe","io-form","yui2-treeview","panel","cookie","datatable","datatable-sort","resize-plugin","dd-plugin","escape","moodle-core_filepicker","moodle-core-notification-dialogue"]},"core_comment":{"name":"core_comment","fullpath":"https:\/\/scholastica.rosea.dev\/lib\/javascript.php\/1739051164\/comment\/comment.js","requires":["base","io-base","node","json","yui2-animation","overlay","escape"]}},"logInclude":[],"logExclude":[],"logLevel":null};
+        M.yui.loader = {modules: {}};
+
+        //]]>
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+
+    <script src="https://scholastica.rosea.dev/theme/scholastica/addons/filtering/index.ui.js"></script>
+
 </head>
 
-<body>
-    <Routes />
-    <script src="_framework/blazor.web.js"></script>
-</body>
+<body id="page-course-index-category" class="format-site limitedwidth role-none  path-course path-course-index ie ie11 dir-ltr lang-en yui-skin-sam yui3-skin-sam scholastica-rosea-dev pagelayout-coursecategory course-1 context-15 category-3 notloggedin theme back-to-top-on drawer-open-index--closed rui-course--visible">
+    <div class="toast-wrapper mx-auto py-0 fixed-top" role="status" aria-live="polite"></div>
 
+    <div id="page-wrapper" class="d-print-block">
+
+        <div>
+            <a class="sr-only sr-only-focusable" href="#maincontent">Skip to main content</a>
+        </div><script src="https://scholastica.rosea.dev/lib/javascript.php/1739051164/lib/polyfills/polyfill.js"></script>
+        <script src="https://scholastica.rosea.dev/theme/yui_combo.php?rollup/3.18.1/yui-moodlesimple-min.js"></script><script src="https://scholastica.rosea.dev/lib/javascript.php/1739051164/lib/javascript-static.js"></script>
+        <script>
+            //<![CDATA[
+            document.body.className += ' jsenabled';
+            //]]>
+        </script>
+
+
+
+        <div class="special-gradient"></div>
+
+        <nav id="topBar" class="rui-topbar-wrapper moodle-has-zindex navbar-expand d-print-none">
+
+            <div class="rui-mobile-nav">
+                <a id="logo" href="https://scholastica.rosea.dev" class="d-inline-flex aabtn ">
+                    <span class="rui-logo dark-mode-logo">
+                        <img src="//scholastica.rosea.dev/pluginfile.php/1/theme_scholastica/customlogo/1739051164/logo-scholastica.svg" class="rui-custom-logo" alt="Scholastica" />
+                        <img src="//scholastica.rosea.dev/pluginfile.php/1/theme_scholastica/customdmlogo/1739051164/scholastica-dark.svg" class="rui-custom-dmlogo" alt="Scholastica" />
+                    </span>
+
+                </a>
+
+                <button id="mobileNav" class="rui-mobile-nav-btn rui-topbar-btn">
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.75 5.75H19.25"></path>
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.75 18.25H19.25"></path>
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.75 12H19.25"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="rui-topbar wrapper-page rui-topbar--custom-menu">
+
+                <div id="topbarLeft" class="d-inline-flex align-items-center">
+
+                    <div class="d-inline-flex align-items-center">
+                        <a id="logo" href="https://scholastica.rosea.dev" class="d-none d-lmd-inline-flex align-items-center text-decoration-none rui-navbar-brand rui-navbar-brand--img aabtn ">
+                            <span class="rui-logo dark-mode-logo">
+                                <img src="//scholastica.rosea.dev/pluginfile.php/1/theme_scholastica/customlogo/1739051164/logo-scholastica.svg" class="rui-custom-logo" alt="Scholastica" />
+                                <img src="//scholastica.rosea.dev/pluginfile.php/1/theme_scholastica/customdmlogo/1739051164/scholastica-dark.svg" class="rui-custom-dmlogo" alt="Scholastica" />
+                            </span>
+
+
+                        </a>
+
+                    </div>
+
+                    <div class="nav dropdown mr-2">
+                        <button id="categoriesListBtn" class="rui-course-special-btn btn-secondary">
+                            <svg width="24px" height="24px" stroke-width="2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor"><path d="M12 21V7C12 5.89543 12.8954 5 14 5H21.4C21.7314 5 22 5.26863 22 5.6V18.7143" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M12 21V7C12 5.89543 11.1046 5 10 5H2.6C2.26863 5 2 5.26863 2 5.6V18.7143" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M14 19L22 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M10 19L2 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M12 21C12 19.8954 12.8954 19 14 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21C12 19.8954 11.1046 19 10 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                            <span class="rui-catbtn-label d-none d-md-block">
+                                Browse
+                            </span>
+                        </button>
+
+                        <div id="categoriesList" class="rui-cat-list dropdown-menu dropdown-content">
+                            <nav class="rui-course-menu">
+                                <ul class="rui-cat-menu-0"><li class="categories-depth-0"><a href="https://scholastica.rosea.dev/course/index.php?categoryid=3">Moodle Tutorials<span class="rui-course-count-badge">5</span></a><ul class="rui-cat-menu-1"><li class="categories-depth-1"><a href="https://scholastica.rosea.dev/course/index.php?categoryid=1">Course Design<span class="rui-course-count-badge">1</span></a></li><li class="categories-depth-1"><a href="https://scholastica.rosea.dev/course/index.php?categoryid=4">Theme Documenattion<span class="rui-course-count-badge">0</span></a></li></ul></li><li class="categories-depth-0"><a href="https://scholastica.rosea.dev/course/index.php?categoryid=6">Paid Courses<span class="rui-course-count-badge">0</span></a><ul class="rui-cat-menu-1"><li class="categories-depth-1"><a href="https://scholastica.rosea.dev/course/index.php?categoryid=9">Industrial Design<span class="rui-course-count-badge">0</span></a></li></ul></li></ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="primary-navigation">
+                    <nav class="moremenu navigation">
+                        <ul id="moremenu-67ac42c1ec68e-navbar-nav" role="menubar" class="nav more-nav navbar-nav">
+                            <li data-key="home" class="nav-item" role="none" data-forceintomoremenu="false">
+                                <a role="menuitem" class="nav-link  "
+                                   href="https://scholastica.rosea.dev/"
+                                   data-disableactive="true"
+                                   tabindex="-1">
+                                    Home
+                                </a>
+                            </li>
+                            <li data-key="" class="nav-item" role="none" data-forceintomoremenu="false">
+                                <a role="menuitem" class="nav-link active "
+                                   href="https://scholastica.rosea.dev/course/index.php?categoryid=3"
+                                   aria-current="true"
+                                   data-disableactive="true">
+                                    Course Filter
+                                </a>
+                            </li>
+                            <li data-key="" class="nav-item" role="none" data-forceintomoremenu="false">
+                                <a role="menuitem" class="nav-link  "
+                                   href="https://rosea.gitbook.io/scholastica-moodle-theme"
+                                   data-disableactive="true"
+                                   tabindex="-1">
+                                    Doc
+                                </a>
+                            </li>
+                            <li class="dropdown nav-item" role="none" data-forceintomoremenu="false">
+                                <a class="dropdown-toggle nav-link  " id="drop-down-67ac42c1ec5a5" role="menuitem" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false" href="#" aria-controls="drop-down-menu-67ac42c1ec5a5"
+                                   tabindex="-1">
+                                    Server
+                                </a>
+                                <div class="dropdown-menu" role="menu" id="drop-down-menu-67ac42c1ec5a5" aria-labelledby="drop-down-67ac42c1ec5a5">
+                                    <a class="dropdown-item" role="menuitem" href="https://www.hostinger.com/pl/referral?REFERRALCODE=1MARCIN48" data-disableactive="true" tabindex="-1">
+                                        Hostiger
+                                    </a>
+                                    <a class="dropdown-item" role="menuitem" href="https://panel.kylos.pl/aff.php?aff=351" data-disableactive="true" tabindex="-1">
+                                        Kylos
+                                    </a>
+                                    <a class="dropdown-item" role="menuitem" href="https://www.scalahosting.com/#rosea" data-disableactive="true" tabindex="-1">
+                                        ScalaHosting
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="dropdown nav-item" role="none" data-forceintomoremenu="false">
+                                <a class="dropdown-toggle nav-link  " id="drop-down-67ac42c1ec5c8" role="menuitem" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false" href="#" aria-controls="drop-down-menu-67ac42c1ec5c8"
+                                   tabindex="-1">
+                                    Moodle Themes
+                                </a>
+                                <div class="dropdown-menu" role="menu" id="drop-down-menu-67ac42c1ec5c8" aria-labelledby="drop-down-67ac42c1ec5c8">
+                                    <a class="dropdown-item" role="menuitem" href="https://rosea.io/universe/" data-disableactive="true" tabindex="-1">
+                                        Universe (New)
+                                    </a>
+                                    <a class="dropdown-item" role="menuitem" href="https://1.envato.market/OR707N" data-disableactive="true" tabindex="-1">
+                                        Space 2
+                                    </a>
+                                    <a class="dropdown-item" role="menuitem" href="https://rosea.io/alpha2-theme/" data-disableactive="true" tabindex="-1">
+                                        Alpha 2
+                                    </a>
+                                    <a class="dropdown-item" role="menuitem" href="https://rosea.io/monocolor-theme/" data-disableactive="true" tabindex="-1">
+                                        Monocolor
+                                    </a>
+                                    <a class="dropdown-item" role="menuitem" href="https://rosea.io/baz/" data-disableactive="true" tabindex="-1">
+                                        BAZ
+                                    </a>
+                                    <a class="dropdown-item" role="menuitem" href="https://rosea.io/moon-theme/" data-disableactive="true" tabindex="-1">
+                                        IOMAD Moon
+                                    </a>
+                                </div>
+                            </li>
+                            <li role="none" class="nav-item dropdown dropdownmoremenu d-none" data-region="morebutton">
+                                <a class="dropdown-toggle nav-link " href="#" id="moremenu-dropdown-67ac42c1ec68e" role="menuitem" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+                                    More
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-left" data-region="moredropdown" aria-labelledby="moremenu-dropdown-67ac42c1ec68e" role="menu">
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div id="usernavigation" class="ml-auto d-inline-flex">
+                    <div class="rui-topbar-customfield d-flex">
+                        <div class="d-inline-flex align-items-center">
+                            <p>
+                                Scholastica (1.0.0) is here!<br><a href="#" target="_blank">Get this theme today!</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <ul class="rui-icon-menu rui-icon-menu--right ">
+                        <li class="rui-icon-menu-plugins m-0"></li>
+                        <li class="rui-icon-menu-darkmode">
+                            <button id="darkModeBtn" class="btn--darkmode" aria-checked="false" type="button" data-preference="darkmode-on">
+                                <div class="rui-dark-mode-status--on rui-tooltip--bottom" data-title="Light Mode" aria-label="Light Mode">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" fill="currentColor" />
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11 0H13V4.06189C12.6724 4.02104 12.3387 4 12 4C11.6613 4 11.3276 4.02104 11 4.06189V0ZM7.0943 5.68018L4.22173 2.80761L2.80752 4.22183L5.6801 7.09441C6.09071 6.56618 6.56608 6.0908 7.0943 5.68018ZM4.06189 11H0V13H4.06189C4.02104 12.6724 4 12.3387 4 12C4 11.6613 4.02104 11.3276 4.06189 11ZM5.6801 16.9056L2.80751 19.7782L4.22173 21.1924L7.0943 18.3198C6.56608 17.9092 6.09071 17.4338 5.6801 16.9056ZM11 19.9381V24H13V19.9381C12.6724 19.979 12.3387 20 12 20C11.6613 20 11.3276 19.979 11 19.9381ZM16.9056 18.3199L19.7781 21.1924L21.1923 19.7782L18.3198 16.9057C17.9092 17.4339 17.4338 17.9093 16.9056 18.3199ZM19.9381 13H24V11H19.9381C19.979 11.3276 20 11.6613 20 12C20 12.3387 19.979 12.6724 19.9381 13ZM18.3198 7.0943L21.1923 4.22183L19.7781 2.80762L16.9056 5.6801C17.4338 6.09071 17.9092 6.56608 18.3198 7.0943Z" fill="currentColor" />
+                                    </svg>
+                                </div>
+                                <div class="rui-dark-mode-status--off rui-tooltip--bottom" data-title="Dark Mode" aria-label="Dark Mode">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2256 2.00253C9.59172 1.94346 6.93894 2.9189 4.92893 4.92891C1.02369 8.83415 1.02369 15.1658 4.92893 19.071C8.83418 22.9763 15.1658 22.9763 19.0711 19.071C21.0811 17.061 22.0565 14.4082 21.9975 11.7743C21.9796 10.9772 21.8669 10.1818 21.6595 9.40643C21.0933 9.9488 20.5078 10.4276 19.9163 10.8425C18.5649 11.7906 17.1826 12.4053 15.9301 12.6837C14.0241 13.1072 12.7156 12.7156 12 12C11.2844 11.2844 10.8928 9.97588 11.3163 8.0699C11.5947 6.81738 12.2094 5.43511 13.1575 4.08368C13.5724 3.49221 14.0512 2.90664 14.5935 2.34046C13.8182 2.13305 13.0228 2.02041 12.2256 2.00253ZM17.6569 17.6568C18.9081 16.4056 19.6582 14.8431 19.9072 13.2186C16.3611 15.2643 12.638 15.4664 10.5858 13.4142C8.53361 11.362 8.73568 7.63895 10.7814 4.09281C9.1569 4.34184 7.59434 5.09193 6.34315 6.34313C3.21895 9.46732 3.21895 14.5326 6.34315 17.6568C9.46734 20.781 14.5327 20.781 17.6569 17.6568Z" fill="currentColor" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </li>
+                        <li></li>
+                        <li class="rui-icon-menu-admin ml-0"></li>
+                        <li class="rui-icon-menu-user m-0">
+                            <div class="usermenu">
+                                <span class="login">
+                                    <a class="rui-topbar-btn rui-login-btn text-decoration-none" href="https://scholastica.rosea.dev/login/index.php">
+                                        <span class="rui-login-btn-txt">Log in</span>
+                                        <svg class="ml-2" width="20" height="20" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M9.75 8.75L13.25 12L9.75 15.25"></path>
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M9.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V17.25C19.25 18.3546 18.3546 19.25 17.25 19.25H9.75">
+                                            </path>
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 12H4.75"></path>
+                                        </svg>
+                                    </a>
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <button class="d-flex d-md-none rui-mobile-nav-btn-close rui-topbar-btn text-decoration-none">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17.25 6.75L6.75 17.25"></path>
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6.75 6.75L17.25 17.25"></path>
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+        </nav>
+
+
+        <div id="page" data-region="mainpage" data-usertour="scroller" class="drawers    drag-container">
+            <div id="topofscroll" class="main-inner">
+
+                <div class="drawer-toggles d-flex">
+                    <div class="drawer-toggler drawer-left-toggle ml-auto d-print-none">
+                        <button class="btn btn-dark drawertoggle btn-close-drawer--left"
+                                data-toggler="drawers"
+                                data-action="toggle"
+                                data-target="theme-drawers-filter"
+                                data-toggle="tooltip"
+                                data-placement="left"
+                                title="Open block drawer">
+                            <span class="sr-only">Open block drawer</span>
+                            <svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor"><path d="M3 6H21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 12L17 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11 18L13 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="page-content" class="page-content wrapper-page">
+
+                    <div class="rui-breadcrumbs wrapper-page d-print-none">
+                        <div id="page-navbar" class="breadcrumbs-container">
+                            <nav aria-label="Navigation bar">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">
+                                        <a href="https://scholastica.rosea.dev/"><span class="text-truncate">Home</span></a>
+                                    </li>
+
+                                    <li class="breadcrumb-item">
+                                        <a href="https://scholastica.rosea.dev/course/index.php"><span class="text-truncate">Courses</span></a>
+                                    </li>
+
+                                    <li class="breadcrumb-item">
+                                        <a href="https://scholastica.rosea.dev/course/index.php?categoryid=3" aria-current="page"><span class="text-truncate">Moodle Tutorials</span></a>
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+
+
+
+                    <div class="wrapper-xxl">
+                        <section id="ctopbl" data-region="ctopbl" class="rui-blocks-area">
+                            <aside id="block-region-ctopbl" class="block-region" data-blockregion="ctopbl" data-droptarget="1"><h2 class="sr-only">Blocks</h2></aside>
+                        </section>
+                    </div>
+
+                    <div id="region-main-box" class="region-main-wrapper">
+                        <section id="region-main" class="" aria-label="Content">
+                            <div>
+                                <div class="">
+
+                                    <div class="wrapper-header">
+                                        <header id="page-header" class="page-header-content page-context-header flex-wrap w-100">
+                                            <div class="w-100 d-flex flex-wrap">
+                                                <div class="page-context-header d-flex align-items-center flex-wrap">
+                                                    <h2 class="page-header-headings
+                rui-page-title rui-page-title--context">
+                                                        <h1 class="rui-main-content-title--h1 rui-title-container page-header-headings ">Moodle Tutorials</h1>
+                                                    </h2>
+                                                </div>
+
+                                                <div class="ml-auto d-flex">
+
+
+                                                    <div class="header-actions-container ml-auto" data-region="header-actions-container">
+                                                    </div>
+                                                </div>
+                                                <div id="course-header">
+                                                </div>
+                                            </div>
+
+
+                                        </header>
+                                    </div>
+
+                                    <section id="cstopbl" data-region="stopbl" class="rui-blocks-area">
+                                        <aside id="block-region-cstopbl" class="block-region" data-blockregion="cstopbl" data-droptarget="1"><h2 class="sr-only">Blocks</h2></aside>
+                                    </section>
+                                    <span class="notifications" id="user-notifications"></span>
+
+
+
+                                    <div id="root" class="d-flex w-100">
+                                        <div class="drawer drawer-left d-print-none not-initialized" data-region="fixed-drawer" id="theme-drawers-filter" data-preference="coursefilter-on" data-state="show-drawer-left" data-forceopen="" data-close-on-resize="1">
+                                            <div class="drawerheader">
+                                                <button class="btn btn-icon--sm btn-dark drawertoggle rui-icon-no-margin"
+                                                        data-toggler="drawers"
+                                                        data-action="closedrawer"
+                                                        data-target="theme-drawers-filter"
+                                                        data-toggle="tooltip"
+                                                        data-placement="left"
+                                                        title="Close block drawer">
+                                                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 6.75L6.75 17.25"></path>
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.75 6.75L17.25 17.25"></path>
+                                                    </svg>
+                                                </button>
+
+                                                <div class="drawerheadercontent hidden">
+                                                </div>
+                                            </div>
+                                            <div class="drawercontent drag-container" data-usertour="scroller">
+                                                <div id="courseFilter" class="rui-course-filter-wrapper p-2">
+
+                                                    <div class="search-input-group d-inline-flex justify-content-between w-100" role="search">
+                                                        <span class="search-input-icon">
+                                                            <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
+                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.25 19.25L15.5 15.5M4.75 11C4.75 7.54822 7.54822 4.75 11 4.75C14.4518 4.75 17.25 7.54822 17.25 11C17.25 14.4518 14.4518 17.25 11 17.25C7.54822 17.25 4.75 14.4518 4.75 11Z"></path>
+                                                            </svg>
+                                                        </span>
+                                                        <input type="text"
+                                                               data-region="input"
+                                                               data-action="search"
+                                                               id="filter-search-input"
+                                                               class="search-input w-100 withclear"
+                                                               placeholder="Search"
+                                                               name="search">
+                                                    </div>
+
+                                                    <div class="rui-course-filter-content">
+                                                        <div class="filtering-group mt-2 rounded border" data-group-name="lang">
+                                                            <h4 class="filtering-title">Language</h4>
+                                                            <div class="filtering-filter" data-filter-name="en">English ‎(en)‎<span class="total" /></div>
+                                                        </div>
+
+                                                        <div class="filtering-group mt-2 rounded border" data-group-name="teachers">
+                                                            <h4 class="filtering-title">Teachers</h4>
+                                                            <div class="filtering-filter" data-filter-name="Marcin Czaja">Marcin Czaja<span class="total" /></div><div class="filtering-filter" data-filter-name="Brunon Samuel">Brunon Samuel<span class="total" /></div>
+                                                        </div>
+
+                                                        <div class="filtering-group mt-2 rounded border" data-group-name="price">
+                                                            <h4 class="filtering-title">Price</h4>
+                                                            <div class="filtering-filter" data-filter-name="$119">
+                                                                $119<span class="total"></span>
+                                                            </div>
+                                                            <div class="filtering-filter" data-filter-name="$99">
+                                                                $99<span class="total"></span>
+                                                            </div>
+                                                            <div class="filtering-filter" data-filter-name="Free">
+                                                                Free<span class="total"></span>
+                                                            </div>
+                                                        </div>
+
+
+
+
+
+
+                                                        <button id="resetFiltersBtn" class="btn btn-xs btn-warning mt-2 ms-3 ps-2 d-none" onclick="resetFilters()" disabled><i class="fa-regular fa-circle-xmark me-2"></i>Clear all</button>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col px-0">
+                                            <div class="main-content" role="main">
+                                                <span id="maincontent"></span><span></span><div class="container-fluid tertiary-navigation" id="action_bar">
+                                                    <div class="row">
+
+                                                        <div class="navitem">
+                                                            <div>
+                                                                <form method="post" action="https://scholastica.rosea.dev/course/jumpto.php" class="form-inline" id="url_select_f67ac42c1dfa1d1">
+                                                                    <input type="hidden" name="sesskey" value="9FLfInh3Jm">
+                                                                    <label for="url_select67ac42c1dfa1d2" class="sr-only">
+                                                                        Course categories
+                                                                    </label>
+                                                                    <select id="url_select67ac42c1dfa1d2" class="custom-select urlselect text-truncate w-100" name="jump">
+                                                                        <option value="/course/index.php?categoryid=3" selected>Moodle Tutorials</option>
+                                                                        <option value="/course/index.php?categoryid=1">Moodle Tutorials / Course Design</option>
+                                                                        <option value="/course/index.php?categoryid=4">Moodle Tutorials / Theme Documenattion</option>
+                                                                        <option value="/course/index.php?categoryid=6">Paid Courses</option>
+                                                                        <option value="/course/index.php?categoryid=9">Paid Courses / Industrial Design</option>
+                                                                        <option value="/course/index.php?categoryid=10">Paid Courses / Industrial Design / 3D Mockups</option>
+                                                                    </select>
+                                                                    <noscript>
+                                                                        <input type="submit" class="btn btn-secondary ml-1" value="Go">
+                                                                    </noscript>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div><div class="course_category_tree clearfix ">
+                                                    <div class="content">
+                                                        <div class="subcategories"><div class="category" data-categoryid="1" data-depth="0"><div class="rui-categorybox-wrapper"><h3 class="rui-categoryname aabtn"><a class="rui-category-link text-decoration-none" href="https://scholastica.rosea.dev/course/index.php?categoryid=1">Course Design</a></h3><h5 class="rui-no-courses-title">1&nbsp;Course</h5></div><div class="rui-categorybox-wrapper"></div></div><div class="category" data-categoryid="4" data-depth="0"><div class="rui-categorybox-wrapper"><h3 class="rui-categoryname aabtn"><a class="rui-category-link text-decoration-none" href="https://scholastica.rosea.dev/course/index.php?categoryid=4">Theme Documenattion</a></h3><h5 class="rui-no-courses-title">0&nbsp;Courses</h5></div><div class="rui-categorybox-wrapper"></div></div></div><div class="courses category-browse category-browse-3">
+                                                            <div id="filtered-results" class="rui-course-card-deck mt-2">
+                                                                <div class="filtering-item rui-course-card rui-progress-0 "
+                                                                     role="listitem"
+                                                                     data-region="course-content"
+                                                                     data-course-id="7"
+                                                                     data-order="7"
+                                                                     data-catid="3"
+                                                                     data-filter-teachers=""
+                                                                     data-filter-lang=""
+                                                                     data-filter-title="Moodle Theme with Course Filter"
+                                                                     data-filter-price="$119">
+
+
+                                                                    <div class="rui-course-card-wrapper position-relative">
+
+                                                                        <a href="https://scholastica.rosea.dev/course/view.php?id=7" tabindex="-1" class="text-decoration-none">
+                                                                            <figure class="rui-course-card-img-top" style="background-image: url(https://scholastica.rosea.dev/pluginfile.php/325/course/overviewfiles/cover-3.jpg);" alt="Course image"><span class="sr-only">Course image" Moodle Theme with Course Filter</span></figure>
+                                                                        </a>
+
+                                                                        <div class="rui-course-card-body">
+                                                                            <div class="d-flex flex-wrap">
+                                                                                <span class="sr-only">
+                                                                                    Course image
+                                                                                </span>
+
+
+                                                                            </div>
+
+                                                                            <div class="w-100">
+                                                                                <div class="rui-course-cat-badge">
+                                                                                    <div class="text-truncate">Moodle Tutorials</div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="d-flex mb-1">
+                                                                                <h4 class="rui-course-card-title mb-1">
+                                                                                    <a href="https://scholastica.rosea.dev/course/view.php?id=7" class="aalink coursename">
+                                                                                        <span class="sr-only">
+                                                                                            Course name
+                                                                                        </span>
+                                                                                        Moodle Theme with Course Filter
+                                                                                    </a>
+                                                                                </h4>
+                                                                            </div>
+
+
+
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="rui-custom-field-contaner">
+                                                                        <div class="rui-custom-field-box"><span class="rui-custom-field-name">Course start date</span><span class="rui-custom-field-value">Wednesday, 20 March 2024</span></div><div class="rui-custom-field-box"><span class="rui-custom-field-name rui-course-enddate-label">Course end date</span><span class="rui-course-enddate rui-custom-field-value">Thursday, 20 March 2031</span></div>
+                                                                    </div>
+
+                                                                    <div class="rui-custom-field-contaner">
+                                                                        <div class="rui-custom-field-box rui-cf-price"><div class="rui-custom-field-name rui-custom-field-price">Price</div><div class="rui-custom-field-value">$119</div></div>
+                                                                    </div>
+
+                                                                </div><div class="filtering-item rui-course-card rui-progress-0 en"
+                                                                           role="listitem"
+                                                                           data-region="course-content"
+                                                                           data-course-id="5"
+                                                                           data-order="5"
+                                                                           data-catid="3"
+                                                                           data-filter-teachers="Marcin Czaja"
+                                                                           data-filter-lang="en"
+                                                                           data-filter-title="Moodle Theme Customization"
+                                                                           data-filter-price="Free">
+
+                                                                    <div class="rui-course-card-icons--right rui-course-lang">
+                                                                        <div class="rui-icon-container">en</div>
+                                                                    </div>
+
+                                                                    <div class="rui-course-card-wrapper position-relative">
+
+                                                                        <a href="https://scholastica.rosea.dev/course/view.php?id=5" tabindex="-1" class="text-decoration-none">
+                                                                            <figure class="rui-course-card-img-top" style="background-image: url(https://scholastica.rosea.dev/pluginfile.php/78/course/overviewfiles/cover-2.jpg);" alt="Course image"><span class="sr-only">Course image" Moodle Theme Customization</span></figure>
+                                                                        </a>
+
+                                                                        <div class="rui-course-card-body">
+                                                                            <div class="d-flex flex-wrap">
+                                                                                <span class="sr-only">
+                                                                                    Course image
+                                                                                </span>
+
+
+                                                                            </div>
+
+                                                                            <div class="w-100">
+                                                                                <div class="rui-course-cat-badge">
+                                                                                    <div class="text-truncate">Moodle Tutorials</div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="d-flex mb-1">
+                                                                                <h4 class="rui-course-card-title mb-1">
+                                                                                    <a href="https://scholastica.rosea.dev/course/view.php?id=5" class="aalink coursename">
+                                                                                        <span class="sr-only">
+                                                                                            Course name
+                                                                                        </span>
+                                                                                        Moodle Theme Customization
+                                                                                    </a>
+                                                                                </h4>
+                                                                            </div>
+
+
+                                                                            <div class="rui-card-course-contacts">
+                                                                                <a href="https://scholastica.rosea.dev/user/profile.php?id=2" class="rui-card-contact rui-user-Teacher text-decoration-none" data-placement="top" role="button" data-title="Marcin Czaja - Teacher">
+                                                                                    <img src="https://scholastica.rosea.dev/pluginfile.php/5/user/icon/scholastica/f1?rev=179" class="rui-card-avatar" alt="Marcin Czaja" />
+                                                                                    <span class="rui-contant-name">Marcin Czaja</span>
+                                                                                </a>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="rui-custom-field-contaner">
+                                                                        <div class="rui-custom-field-box"><span class="rui-custom-field-name">Course start date</span><span class="rui-custom-field-value">Wednesday, 30 November 2022</span></div>
+                                                                    </div>
+
+                                                                    <div class="rui-custom-field-contaner">
+                                                                        <div class="rui-custom-field-box rui-cf-price"><div class="rui-custom-field-name rui-custom-field-price">Price</div><div class="rui-custom-field-value">Free</div></div>
+                                                                    </div>
+
+                                                                </div><div class="filtering-item rui-course-card rui-progress-0 "
+                                                                           role="listitem"
+                                                                           data-region="course-content"
+                                                                           data-course-id="2"
+                                                                           data-order="2"
+                                                                           data-catid="3"
+                                                                           data-filter-teachers="Marcin Czaja"
+                                                                           data-filter-lang=""
+                                                                           data-filter-title="Let&#039;s get started with Scholastica"
+                                                                           data-filter-price="$119">
+
+
+                                                                    <div class="rui-course-card-wrapper position-relative">
+
+                                                                        <a href="https://scholastica.rosea.dev/course/view.php?id=2" tabindex="-1" class="text-decoration-none">
+                                                                            <figure class="rui-course-card-img-top" style="background-image: url(https://scholastica.rosea.dev/pluginfile.php/19/course/overviewfiles/cover-1.jpg);" alt="Course image"><span class="sr-only">Course image" Let's get started with Scholastica</span></figure>
+                                                                        </a>
+
+                                                                        <div class="rui-course-card-body">
+                                                                            <div class="d-flex flex-wrap">
+                                                                                <span class="sr-only">
+                                                                                    Course image
+                                                                                </span>
+
+
+                                                                            </div>
+
+                                                                            <div class="w-100">
+                                                                                <div class="rui-course-cat-badge">
+                                                                                    <div class="text-truncate">Moodle Tutorials</div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="d-flex mb-1">
+                                                                                <h4 class="rui-course-card-title mb-1">
+                                                                                    <a href="https://scholastica.rosea.dev/course/view.php?id=2" class="aalink coursename">
+                                                                                        <span class="sr-only">
+                                                                                            Course name
+                                                                                        </span>
+                                                                                        Let's get started with Scholastica
+                                                                                    </a>
+                                                                                </h4>
+                                                                            </div>
+
+
+                                                                            <div class="rui-card-course-contacts">
+                                                                                <a href="https://scholastica.rosea.dev/user/profile.php?id=2" class="rui-card-contact rui-user-Teacher text-decoration-none" data-placement="top" role="button" data-title="Marcin Czaja - Teacher">
+                                                                                    <img src="https://scholastica.rosea.dev/pluginfile.php/5/user/icon/scholastica/f1?rev=179" class="rui-card-avatar" alt="Marcin Czaja" />
+                                                                                    <span class="rui-contant-name">Marcin Czaja</span>
+                                                                                </a>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="rui-custom-field-contaner">
+                                                                        <div class="rui-custom-field-box"><span class="rui-custom-field-name">Course start date</span><span class="rui-custom-field-value">Wednesday, 20 March 2024</span></div><div class="rui-custom-field-box"><span class="rui-custom-field-name rui-course-enddate-label">Course end date</span><span class="rui-course-enddate rui-custom-field-value">Thursday, 20 March 2031</span></div>
+                                                                    </div>
+
+                                                                    <div class="rui-custom-field-contaner">
+                                                                        <div class="rui-custom-field-box rui-cf-price"><div class="rui-custom-field-name rui-custom-field-price">Price</div><div class="rui-custom-field-value">$119</div></div>
+                                                                    </div>
+
+                                                                </div><div class="filtering-item rui-course-card rui-progress-0 "
+                                                                           role="listitem"
+                                                                           data-region="course-content"
+                                                                           data-course-id="3"
+                                                                           data-order="3"
+                                                                           data-catid="3"
+                                                                           data-filter-teachers="Brunon Samuel"
+                                                                           data-filter-lang=""
+                                                                           data-filter-title="Machine Learning A-Z™: Hands-On Python &amp;amp; R In Data Science"
+                                                                           data-filter-price="$119">
+
+
+                                                                    <div class="rui-course-card-wrapper position-relative">
+
+                                                                        <a href="https://scholastica.rosea.dev/course/view.php?id=3" tabindex="-1" class="text-decoration-none">
+                                                                            <figure class="rui-course-card-img-top" style="background-image: url(https://scholastica.rosea.dev/pluginfile.php/30/course/overviewfiles/cover-3.jpg);" alt="Course image"><span class="sr-only">Course image" Machine Learning A-Z™: Hands-On Python &amp; R In Data Science</span></figure>
+                                                                        </a>
+
+                                                                        <div class="rui-course-card-body">
+                                                                            <div class="d-flex flex-wrap">
+                                                                                <span class="sr-only">
+                                                                                    Course image
+                                                                                </span>
+
+
+                                                                            </div>
+
+                                                                            <div class="w-100">
+                                                                                <div class="rui-course-cat-badge">
+                                                                                    <div class="text-truncate">Moodle Tutorials</div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="d-flex mb-1">
+                                                                                <h4 class="rui-course-card-title mb-1">
+                                                                                    <a href="https://scholastica.rosea.dev/course/view.php?id=3" class="aalink coursename">
+                                                                                        <span class="sr-only">
+                                                                                            Course name
+                                                                                        </span>
+                                                                                        Machine Learning A-Z™: Hands-On Python &amp; R In Data Science
+                                                                                    </a>
+                                                                                </h4>
+                                                                            </div>
+
+
+                                                                            <div class="rui-card-course-contacts">
+                                                                                <a href="https://scholastica.rosea.dev/user/profile.php?id=2" class="rui-card-contact rui-user-Teacher text-decoration-none" data-placement="top" role="button" data-title="Marcin Czaja - Teacher">
+                                                                                    <img src="https://scholastica.rosea.dev/pluginfile.php/5/user/icon/scholastica/f1?rev=179" class="rui-card-avatar" alt="Marcin Czaja" />
+                                                                                    <span class="rui-contant-name">Marcin Czaja</span>
+                                                                                </a>
+                                                                                <a href="https://scholastica.rosea.dev/user/profile.php?id=3" class="rui-card-contact rui-user-Teacher text-decoration-none" data-placement="top" role="button" data-title="Brunon Samuel - Teacher">
+                                                                                    <img src="https://scholastica.rosea.dev/pluginfile.php/104/user/icon/scholastica/f1?rev=6027" class="rui-card-avatar" alt="Brunon Samuel" />
+                                                                                    <span class="rui-contant-name">Brunon Samuel</span>
+                                                                                </a>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="rui-custom-field-contaner">
+                                                                        <div class="rui-custom-field-box"><span class="rui-custom-field-name">Course start date</span><span class="rui-custom-field-value">Sunday, 19 February 2017</span></div>
+                                                                    </div>
+
+                                                                    <div class="rui-custom-field-contaner">
+                                                                        <div class="rui-custom-field-box rui-cf-price"><div class="rui-custom-field-name rui-custom-field-price">Price</div><div class="rui-custom-field-value">$119</div></div>
+                                                                    </div>
+
+                                                                </div><div class="filtering-item rui-course-card rui-progress-0 "
+                                                                           role="listitem"
+                                                                           data-region="course-content"
+                                                                           data-course-id="4"
+                                                                           data-order="4"
+                                                                           data-catid="3"
+                                                                           data-filter-teachers="Marcin Czaja"
+                                                                           data-filter-lang=""
+                                                                           data-filter-title="Custom Moodle Theme"
+                                                                           data-filter-price="$99">
+
+
+                                                                    <div class="rui-course-card-wrapper position-relative">
+
+                                                                        <a href="https://scholastica.rosea.dev/course/view.php?id=4" tabindex="-1" class="text-decoration-none">
+                                                                            <figure class="rui-course-card-img-top" style="background-image: url(https://scholastica.rosea.dev/pluginfile.php/61/course/overviewfiles/fruit-basket-agency-kk2eYi5M7JM-unsplash.jpg);" alt="Course image"><span class="sr-only">Course image" Custom Moodle Theme</span></figure>
+                                                                        </a>
+
+                                                                        <div class="rui-course-card-body">
+                                                                            <div class="d-flex flex-wrap">
+                                                                                <span class="sr-only">
+                                                                                    Course image
+                                                                                </span>
+
+
+                                                                            </div>
+
+                                                                            <div class="w-100">
+                                                                                <div class="rui-course-cat-badge">
+                                                                                    <div class="text-truncate">Moodle Tutorials</div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="d-flex mb-1">
+                                                                                <h4 class="rui-course-card-title mb-1">
+                                                                                    <a href="https://scholastica.rosea.dev/course/view.php?id=4" class="aalink coursename">
+                                                                                        <span class="sr-only">
+                                                                                            Course name
+                                                                                        </span>
+                                                                                        Custom Moodle Theme
+                                                                                    </a>
+                                                                                </h4>
+                                                                            </div>
+
+
+                                                                            <div class="rui-card-course-contacts">
+                                                                                <a href="https://scholastica.rosea.dev/user/profile.php?id=2" class="rui-card-contact rui-user-Teacher text-decoration-none" data-placement="top" role="button" data-title="Marcin Czaja - Teacher">
+                                                                                    <img src="https://scholastica.rosea.dev/pluginfile.php/5/user/icon/scholastica/f1?rev=179" class="rui-card-avatar" alt="Marcin Czaja" />
+                                                                                    <span class="rui-contant-name">Marcin Czaja</span>
+                                                                                </a>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="rui-custom-field-contaner">
+                                                                        <div class="rui-custom-field-box"><span class="rui-custom-field-name">Course start date</span><span class="rui-custom-field-value">Wednesday, 30 November 2022</span></div><div class="rui-custom-field-box"><span class="rui-custom-field-name rui-course-enddate-label">Course end date</span><span class="rui-course-enddate rui-custom-field-value">Friday, 16 December 2022</span></div>
+                                                                    </div>
+
+                                                                    <div class="rui-custom-field-contaner">
+                                                                        <div class="rui-custom-field-box rui-cf-price"><div class="rui-custom-field-name rui-custom-field-price">Price</div><div class="rui-custom-field-value">$99</div></div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div>
+                                        <section id="csbottombl" data-region="csbottombl" class="rui-blocks-area">
+                                            <aside id="block-region-csbottombl" class="block-region" data-blockregion="csbottombl" data-droptarget="1"><h2 class="sr-only">Blocks</h2></aside>
+                                        </section>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </section>
+                    </div>
+
+                    <div class="wrapper-xxl">
+                        <section id="cbottombl" data-region="cbottombl" class="rui-blocks-area">
+                            <aside id="block-region-cbottombl" class="block-region" data-blockregion="cbottombl" data-droptarget="1"><h2 class="sr-only">Blocks</h2></aside>
+                        </section>
+                    </div>
+
+                </div>
+
+
+                <footer id="s-page-footer" class="">
+                    <div class="wrapper-fw ">
+
+                        <div class="rui-footer-content rui-footer-block--1">
+                            <div class="mb-5">
+                                <div class="rui-footer-nav row my-5">
+                                    <div class="col-sm-12 col-md-6 col-lg my-sm-2 my-md-0">
+                                        <p class="h2 text-size-xxl">Good design is aesthetic.</p>
+                                        <p>RoseaThemes<br>128 West 19rd Street, Floor 13<br>New York, NY 10010</p>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg my-sm-2 my-md-0 pl-lg-6 ml-lg-3">
+                                        <p class="text-size-base"><strong>Learn how to use the theme</strong></p>
+                                        <ul class="rui-footer-nav-items list-unstyled mb-0">
+                                            <li><a href="#">Theme Documentation</a></li>
+                                            <li><a href="#">Moodle Documentation</a></li>
+                                            <li><a href="#">Support Page</a></li>
+                                        </ul>
+
+                                        <p class="mt-4 text-size-base">
+                                            <strong>More Premium Moodle Themes</strong>
+                                            <br>Space 2.0 For Moodle 4.3
+                                            <br>Monocolor and Universe
+                                            <br><a href="https://rosea.io">See all themes</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-2 my-sm-2 my-md-0">
+                                        <ul class="rui-footer-nav-items list-unstyled mb-0">
+                                            <li><a href="#">Privacy Policy</a></li>
+                                            <li><a href="#">Terms of Service</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="rui-footer-hr--1" />
+
+                        <div class="rui-footer-content rui-footer-block--2">
+                            <ol class="rui-footer-list">
+                                <li>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>
+                                <li>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>
+                            </ol>
+                            <p class="small mt-4 ml-6">
+                                * Price is in US dollars. The price displayed excludes VAT. The standard VAT rate may be charged, following the law of your country.
+                                <br />
+                                ** Support Page is open for everyone who logged in. If you are not my customer just add a ticket to the general category.
+                            </p>
+                        </div>
+                        <hr class="rui-footer-hr--2" />
+
+
+                        <div class="row">
+                            <div class="rui-footer-copy rui-footer-content col-12 col-md-6 justify-content-lmd-end mb-4 mb-md-0">
+                                <p><strong>Copyright © 2024 Scholastica Premium Moodle Theme. All rights reserved. </strong></p>
+                                <p>Premium Moodle Theme by RoseaThemes.</p>
+                            </div>
+                            <div class="col-12 col-md-6 justify-content-lmd-end d-flex flex-wrap pl-md-6">
+                                <ul class="rui-footer--contact justify-content-lmd-end w-100">
+                                    <li>
+                                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                                            <circle cx="12" cy="12" r="7.25" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></circle>
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.25 12C15.25 16.5 13.2426 19.25 12 19.25C10.7574 19.25 8.75 16.5 8.75 12C8.75 7.5 10.7574 4.75 12 4.75C13.2426 4.75 15.25 7.5 15.25 12Z"></path>
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12H12H19"></path>
+                                        </svg>
+                                        <a class="ml-1" href="https://rosea.io">Moodle Themes</a>
+                                    </li>
+                                    <li>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M15.2502 19.25H8.75C7.64543 19.25 6.75 18.3546 6.75 17.25V6.75C6.75 5.64543 7.64543 4.75 8.75 4.75H15.2502C16.3548 4.75 17.2502 5.64543 17.2502 6.75V17.25C17.2502 18.3546 16.3548 19.25 15.2502 19.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path d="M11.75 16.75H12.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span class="ml-1">Mobile : +12 (34) 00123-45678</span>
+                                    </li>
+                                    <li>
+                                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 7.75C4.75 6.64543 5.64543 5.75 6.75 5.75H17.25C18.3546 5.75 19.25 6.64543 19.25 7.75V16.25C19.25 17.3546 18.3546 18.25 17.25 18.25H6.75C5.64543 18.25 4.75 17.3546 4.75 16.25V7.75Z"></path>
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.5 6.5L12 12.25L18.5 6.5"></path>
+                                        </svg>
+                                        <a class="ml-1" href="mailto:sample@mail.com">sample@mail.com</a>
+                                    </li>
+                                </ul>
+
+                                <div class="rui-footer--box">
+                                    <ul class="rui-footer--social ">
+                                        <li>
+                                            <a href="#" target="_blank" class="text-decoration-none facebook">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M2.00195 12.002C2.00312 16.9214 5.58036 21.1101 10.439 21.881V14.892H7.90195V12.002H10.442V9.80204C10.3284 8.75958 10.6845 7.72064 11.4136 6.96698C12.1427 6.21332 13.1693 5.82306 14.215 5.90204C14.9655 5.91417 15.7141 5.98101 16.455 6.10205V8.56104H15.191C14.7558 8.50405 14.3183 8.64777 14.0017 8.95171C13.6851 9.25566 13.5237 9.68693 13.563 10.124V12.002H16.334L15.891 14.893H13.563V21.881C18.8174 21.0506 22.502 16.2518 21.9475 10.9611C21.3929 5.67041 16.7932 1.73997 11.4808 2.01722C6.16831 2.29447 2.0028 6.68235 2.00195 12.002Z" fill="currentColor"></path>
+                                                </svg>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" target="_blank" class="text-decoration-none twitter">
+                                                <svg width="24" height="25" viewBox="0 0 39 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M22.2856 18.172L31.2216 8H29.1048L21.3424 16.8304L15.1472 8H8L17.3704 21.3544L8 32.02H10.1168L18.3088 22.6928L24.8528 32.02H32M10.8808 9.5632H14.1328L29.1032 30.5336H25.8504" fill="currentColor" />
+                                                </svg>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" target="_blank" class="text-decoration-none linkedin">
+                                                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M19.039,19.043H16.078V14.4c0-1.106-.023-2.53-1.544-2.53-1.544,0-1.78,1.2-1.78,2.449v4.722H9.792V9.5h2.845v1.3h.039a3.12,3.12,0,0,1,2.808-1.542c3,0,3.556,1.975,3.556,4.546v5.238ZM6.447,8.194A1.72,1.72,0,1,1,8.168,6.473,1.719,1.719,0,0,1,6.447,8.194ZM7.932,19.043H4.963V9.5H7.932ZM20.521,2H3.476A1.458,1.458,0,0,0,2,3.441V20.559A1.458,1.458,0,0,0,3.476,22H20.518A1.463,1.463,0,0,0,22,20.559V3.441A1.464,1.464,0,0,0,20.518,2Z" fill="currentColor" />
+                                                </svg>
+                                            </a>
+                                        </li>
+
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="rui-footer--btns-box mt-3">
+                            <div id="course-footer"></div>
+
+                            <div class="rui-footer-btns">
+
+
+
+                                <div class="tool_dataprivacy"><a href="https://scholastica.rosea.dev/admin/tool/dataprivacy/summary.php">Data retention summary</a></div>
+                            </div>
+
+                            <div class="rui-debug footer-content-debugging w-100 d-block mt-4 small"></div>
+                        </div>
+                        <div class="tool_usertours-resettourcontainer ">
+                        </div>
+
+                    </div>
+                </footer>
+
+                <script>
+                    //<![CDATA[
+                    var require = {
+                        baseUrl : 'https://scholastica.rosea.dev/lib/requirejs.php/1739051164/',
+                        // We only support AMD modules with an explicit define() statement.
+                        enforceDefine: true,
+                        skipDataMain: true,
+                        waitSeconds : 0,
+
+                        paths: {
+                            jquery: 'https://scholastica.rosea.dev/lib/javascript.php/1739051164/lib/jquery/jquery-3.7.1.min',
+                            jqueryui: 'https://scholastica.rosea.dev/lib/javascript.php/1739051164/lib/jquery/ui-1.13.2/jquery-ui.min',
+                            jqueryprivate: 'https://scholastica.rosea.dev/lib/javascript.php/1739051164/lib/requirejs/jquery-private'
+                        },
+
+                        // Custom jquery config map.
+                        map: {
+                          // '*' means all modules will get 'jqueryprivate'
+                          // for their 'jquery' dependency.
+                          '*': { jquery: 'jqueryprivate' },
+
+                          // 'jquery-private' wants the real jQuery module
+                          // though. If this line was not here, there would
+                          // be an unresolvable cyclic dependency.
+                          jqueryprivate: { jquery: 'jquery' }
+                        }
+                    };
+
+                    //]]>
+                </script>
+                <script src="https://scholastica.rosea.dev/lib/javascript.php/1739051164/lib/requirejs/require.min.js"></script>
+                <script>
+                    //<![CDATA[
+                    M.util.js_pending("core/first");
+                    require(['core/first'], function() {
+                    require(['core/prefetch'])
+                    ;
+                    M.util.js_pending('filter_mathjaxloader/loader'); require(['filter_mathjaxloader/loader'], function(amd) {amd.configure({"mathjaxconfig":"\nMathJax.Hub.Config({\n    config: [\"Accessible.js\", \"Safe.js\"],\n    errorSettings: { message: [\"!\"] },\n    skipStartupTypeset: true,\n    messageStyle: \"none\"\n});\n","lang":"en"}); M.util.js_complete('filter_mathjaxloader/loader');});;
+                    require(["media_videojs/loader"], function(loader) {
+                        loader.setUp('en');
+                    });;
+
+                            require(['jquery', 'core/custom_interaction_events'], function($, CustomEvents) {
+                                CustomEvents.define('#url_select67ac42c1dfa1d2', [CustomEvents.events.accessibleChange]);
+                                $('#url_select67ac42c1dfa1d2').on(CustomEvents.events.accessibleChange, function() {
+                                    if (!$(this).val()) {
+                                        return false;
+                                    }
+                                    $('#url_select_f67ac42c1dfa1d1').submit();
+                                });
+                            });
+                        ;
+                    M.util.js_pending('theme_scholastica/rui'); require(['theme_scholastica/rui'], function(amd) {amd.init(); M.util.js_complete('theme_scholastica/rui');});;
+                    M.util.js_pending('theme_scholastica/backtotop'); require(['theme_scholastica/backtotop'], function(amd) {amd.init(); M.util.js_complete('theme_scholastica/backtotop');});;
+
+                        require(['core/moremenu'], function(moremenu) {
+                            moremenu(document.querySelector('#moremenu-67ac42c1ec68e-navbar-nav'));
+                        });
+                    ;
+
+                    require(['theme_scholastica/drawers']);
+                    ;
+
+                    require(['jquery'], function($) {
+
+                            hide = true;
+                            $('#page-wrapper').on("click", function () {
+                                if (hide) $('.rui-cat-list').removeClass('show');
+                                hide = true;
+                            });
+
+                            $('body').on('click', '#categoriesListBtn', function () {
+                                var self = $(".rui-cat-list");
+                                if (self.hasClass('show')) {
+                                    $('.rui-cat-list').removeClass('show');
+                                    return false;
+                                }
+                                $('.rui-cat-list').removeClass('show');
+                                self.toggleClass('show');
+                                hide = false;
+                            });
+
+                        $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+
+                            if (!$(this).next().hasClass('show')) {
+                                $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+                            }
+
+                            var $subMenu = $(this).next('.dropdown-menu');
+                            $subMenu.toggleClass('show');
+                            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+                                $('.dropdown-submenu .show').removeClass('show');
+                            });
+
+                            return false;
+
+                        });
+
+                    });
+                    ;
+
+                    // Import the FilteringFlow class from filteringjs library
+                    const {FilteringFlow} = filteringjs;
+
+                    // Get the search input element
+                    const searchElement = document.querySelector('#filter-search-input');
+                    // Set items per page from template variable or default to 10
+                    const ITEMS_PER_PAGE = 10;
+                    // Track current page number
+                    let currentPage = 1;
+
+                    // Add input event listener to trigger filtering when search input changes
+                    searchElement.addEventListener('input', (event) => {
+                        flow.filter();
+                    });
+
+                    // Extend FilteringFlow class with custom functionality
+                    class MyFlow extends FilteringFlow {
+                        // Override handleFilterResult to customize filtering behavior
+                        handleFilterResult(result) {
+                            super.handleFilterResult(result);
+
+                            // Handle reset filters button visibility
+                            const resetFiltersBtn = document.querySelector('#resetFiltersBtn');
+                            const hasCheckedFilters = document.querySelectorAll('.filtering-filter.checked').length > 0;
+                            resetFiltersBtn.disabled = !hasCheckedFilters;
+                            resetFiltersBtn.classList.toggle('d-none', !hasCheckedFilters);
+
+                            // Update filter count badges
+                            for (const group of result.groups) {
+                                for (const filter of group.filters) {
+                                    const filterElement = filter.schemaFilter.data.element;
+                                    filterElement.querySelector('.total').innerText = `${filter.possibleItems.length}`;
+                                }
+                            }
+
+                            // Handle pagination if enabled
+                            // When pagination disabled, show all items
+                            const filteredResults = document.querySelector('#filtered-results');
+                            const items = Array.from(filteredResults.querySelectorAll('.filtering-item')).filter(
+                                item => !item.classList.contains('filtered')
+                            );
+                            items.forEach(item => {
+                                item.style.display = '';
+                            });
+                        }
+
+                        // Helper method to get all filter names for an item
+                        getAllFilterNames(item) {
+                            const result = [];
+                            for (const groupName of item.getGroupNames()) {
+                                for (const filterName of item.getFilterNames(groupName)) {
+                                    result.push(filterName);
+                                }
+                            }
+                            return result;
+                        }
+
+                        // Override filtering options
+                        get filteringOptions() {
+                            return {
+                                // Custom filter callback to handle search text
+                                filterItem: (item, schema, filterData) => {
+                                    for (const filterName of this.getAllFilterNames(item)) {
+                                        if (filterName.toLowerCase().includes(searchElement.value.toLowerCase())) {
+                                            return true;
+                                        }
+                                    }
+                                    return false;
+                                }
+                            };
+                        }
+
+                    }
+
+                    // Initialize filtering
+                    const flow = new MyFlow(document.querySelector('#root'));
+
+
+                    // Global filter reset function
+                    window.resetFilters = () => {
+                        searchElement.value = '';
+                        currentPage = 1;
+                        // Clear filtered class from items
+                        document.querySelectorAll('.filtered').forEach(el => {
+                            el.classList.remove('filtered');
+                        });
+                        // Uncheck all filter checkboxes
+                        document.querySelectorAll('.filtering-filter').forEach(el => {
+                            el.classList.remove('checked');
+                        });
+                        flow.filter();
+                    };
+                    ;
+
+                        M.util.js_pending('theme_scholastica/loader');
+                        require(['theme_scholastica/loader', 'theme_scholastica/drawer'], function(Loader, Drawer) {
+                        Drawer.init();
+                        M.util.js_complete('theme_scholastica/loader');
+                        });
+                    ;
+                    M.util.js_pending('core/notification'); require(['core/notification'], function(amd) {amd.init(15, []); M.util.js_complete('core/notification');});;
+                    M.util.js_pending('core/log'); require(['core/log'], function(amd) {amd.setConfig({"level":"warn"}); M.util.js_complete('core/log');});;
+                    M.util.js_pending('core/page_global'); require(['core/page_global'], function(amd) {amd.init(); M.util.js_complete('core/page_global');});;
+                    M.util.js_pending('core/utility'); require(['core/utility'], function(amd) {M.util.js_complete('core/utility');});;
+                    M.util.js_pending('core/storage_validation'); require(['core/storage_validation'], function(amd) {amd.init(null); M.util.js_complete('core/storage_validation');});
+                        M.util.js_complete("core/first");
+                    });
+                    //]]>
+                </script>
+                <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?delayStartupUntil=configured"></script>
+                <script>
+                    //<![CDATA[
+                    M.str = {"moodle":{"lastmodified":"Last modified","name":"Name","error":"Error","info":"Information","yes":"Yes","no":"No","cancel":"Cancel","confirm":"Confirm","areyousure":"Are you sure?","closebuttontitle":"Close","unknownerror":"Unknown error","file":"File","url":"URL","collapseall":"Collapse all","expandall":"Expand all"},"repository":{"type":"Type","size":"Size","invalidjson":"Invalid JSON string","nofilesattached":"No files attached","filepicker":"File picker","logout":"Logout","nofilesavailable":"No files available","norepositoriesavailable":"Sorry, none of your current repositories can return files in the required format.","fileexistsdialogheader":"File exists","fileexistsdialog_editor":"A file with that name has already been attached to the text you are editing.","fileexistsdialog_filemanager":"A file with that name has already been attached","renameto":"Rename to \"{$a}\"","referencesexist":"There are {$a} links to this file","select":"Select"},"admin":{"confirmdeletecomments":"Are you sure you want to delete the selected comment(s)?","confirmation":"Confirmation"},"debug":{"debuginfo":"Debug info","line":"Line","stacktrace":"Stack trace"},"langconfig":{"labelsep":": "}};
+                    //]]>
+                </script>
+                <script>
+                    //<![CDATA[
+                    (function() {M.util.help_popups.setup(Y);
+                     M.util.js_pending('random67ac42c1dfa1d4'); Y.on('domready', function() { M.util.js_complete("init");  M.util.js_complete('random67ac42c1dfa1d4'); });
+                    })();
+                    //]]>
+                </script>
+
+
+
+
+                <script>
+                    window.onkeydown = function( event ) {
+                        if ( event.keyCode == 27 ) {
+                            document.getElementById("categoriesList").classList.remove("show");
+                        }
+                    };
+
+                    function filterFunction() {
+                      var input, filter, ul, li, a, i;
+                      input = document.getElementById("searchCourses");
+                      filter = input.value.toUpperCase();
+                      div = document.getElementById("categoriesList");
+                      a = div.getElementsByTagName("a");
+                      for (i = 0; i < a.length; i++) {
+                        txtValue = a[i].textContent || a[i].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                          a[i].style.display = "";
+                        } else {
+                          a[i].style.display = "none";
+                        }
+                      }
+                    }
+
+                    const scrollers = document.querySelectorAll(".scroller");
+
+                    // If a user hasn't opted in for recuded motion, then we add the animation
+                    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                      addAnimation();
+                    }
+
+                    function addAnimation() {
+                      scrollers.forEach((scroller) => {
+                        // add data-animated="true" to every `.scroller` on the page
+                        scroller.setAttribute("data-animated", true);
+
+                        // Make an array from the elements within `.scroller-inner`
+                        const scrollerInner = scroller.querySelector(".scroller__inner");
+                        const scrollerContent = Array.from(scrollerInner.children);
+
+                        // For each item in the array, clone it
+                        // add aria-hidden to it
+                        // add it into the `.scroller-inner`
+                        scrollerContent.forEach((item) => {
+                          const duplicatedItem = item.cloneNode(true);
+                          duplicatedItem.setAttribute("aria-hidden", true);
+                          scrollerInner.appendChild(duplicatedItem);
+                        });
+                      });
+                    }
+                </script>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+</body>
 </html>
