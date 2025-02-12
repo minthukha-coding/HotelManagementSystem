@@ -10,4 +10,9 @@
     <Folder Include="Features\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HotelManagementSystem.Database\HotelManagementSystem.Database.csproj" />
+    <ProjectReference Include="..\HotelManagementSystem.Shared\HotelManagementSystem.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

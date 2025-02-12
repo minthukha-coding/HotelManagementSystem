@@ -5,13 +5,13 @@ namespace HotelManagementSystem.Database.Db;
 
 public partial class User
 {
-    public int UserId { get; set; }
+    public string UserId { get; set; } = null!;
 
-    public string FullName { get; set; } = null!;
-
-    public string Email { get; set; } = null!;
+    public string Username { get; set; } = null!;
 
     public string PasswordHash { get; set; } = null!;
+
+    public string Email { get; set; } = null!;
 
     public string Role { get; set; } = null!;
 
@@ -19,7 +19,7 @@ public partial class User
 
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 
-    public virtual Customer? Customer { get; set; }
+    public virtual ICollection<CustomerProfile> CustomerProfiles { get; set; } = new List<CustomerProfile>();
 
     public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 

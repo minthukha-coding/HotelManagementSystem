@@ -1,0 +1,11 @@
+﻿@page "/userLogin"
+@inject Domain.Features.User.UserServices _userService
+
+<h3>User Details</h3>
+
+@code {
+    protected override void OnInitialized()
+    {
+        var userDetails = _userService.GetUserDetails();
+    }
+}

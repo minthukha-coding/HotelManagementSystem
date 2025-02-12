@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HotelManagementSystem.Domain\HotelManagementSystem.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

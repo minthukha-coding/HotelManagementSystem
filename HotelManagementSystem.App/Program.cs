@@ -1,6 +1,11 @@
 using HotelManagementSystem.App.Components;
+using HotelManagementSystem.Database.Db;
+using HotelManagementSystem.Domain.Features.User;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddTransient<AppDbContext>();
+builder.Services.AddScoped<UserServices>();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

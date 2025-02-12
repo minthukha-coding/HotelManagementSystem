@@ -5,9 +5,13 @@ namespace HotelManagementSystem.Database.Db;
 
 public partial class AdminDashboard
 {
-    public int? TotalBookings { get; set; }
+    public string DashboardId { get; set; } = null!;
 
-    public int? TotalCustomers { get; set; }
+    public int TotalBookings { get; set; }
 
-    public decimal? TotalRevenue { get; set; }
+    public decimal TotalRevenue { get; set; }
+
+    public int ActiveCustomers { get; set; }
+
+    public DateTime? LastUpdated { get; set; }
 }
