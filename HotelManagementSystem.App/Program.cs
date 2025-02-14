@@ -1,11 +1,14 @@
 using HotelManagementSystem.App.Components;
 using HotelManagementSystem.Database.Db;
 using HotelManagementSystem.Domain.Features.User;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddTransient<AppDbContext>();
 builder.Services.AddScoped<UserServices>();
+
+builder.Services.AddMudServices();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
