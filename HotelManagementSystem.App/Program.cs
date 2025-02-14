@@ -1,6 +1,7 @@
 using HotelManagementSystem.App.Components;
 using HotelManagementSystem.Database.Db;
 using HotelManagementSystem.Domain.Features.User;
+using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,8 @@ builder.Services.AddMudServices();
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
 
 var app = builder.Build();
 

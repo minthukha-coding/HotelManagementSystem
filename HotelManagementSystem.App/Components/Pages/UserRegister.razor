@@ -1,0 +1,80 @@
+﻿@rendermode RenderMode.InteractiveServer
+@page "/register"
+@layout EmptyLayout
+@using HotelManagementSystem.Domain.Features.User
+@using HotelManagementSystem.Shared
+@using MudBlazor
+@inject NavigationManager Navigation
+@inject Domain.Features.User.UserServices _userService
+@inject ISnackbar Snackbar
+
+
+<MudPaper Class="pa-4" MaxWidth="xs">
+    <MudText Typo="Typo.h5">Register</MudText>
+
+    <MudForm @ref="form">
+        <MudTextField Label="Username" @bind-Value="username" Required="true" Immediate="true" />
+        <MudTextField Label="Password" @bind-Value="password" Type="password" Required="true" Immediate="true" />
+        <MudTextField Label="Password" @bind-Value="role" Type="Role" Required="true" Immediate="true" />
+
+        @* <MudSelect T="string" Label="Role" @bind-Value="role" Required="true">
+            <MudSelectItem Value="Admin">Admin</MudSelectItem>
+            <MudSelectItem Value="User">User</MudSelectItem>
+            <MudSelectItem Value="Moderator">Moderator</MudSelectItem>
+        </MudSelect> *@
+
+        @* <MudButton Type="Submit" Variant="Variant.Filled" Color="Color.Primary">Register</MudButton> *@
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit">
+            Register
+        </MudButton>
+    </MudForm>
+</MudPaper>
+
+@code {
+    private MudForm form;
+    private string username;
+    private string password;
+    private string role;
+
+
+    private async Task<Result<UserModel>> HandleValidSubmit()
+    {
+        var model = new Result<UserModel>();
+
+        var reqModel = new UserModel
+            {
+                Username = username,
+                PasswordHash = password,
+                Role = role
+            };
+
+        model = await _userService.Register(reqModel);
+
+        if (model!.IsSuccess)
+        {
+            Snackbar.Add("Register successful!", Severity.Success);
+            Navigation.NavigateTo("/");
+
+            model = new Result<UserModel>
+                {
+                    IsSuccess = true,
+                    Data = new UserModel
+                    {
+                        UserId = model.Data!.UserId,
+                        Username = model.Data.Username,
+                        Email = model.Data.Email,
+                        PasswordHash = model.Data.PasswordHash,
+                        Role = model.Data.Role,
+                        CreatedAt = model.Data.CreatedAt
+                    }
+                };
+        }
+        else
+        {
+            Snackbar.Add("Register failed!", Severity.Error);
+            Navigation.NavigateTo("/");
+        }
+
+        return model;
+    }
+}
