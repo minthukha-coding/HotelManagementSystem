@@ -2,14 +2,24 @@ using HotelManagementSystem.App.Components;
 using HotelManagementSystem.Database.Db;
 using HotelManagementSystem.Domain.Features.User;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
+using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddTransient<AppDbContext>();
-builder.Services.AddScoped<UserServices>();
-
 builder.Services.AddMudServices();
+
+try
+{
+	builder.Services.AddScoped<UserServices>();
+	builder.Services.AddDbContext<AppDbContext>(options =>
+		options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

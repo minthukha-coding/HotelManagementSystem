@@ -5,15 +5,13 @@ namespace HotelManagementSystem.Database.Db;
 
 public partial class Notification
 {
-    public string NotificationId { get; set; } = null!;
+    public int NotificationId { get; set; }
 
-    public string UserId { get; set; } = null!;
+    public int UserId { get; set; }
 
     public string Message { get; set; } = null!;
 
-    public string NotificationType { get; set; } = null!;
-
     public DateTime? SentAt { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public string Status { get; set; } = null!;
 }

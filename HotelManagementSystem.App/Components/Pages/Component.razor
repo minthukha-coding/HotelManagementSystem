@@ -1,0 +1,34 @@
+﻿@page "/day"
+@using HotelManagementSystem.Domain.Features.User
+@rendermode RenderMode.InteractiveServer
+@inject Domain.Features.User.UserServices _userService
+@inject ISnackbar Snackbar
+@inject NavigationManager Navigation
+
+<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit">
+    Register
+</MudButton>
+
+@code {
+    private async Task HandleValidSubmit()
+    {
+        var reqModel = new UserModel
+            {
+                Username = "testuser",
+                PasswordHash = "testpassword",
+                Role = "User"
+            };
+
+        var result = await _userService.Register(reqModel);
+
+        if (result.IsSuccess)
+        {
+            Snackbar.Add("Register successful!", Severity.Success);
+            Navigation.NavigateTo("/");
+        }
+        else
+        {
+            Snackbar.Add("Register failed!", Severity.Error);
+        }
+    }
+}

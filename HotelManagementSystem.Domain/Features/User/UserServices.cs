@@ -28,6 +28,7 @@ public class UserServices
             CreatedAt = DateTime.Now,
             Role = EnumRole.User.ToString()
         };
+
         _context.Users.Add(user);
         int response = await _context.SaveChangesAsync();
 

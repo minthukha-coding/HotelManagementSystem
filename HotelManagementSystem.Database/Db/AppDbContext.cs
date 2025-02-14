@@ -15,11 +15,9 @@ public partial class AppDbContext : DbContext
     {
     }
 
-    public virtual DbSet<AdminDashboard> AdminDashboards { get; set; }
-
     public virtual DbSet<Booking> Bookings { get; set; }
 
-    public virtual DbSet<CustomerProfile> CustomerProfiles { get; set; }
+    public virtual DbSet<Customer> Customers { get; set; }
 
     public virtual DbSet<Notification> Notifications { get; set; }
 
@@ -31,255 +29,105 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=.;Database=HotelManagementSystem;User ID=sa;Password=sasa@123;TrustServerCertificate=True;");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<AdminDashboard>(entity =>
-        {
-            entity.HasKey(e => e.DashboardId).HasName("PK__AdminDas__5E2AEAE6AFB623BF");
-
-            entity.ToTable("AdminDashboard");
-
-            entity.Property(e => e.DashboardId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("dashboard_id");
-            entity.Property(e => e.ActiveCustomers).HasColumnName("active_customers");
-            entity.Property(e => e.LastUpdated)
-                .HasColumnType("datetime")
-                .HasColumnName("last_updated");
-            entity.Property(e => e.TotalBookings).HasColumnName("total_bookings");
-            entity.Property(e => e.TotalRevenue)
-                .HasColumnType("decimal(15, 2)")
-                .HasColumnName("total_revenue");
-        });
-
         modelBuilder.Entity<Booking>(entity =>
         {
-            entity.HasKey(e => e.BookingId).HasName("PK__Bookings__5DE3A5B1607714AB");
+            entity.HasKey(e => e.BookingId).HasName("PK__Bookings__73951ACD55186C3B");
 
-            entity.Property(e => e.BookingId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("booking_id");
-            entity.Property(e => e.BookingStatus)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("booking_status");
-            entity.Property(e => e.CheckInDate).HasColumnName("check_in_date");
-            entity.Property(e => e.CheckOutDate).HasColumnName("check_out_date");
+            entity.Property(e => e.BookingId).HasColumnName("BookingID");
+            entity.Property(e => e.CheckInDate).HasColumnType("datetime");
+            entity.Property(e => e.CheckOutDate).HasColumnType("datetime");
             entity.Property(e => e.CreatedAt)
-                .HasColumnType("datetime")
-                .HasColumnName("created_at");
-            entity.Property(e => e.RoomId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("room_id");
-            entity.Property(e => e.UserId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("user_id");
-
-            entity.HasOne(d => d.Room).WithMany(p => p.Bookings)
-                .HasForeignKey(d => d.RoomId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Bookings__room_i__403A8C7D");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Bookings)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Bookings__user_i__3F466844");
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.RoomId).HasColumnName("RoomID");
+            entity.Property(e => e.Status).HasMaxLength(50);
+            entity.Property(e => e.UserId).HasColumnName("UserID");
         });
 
-        modelBuilder.Entity<CustomerProfile>(entity =>
+        modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.ProfileId).HasName("PK__Customer__AEBB701F9E4EA950");
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64B8A7F5D608");
 
-            entity.Property(e => e.ProfileId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("profile_id");
-            entity.Property(e => e.Address)
-                .HasColumnType("text")
-                .HasColumnName("address");
-            entity.Property(e => e.CreatedAt)
-                .HasColumnType("datetime")
-                .HasColumnName("created_at");
-            entity.Property(e => e.FullName)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("full_name");
-            entity.Property(e => e.PhoneNumber)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("phone_number");
-            entity.Property(e => e.UserId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("user_id");
-
-            entity.HasOne(d => d.User).WithMany(p => p.CustomerProfiles)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__CustomerP__user___46E78A0C");
+            entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+            entity.Property(e => e.Address).HasMaxLength(255);
+            entity.Property(e => e.FullName).HasMaxLength(100);
+            entity.Property(e => e.PhoneNumber).HasMaxLength(20);
+            entity.Property(e => e.UserId).HasColumnName("UserID");
         });
 
         modelBuilder.Entity<Notification>(entity =>
         {
-            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__E059842FCE53D582");
+            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E32D8A2E3C4");
 
-            entity.Property(e => e.NotificationId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("notification_id");
-            entity.Property(e => e.Message)
-                .HasColumnType("text")
-                .HasColumnName("message");
-            entity.Property(e => e.NotificationType)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("notification_type");
+            entity.Property(e => e.NotificationId).HasColumnName("NotificationID");
+            entity.Property(e => e.Message).HasMaxLength(255);
             entity.Property(e => e.SentAt)
-                .HasColumnType("datetime")
-                .HasColumnName("sent_at");
-            entity.Property(e => e.UserId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("user_id");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Notifications)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Notificat__user___4AB81AF0");
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Status).HasMaxLength(50);
+            entity.Property(e => e.UserId).HasColumnName("UserID");
         });
 
         modelBuilder.Entity<Payment>(entity =>
         {
-            entity.HasKey(e => e.PaymentId).HasName("PK__Payments__ED1FC9EA387B882E");
+            entity.HasKey(e => e.PaymentId).HasName("PK__Payments__9B556A58CF613AC4");
 
-            entity.Property(e => e.PaymentId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("payment_id");
-            entity.Property(e => e.BookingId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("booking_id");
-            entity.Property(e => e.DiscountAmount)
-                .HasColumnType("decimal(10, 2)")
-                .HasColumnName("discount_amount");
+            entity.Property(e => e.PaymentId).HasColumnName("PaymentID");
+            entity.Property(e => e.Amount).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.BookingId).HasColumnName("BookingID");
+            entity.Property(e => e.Discount).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.PaymentDate)
-                .HasColumnType("datetime")
-                .HasColumnName("payment_date");
-            entity.Property(e => e.PaymentStatus)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("payment_status");
-            entity.Property(e => e.TaxAmount)
-                .HasColumnType("decimal(10, 2)")
-                .HasColumnName("tax_amount");
-            entity.Property(e => e.TotalAmount)
-                .HasColumnType("decimal(10, 2)")
-                .HasColumnName("total_amount");
-
-            entity.HasOne(d => d.Booking).WithMany(p => p.Payments)
-                .HasForeignKey(d => d.BookingId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Payments__bookin__440B1D61");
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Tax).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.TotalAmount).HasColumnType("decimal(10, 2)");
         });
 
         modelBuilder.Entity<Review>(entity =>
         {
-            entity.HasKey(e => e.ReviewId).HasName("PK__Reviews__60883D90AC0CA612");
+            entity.HasKey(e => e.ReviewId).HasName("PK__Reviews__74BC79AE2D8BF479");
 
-            entity.Property(e => e.ReviewId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("review_id");
-            entity.Property(e => e.Comment)
-                .HasColumnType("text")
-                .HasColumnName("comment");
+            entity.Property(e => e.ReviewId).HasColumnName("ReviewID");
+            entity.Property(e => e.Comment).HasMaxLength(255);
             entity.Property(e => e.CreatedAt)
-                .HasColumnType("datetime")
-                .HasColumnName("created_at");
-            entity.Property(e => e.Rating).HasColumnName("rating");
-            entity.Property(e => e.RoomId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("room_id");
-            entity.Property(e => e.UserId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("user_id");
-
-            entity.HasOne(d => d.Room).WithMany(p => p.Reviews)
-                .HasForeignKey(d => d.RoomId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Reviews__room_id__4F7CD00D");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Reviews)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Reviews__user_id__4E88ABD4");
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.RoomId).HasColumnName("RoomID");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
         });
 
         modelBuilder.Entity<Room>(entity =>
         {
-            entity.HasKey(e => e.RoomId).HasName("PK__Rooms__19675A8A36A37096");
+            entity.HasKey(e => e.RoomId).HasName("PK__Rooms__32863919304FE77E");
 
-            entity.Property(e => e.RoomId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("room_id");
-            entity.Property(e => e.AvailabilityStatus)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("availability_status");
-            entity.Property(e => e.CreatedAt)
-                .HasColumnType("datetime")
-                .HasColumnName("created_at");
-            entity.Property(e => e.Description)
-                .HasColumnType("text")
-                .HasColumnName("description");
-            entity.Property(e => e.PricePerNight)
-                .HasColumnType("decimal(10, 2)")
-                .HasColumnName("price_per_night");
-            entity.Property(e => e.RoomCategory)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("room_category");
-            entity.Property(e => e.RoomNumber)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("room_number");
+            entity.Property(e => e.RoomId).HasColumnName("RoomID");
+            entity.Property(e => e.Category).HasMaxLength(50);
+            entity.Property(e => e.Description).HasMaxLength(255);
+            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.RoomNumber).HasMaxLength(50);
+            entity.Property(e => e.Status).HasMaxLength(50);
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__B9BE370F190380B9");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC22F6C731");
 
             entity.Property(e => e.UserId)
                 .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("user_id");
+                .HasColumnName("UserID");
             entity.Property(e => e.CreatedAt)
-                .HasColumnType("datetime")
-                .HasColumnName("created_at");
-            entity.Property(e => e.Email)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("email");
-            entity.Property(e => e.PasswordHash)
-                .HasMaxLength(255)
-                .IsUnicode(false)
-                .HasColumnName("password_hash");
-            entity.Property(e => e.Role)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("role");
-            entity.Property(e => e.Username)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("username");
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Email).HasMaxLength(100);
+            entity.Property(e => e.PasswordHash).HasMaxLength(255);
+            entity.Property(e => e.Role).HasMaxLength(50);
+            entity.Property(e => e.Username).HasMaxLength(50);
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -5,23 +5,17 @@ namespace HotelManagementSystem.Database.Db;
 
 public partial class Booking
 {
-    public string BookingId { get; set; } = null!;
+    public int BookingId { get; set; }
 
-    public string UserId { get; set; } = null!;
+    public int UserId { get; set; }
 
-    public string RoomId { get; set; } = null!;
+    public int RoomId { get; set; }
 
-    public DateOnly CheckInDate { get; set; }
+    public DateTime CheckInDate { get; set; }
 
-    public DateOnly CheckOutDate { get; set; }
+    public DateTime CheckOutDate { get; set; }
 
-    public string BookingStatus { get; set; } = null!;
+    public string Status { get; set; } = null!;
 
     public DateTime? CreatedAt { get; set; }
-
-    public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
-
-    public virtual Room Room { get; set; } = null!;
-
-    public virtual User User { get; set; } = null!;
 }

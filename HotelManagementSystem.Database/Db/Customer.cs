@@ -3,19 +3,15 @@ using System.Collections.Generic;
 
 namespace HotelManagementSystem.Database.Db;
 
-public partial class CustomerProfile
+public partial class Customer
 {
-    public string ProfileId { get; set; } = null!;
+    public int CustomerId { get; set; }
 
-    public string UserId { get; set; } = null!;
+    public int UserId { get; set; }
 
     public string FullName { get; set; } = null!;
 
     public string? PhoneNumber { get; set; }
 
     public string? Address { get; set; }
-
-    public DateTime? CreatedAt { get; set; }
-
-    public virtual User User { get; set; } = null!;
 }

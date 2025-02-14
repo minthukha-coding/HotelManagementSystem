@@ -7,23 +7,30 @@
 @inject ISnackbar Snackbar
 @inject Domain.Features.User.UserServices _userService
 
-<MudContainer MaxWidth="MaxWidth.Small">
+<MudContainer MaxWidth="MaxWidth.Small" Class="mt-8">
     <MudCard>
         <MudCardContent>
             <MudForm Model="loginModel">
-                <MudText Typo="Typo.h5" Class="mb-4">Login</MudText>
+                <MudText Typo="Typo.h5" Class="mb-4 text-center">Login</MudText>
 
-                <MudTextField Label="Email" @bind-Value="loginModel.Email" Required="true" RequiredError="Email is required" />
-
-                <MudTextField Label="Password" @bind-Value="loginModel.Password" Required="true" RequiredError="Password is required" Type="password" />
-
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Login">
-                    Login
-                </MudButton>
+                <MudGrid>
+                    <MudItem xs="12" Class="mb-4">
+                        <MudTextField Label="Email" @bind-Value="loginModel.Email" Required="true" RequiredError="Email is required" Variant="Variant.Outlined" FullWidth="true" />
+                    </MudItem>
+                    <MudItem xs="12" Class="mb-4">
+                        <MudTextField Label="Password" @bind-Value="loginModel.Password" Required="true" RequiredError="Password is required" Type="password" Variant="Variant.Outlined" FullWidth="true" />
+                    </MudItem>
+                    <MudItem xs="12" Class="text-center">
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Login" FullWidth="true">
+                            Login
+                        </MudButton>
+                    </MudItem>
+                </MudGrid>
             </MudForm>
         </MudCardContent>
     </MudCard>
 </MudContainer>
+
 
 @code {
 
@@ -37,7 +44,6 @@
 
         if (model!.IsSuccess)
         {
-            Snackbar.Add("Login successful!", Severity.Success);
             Navigation.NavigateTo("/");
 
             model = new Result<UserModel>
@@ -56,7 +62,6 @@
         }
         else
         {
-            Snackbar.Add("Login failed!", Severity.Error);
             Navigation.NavigateTo("/login");
         }
 

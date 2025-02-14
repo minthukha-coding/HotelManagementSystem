@@ -9,26 +9,34 @@
 @inject ISnackbar Snackbar
 
 
-<MudPaper Class="pa-4" MaxWidth="xs">
-    <MudText Typo="Typo.h5">Register</MudText>
+<MudContainer MaxWidth="MaxWidth.Small" Class="mt-8">
+    <MudPaper Class="pa-4">
+        <MudText Typo="Typo.h5" Class="mb-4 text-center">Register</MudText>
 
-    <MudForm @ref="form">
-        <MudTextField Label="Username" @bind-Value="username" Required="true" Immediate="true" />
-        <MudTextField Label="Password" @bind-Value="password" Type="password" Required="true" Immediate="true" />
-        <MudTextField Label="Password" @bind-Value="role" Type="Role" Required="true" Immediate="true" />
-
-        @* <MudSelect T="string" Label="Role" @bind-Value="role" Required="true">
-            <MudSelectItem Value="Admin">Admin</MudSelectItem>
-            <MudSelectItem Value="User">User</MudSelectItem>
-            <MudSelectItem Value="Moderator">Moderator</MudSelectItem>
-        </MudSelect> *@
-
-        @* <MudButton Type="Submit" Variant="Variant.Filled" Color="Color.Primary">Register</MudButton> *@
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit">
-            Register
-        </MudButton>
-    </MudForm>
-</MudPaper>
+        <MudForm @ref="form">
+            <MudGrid>
+                <MudItem xs="12" Class="mb-4">
+                    <MudTextField Label="Username" @bind-Value="username" Required="true" Immediate="true" Variant="Variant.Outlined" FullWidth="true" />
+                </MudItem>
+                <MudItem xs="12" Class="mb-4">
+                    <MudTextField Label="Password" @bind-Value="password" Type="password" Required="true" Immediate="true" Variant="Variant.Outlined" FullWidth="true" />
+                </MudItem>
+                <MudItem xs="12" Class="mb-4">
+                    <MudSelect T="string" Label="Role" @bind-Value="role" Required="true" Variant="Variant.Outlined" FullWidth="true">
+                        <MudSelectItem T="string" Value="@("Admin")">Admin</MudSelectItem>
+                        <MudSelectItem T="string" Value="@("User")">Admin</MudSelectItem>
+                        <MudSelectItem T="string" Value="@("Staff")">Admin</MudSelectItem>
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12" Class="text-center">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit" FullWidth="true">
+                        Register
+                    </MudButton>
+                </MudItem>
+            </MudGrid>
+        </MudForm>
+    </MudPaper>
+</MudContainer>
 
 @code {
     private MudForm form;
