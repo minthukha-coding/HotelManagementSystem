@@ -1,11 +1,4 @@
 ﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HotelManagementSystem.Shared;
 
 public class Result<T>
 {
@@ -48,10 +41,7 @@ public class Result<T>
     {
         return result > 0 ? SuccessResult() : FailureResult();
     }
-}
 
-public class Result
-{
     public static Result<T> Success<T>(string message)
     {
         return new Result<T>() { IsSuccess = true, Message = message };

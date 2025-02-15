@@ -24,7 +24,7 @@ public class UserServices
             UserId = Guid.NewGuid().ToString(),
             Username = reqModel.Username,
             PasswordHash = reqModel.PasswordHash,
-            Email = reqModel.Role,
+            Email = reqModel.Email,
             CreatedAt = DateTime.Now,
             Role = EnumRole.User.ToString()
         };
@@ -32,11 +32,8 @@ public class UserServices
         _context.Users.Add(user);
         int response = await _context.SaveChangesAsync();
 
-        model = new Result<UserModel>
-        {
-            IsSuccess = response > 0,
-            Data = reqModel
-        };
+        model = Result<UserModel>.Success("Register");
+
         return model;
     }
 

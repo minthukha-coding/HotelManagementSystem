@@ -15,18 +15,14 @@
 
         <MudForm @ref="form">
             <MudGrid>
-                <MudItem xs="12" Class="mb-4">
+                <MudItem xs="12" Class="mb-1">
                     <MudTextField Label="Username" @bind-Value="username" Required="true" Immediate="true" Variant="Variant.Outlined" FullWidth="true" />
                 </MudItem>
-                <MudItem xs="12" Class="mb-4">
-                    <MudTextField Label="Password" @bind-Value="password" Type="password" Required="true" Immediate="true" Variant="Variant.Outlined" FullWidth="true" />
+                <MudItem xs="12" Class="mb-1">
+                    <MudTextField Label="Email" @bind-Value="email" Required="true" Immediate="true" Variant="Variant.Outlined" FullWidth="true" />
                 </MudItem>
-                <MudItem xs="12" Class="mb-4">
-                    <MudSelect T="string" Label="Role" @bind-Value="role" Required="true" Variant="Variant.Outlined" FullWidth="true">
-                        <MudSelectItem T="string" Value="@("Admin")">Admin</MudSelectItem>
-                        <MudSelectItem T="string" Value="@("User")">Admin</MudSelectItem>
-                        <MudSelectItem T="string" Value="@("Staff")">Admin</MudSelectItem>
-                    </MudSelect>
+                <MudItem xs="12" Class="mb-1">
+                    <MudTextField Label="Password" @bind-Value="password" Type="password" Required="true" Immediate="true" Variant="Variant.Outlined" FullWidth="true" />
                 </MudItem>
                 <MudItem xs="12" Class="text-center">
                     <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit" FullWidth="true">
@@ -42,7 +38,7 @@
     private MudForm form;
     private string username;
     private string password;
-    private string role;
+    private string email;
 
 
     private async Task<Result<UserModel>> HandleValidSubmit()
@@ -53,14 +49,14 @@
             {
                 Username = username,
                 PasswordHash = password,
-                Role = role
+                Email = email,
             };
 
         model = await _userService.Register(reqModel);
 
         if (model!.IsSuccess)
         {
-            Snackbar.Add("Register successful!", Severity.Success);
+            await JS.InvokeVoidAsync("notiflixNotify.success", "Register successful!");
             Navigation.NavigateTo("/");
 
             model = new Result<UserModel>
@@ -79,7 +75,7 @@
         }
         else
         {
-            Snackbar.Add("Register failed!", Severity.Error);
+            await JS.InvokeVoidAsync("notiflixNotify.error", "Error! Something went wrong.");
             Navigation.NavigateTo("/");
         }
 
