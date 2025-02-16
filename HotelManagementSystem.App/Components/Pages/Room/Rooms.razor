@@ -1,8 +1,4 @@
 ﻿@page "/rooms"
-@using HotelManagementSystem.Domain.Features.Room
-@inject Domain.Features.Room.RoomService _roomService
-@inject NavigationManager Navigation
-@inject ISnackbar Snackbar
 @rendermode RenderMode.InteractiveServer
 
 <MudContainer>
@@ -58,18 +54,17 @@
         }
         else
         {
-            Snackbar.Add($"Error loading rooms: {result}", Severity.Error);
         }
     }
 
     private void AddRoom()
     {
-        Navigation.NavigateTo("/rooms/add");
+        _goto.NavigateTo("/rooms/add");
     }
 
     private void EditRoom(int roomId)
     {
-        Navigation.NavigateTo($"/rooms/edit/{roomId}");
+        _goto.NavigateTo($"/rooms/edit/{roomId}");
     }
 
     private async Task DeleteRoom(int roomId)
@@ -77,12 +72,10 @@
         var result = await _roomService.DeleteRoomAsync(roomId);
         if (result.IsSuccess)
         {
-            Snackbar.Add("Room deleted successfully.", Severity.Success);
             await LoadRooms();
         }
         else
         {
-            Snackbar.Add($"Error deleting room: {result}", Severity.Error);
         }
     }
 }

@@ -1,13 +1,6 @@
 ﻿@rendermode RenderMode.InteractiveServer
 @page "/register"
 @layout EmptyLayout
-@using HotelManagementSystem.Domain.Features.User
-@using HotelManagementSystem.Shared
-@using MudBlazor
-@inject NavigationManager Navigation
-@inject Domain.Features.User.UserServices _userService
-@inject ISnackbar Snackbar
-
 
 <MudContainer MaxWidth="MaxWidth.Small" Class="mt-8">
     <MudPaper Class="pa-4">
@@ -29,6 +22,11 @@
                         Register
                     </MudButton>
                 </MudItem>
+                    <MudItem xs="12" Class="text-center mt-2">
+                        <MudText Typo="Typo.body2">
+                            Already have an account? <MudLink Href="/" Color="Color.Primary">Login</MudLink>
+                        </MudText>
+                    </MudItem>
             </MudGrid>
         </MudForm>
     </MudPaper>
@@ -57,26 +55,12 @@
         if (model!.IsSuccess)
         {
             await JS.InvokeVoidAsync("notiflixNotify.success", "Register successful!");
-            Navigation.NavigateTo("/");
-
-            model = new Result<UserModel>
-                {
-                    IsSuccess = true,
-                    Data = new UserModel
-                    {
-                        UserId = model.Data!.UserId,
-                        Username = model.Data.Username,
-                        Email = model.Data.Email,
-                        PasswordHash = model.Data.PasswordHash,
-                        Role = model.Data.Role,
-                        CreatedAt = model.Data.CreatedAt
-                    }
-                };
+            _goto.NavigateTo("/");
         }
         else
         {
             await JS.InvokeVoidAsync("notiflixNotify.error", "Error! Something went wrong.");
-            Navigation.NavigateTo("/");
+            _goto.NavigateTo("/");
         }
 
         return model;

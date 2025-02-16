@@ -1,8 +1,6 @@
 ﻿window.notiflixNotify = {
     success: (message) => {
-        setTimeout(() => {
-            Notiflix.Notify.success(message);
-        }, 1000); // 1000 milliseconds = 1 second
+        Notiflix.Notify.success(message);
     },
     error: (message) => {
         Notiflix.Notify.failure(message);
@@ -23,5 +21,25 @@ window.notiflixConfirm = {
                 dotNetObjectRef.invokeMethodAsync(callbackMethod, false);
             }
         );
+    }
+};
+
+window.notiflixLoadingPulse = {
+    show: () => {
+        Notiflix.Loading.pulse();
+    }
+};
+
+window.notiflixLoadingRemove = {
+    show: () => {
+        Notiflix.Loading.remove();
+    }
+};
+
+window.manageLoading = (action) => {
+    if (action === 'show') {
+        Notiflix.Loading.circle(); // or any other Notiflix loading method
+    } else if (action === 'remove') {
+        Notiflix.Loading.remove();
     }
 };

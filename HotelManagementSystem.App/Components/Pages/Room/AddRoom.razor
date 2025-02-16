@@ -1,7 +1,4 @@
 ﻿@page "/rooms/add"
-@using HotelManagementSystem.Domain.Features.Room
-@inject Domain.Features.Room.RoomService _roomService
-@inject NavigationManager Navigation
 @inject ISnackbar Snackbar
 @rendermode RenderMode.InteractiveServer
 
@@ -28,7 +25,7 @@
         if (result.IsSuccess)
         {
             Snackbar.Add("Room added successfully.", Severity.Success);
-            Navigation.NavigateTo("/rooms");
+            _goto.NavigateTo("/rooms");
         }
         else
         {
@@ -38,6 +35,6 @@
 
     private void Cancel()
     {
-        Navigation.NavigateTo("/rooms");
+        _goto.NavigateTo("/rooms");
     }
 }

@@ -1,11 +1,6 @@
 ﻿@page "/"
-@using HotelManagementSystem.Domain.Features.User
-@using HotelManagementSystem.Shared
 @rendermode RenderMode.InteractiveServer
 @layout EmptyLayout
-@inject NavigationManager Navigation
-@inject ISnackbar Snackbar
-@inject Domain.Features.User.UserServices _userService
 
 <MudContainer MaxWidth="MaxWidth.Small" Class="mt-8">
     <MudCard>
@@ -25,6 +20,11 @@
                             Login
                         </MudButton>
                     </MudItem>
+                    <MudItem xs="12" Class="text-center mt-2">
+                        <MudText Typo="Typo.body2">
+                            Don't have an account? <MudLink Href="/register" Color="Color.Primary">Register</MudLink>
+                        </MudText>
+                    </MudItem>
                 </MudGrid>
             </MudForm>
         </MudCardContent>
@@ -40,12 +40,17 @@
     {
         var model = new Result<UserModel>();
 
+        // await JS.InvokeVoidAsync("notiflixLoadingPulse.show");
+        await JS.InvokeVoidAsync("manageLoading", "show");
         model = await _userService.Login(loginModel.Email, loginModel.Password);
+        // await JS.InvokeVoidAsync("notiflixLoadingRemove.show");
+        await JS.InvokeVoidAsync("manageLoading", "remove");
 
         if (model!.IsSuccess)
         {
             await JS.InvokeVoidAsync("notiflixNotify.success", "Login successful!");
-            Navigation.NavigateTo("/home");
+            await Task.Delay(1000);
+            _goto.NavigateTo("/home");
 
             model = new Result<UserModel>
                 {
@@ -64,7 +69,7 @@
         else
         {
             await JS.InvokeVoidAsync("notiflixNotify.error", "Error! Something went wrong.");
-            Navigation.NavigateTo("/");
+            _goto.NavigateTo("/");
         }
 
         return model;

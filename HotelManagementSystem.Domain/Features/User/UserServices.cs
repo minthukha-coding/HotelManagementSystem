@@ -33,6 +33,7 @@ public class UserServices
             Role = EnumRole.User.ToString()
         };
 
+
         _context.Users.Add(user);
         int response = await _context.SaveChangesAsync();
 

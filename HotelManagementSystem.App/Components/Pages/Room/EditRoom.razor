@@ -1,8 +1,4 @@
 ﻿@page "/rooms/edit/{roomId:int}"
-@using HotelManagementSystem.Domain.Features.Room
-@inject Domain.Features.Room.RoomService _roomService
-@inject NavigationManager Navigation
-@inject ISnackbar Snackbar
 @rendermode RenderMode.InteractiveServer
 
 <MudContainer>
@@ -36,13 +32,11 @@
             }
             else
             {
-                Snackbar.Add("Room not found.", Severity.Error);
-                Navigation.NavigateTo("/rooms");
+                _goto.NavigateTo("/rooms");
             }
         }
         else
         {
-            Snackbar.Add($"Error loading room: {result}", Severity.Error);
         }
     }
 
@@ -51,17 +45,15 @@
         var result = await _roomService.UpdateRoomAsync(roomModel);
         if (result.IsSuccess)
         {
-            Snackbar.Add("Room updated successfully.", Severity.Success);
-            Navigation.NavigateTo("/rooms");
+            _goto.NavigateTo("/rooms");
         }
         else
         {
-            Snackbar.Add($"Error updating room: {result}", Severity.Error);
         }
     }
 
     private void Cancel()
     {
-        Navigation.NavigateTo("/rooms");
+        _goto.NavigateTo("/rooms");
     }
 }

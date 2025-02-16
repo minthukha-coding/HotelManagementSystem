@@ -11,3 +11,9 @@
 @using HotelManagementSystem.App.Components.Layout
 @using MudBlazor
 @inject IJSRuntime JS
+@inject Domain.Features.User.UserServices _userService
+@inject Domain.Features.Room.RoomService _roomService
+@inject NavigationManager _goto
+@using HotelManagementSystem.Domain.Features.Room
+@using HotelManagementSystem.Domain.Features.User
+@using HotelManagementSystem.Shared
