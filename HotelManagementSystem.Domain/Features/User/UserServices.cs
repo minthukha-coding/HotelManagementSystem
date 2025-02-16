@@ -17,7 +17,6 @@ public class UserServices
 
     public async Task<Result<UserModel>> Register(UserModel reqModel)
     {
-
         var item = await _context.Users.FirstOrDefaultAsync(u => u.Email == reqModel.Email);
         if (item != null)
         {

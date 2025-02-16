@@ -1,4 +1,4 @@
-﻿@page "/login"
+﻿@page "/"
 @using HotelManagementSystem.Domain.Features.User
 @using HotelManagementSystem.Shared
 @rendermode RenderMode.InteractiveServer
@@ -44,7 +44,8 @@
 
         if (model!.IsSuccess)
         {
-            Navigation.NavigateTo("/");
+            await JS.InvokeVoidAsync("notiflixNotify.success", "Login successful!");
+            Navigation.NavigateTo("/home");
 
             model = new Result<UserModel>
                 {
@@ -62,7 +63,8 @@
         }
         else
         {
-            Navigation.NavigateTo("/login");
+            await JS.InvokeVoidAsync("notiflixNotify.error", "Error! Something went wrong.");
+            Navigation.NavigateTo("/");
         }
 
         return model;

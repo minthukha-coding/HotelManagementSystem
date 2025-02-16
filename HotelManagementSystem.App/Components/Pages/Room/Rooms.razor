@@ -12,26 +12,30 @@
 
     <MudGrid>
         <MudItem xs="12">
-            <MudText Typo="Typo.h6">Rooms List</MudText>
+            <MudText Typo="Typo.h6" Class="mb-4">Rooms List</MudText>
         </MudItem>
         <MudItem xs="12">
-            <MudPaper Elevation="3" Style="padding: 16px;">
-                @foreach (var room in rooms)
-                {
-                    <MudCard Style="margin-bottom: 16px;">
-                        <MudCardContent>
-                            <MudText Typo="Typo.body1">Room Number: @room.RoomNumber</MudText>
-                            <MudText Typo="Typo.body2">Category: @room.Category</MudText>
-                            <MudText Typo="Typo.body2">Status: @room.Status</MudText>
-                            <MudText Typo="Typo.body2">Price: @room.Price</MudText>
-                            <MudText Typo="Typo.body2">Description: @room.Description</MudText>
-                        </MudCardContent>
-                        <MudCardActions>
-                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => EditRoom(room.RoomId)">Edit</MudButton>
-                            <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="() => DeleteRoom(room.RoomId)">Delete</MudButton>
-                        </MudCardActions>
-                    </MudCard>
-                }
+            <MudPaper Elevation="3" Class="pa-4">
+                <MudGrid Spacing="4">
+                    @foreach (var room in rooms)
+                    {
+                        <MudItem xs="12" sm="6" md="4">
+                            <MudCard Class="h-100">
+                                <MudCardContent>
+                                    <MudText Typo="Typo.h6" Class="mb-2">Room @room.RoomNumber</MudText>
+                                    <MudText Typo="Typo.body2" Class="mb-1">Category: @room.Category</MudText>
+                                    <MudText Typo="Typo.body2" Class="mb-1">Price: $@room.Price</MudText>
+                                    <MudText Typo="Typo.body2" Class="mb-2">@room.Description</MudText>
+                                    <MudText Typo="Typo.body2" Class="mb-2">@room.Status</MudText>
+                                </MudCardContent>
+                                <MudCardActions Class="justify-end">
+                                    <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="() => EditRoom(room.RoomId)" Class="mr-2">Edit</MudButton>
+                                    <MudButton Variant="Variant.Outlined" Color="Color.Error" OnClick="() => DeleteRoom(room.RoomId)">Delete</MudButton>
+                                </MudCardActions>
+                            </MudCard>
+                        </MudItem>
+                    }
+                </MudGrid>
             </MudPaper>
         </MudItem>
     </MudGrid>

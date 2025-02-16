@@ -1,6 +1,8 @@
 ﻿window.notiflixNotify = {
     success: (message) => {
-        Notiflix.Notify.success(message);
+        setTimeout(() => {
+            Notiflix.Notify.success(message);
+        }, 1000); // 1000 milliseconds = 1 second
     },
     error: (message) => {
         Notiflix.Notify.failure(message);
