@@ -1,0 +1,43 @@
+﻿@page "/rooms/add"
+@using HotelManagementSystem.Domain.Features.Room
+@inject Domain.Features.Room.RoomService _roomService
+@inject NavigationManager Navigation
+@inject ISnackbar Snackbar
+@rendermode RenderMode.InteractiveServer
+
+
+<MudContainer>
+    <MudText Typo="Typo.h4" GutterBottom="true">Add Room</MudText>
+
+    <MudTextField @bind-Value="roomModel.RoomNumber" Label="Room Number" />
+    <MudTextField @bind-Value="roomModel.Category" Label="Category" />
+    <MudTextField @bind-Value="roomModel.Status" Label="Status" />
+    <MudTextField @bind-Value="roomModel.Price" Label="Price" />
+    <MudTextField @bind-Value="roomModel.Description" Label="Description" />
+
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveRoom">Save</MudButton>
+    <MudButton Variant="Variant.Text" Color="Color.Secondary" OnClick="Cancel">Cancel</MudButton>
+</MudContainer>
+
+@code {
+    private RoomModel roomModel = new RoomModel();
+
+    private async Task SaveRoom()
+    {
+        var result = await _roomService.AddRoomAsync(roomModel);
+        if (result.IsSuccess)
+        {
+            Snackbar.Add("Room added successfully.", Severity.Success);
+            Navigation.NavigateTo("/rooms");
+        }
+        else
+        {
+            Snackbar.Add($"Error adding room: {result}", Severity.Error);
+        }
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/rooms");
+    }
+}

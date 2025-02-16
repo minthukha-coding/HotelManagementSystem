@@ -17,7 +17,12 @@ public class UserServices
 
     public async Task<Result<UserModel>> Register(UserModel reqModel)
     {
-        var model = new Result<UserModel>();
+
+        var item = await _context.Users.FirstOrDefaultAsync(u => u.Email == reqModel.Email);
+        if (item != null)
+        {
+            return Result<UserModel>.FailureResult("User already exists.");
+        }
 
         var user = new Database.Db.User
         {
@@ -32,50 +37,43 @@ public class UserServices
         _context.Users.Add(user);
         int response = await _context.SaveChangesAsync();
 
-        model = Result<UserModel>.Success("Register");
-
-        return model;
+        if (response > 0)
+        {
+            return Result<UserModel>.SuccessResult("User registered successfully.");
+        }
+        else
+        {
+            return Result<UserModel>.FailureResult("Failed to register user.");
+        }
     }
 
     public async Task<Result<UserModel>?> Login(string email, string password)
     {
         var model = new Result<UserModel>();
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.PasswordHash == password);
+
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         if (user == null)
         {
-            model = new Result<UserModel>
-            {
-                IsSuccess = false,
-                Message = "Invalid email or password"
-            };
+            model = Result<UserModel>.FailureResult("User doesn't exists.");
             goto Result;
         }
-        model = new Result<UserModel>
-        {
-            IsSuccess = true,
-            Data = new UserModel
-            {
-                UserId = user.UserId,
-                Username = user.Username,
-                Email = user.Email,
-                PasswordHash = user.PasswordHash,
-                Role = user.Role,
-                CreatedAt = user.CreatedAt
-            }
-        };
-    Result:
-        return model;
-    }
 
-    public async Task<Result<UserModel>> GetUserDetails()
-    {
-        var model = new Result<UserModel>
+        if (user.PasswordHash != password)
         {
-            IsSuccess = true,
-            Data = new UserModel
-            {
-            }
-        };
+            model = Result<UserModel>.FailureResult("Invalid password.");
+            goto Result;
+        }
+
+        model = Result<UserModel>.SuccessResult(new UserModel
+        {
+            UserId = user.UserId,
+            Username = user.Username,
+            Email = user.Email,
+            PasswordHash = user.PasswordHash,
+            Role = user.Role,
+            CreatedAt = user.CreatedAt
+        }, "Login successful.");
+    Result:
         return model;
     }
 }

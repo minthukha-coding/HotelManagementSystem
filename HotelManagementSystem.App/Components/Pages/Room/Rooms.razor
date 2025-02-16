@@ -1,0 +1,84 @@
+﻿@page "/rooms"
+@using HotelManagementSystem.Domain.Features.Room
+@inject Domain.Features.Room.RoomService _roomService
+@inject NavigationManager Navigation
+@inject ISnackbar Snackbar
+@rendermode RenderMode.InteractiveServer
+
+<MudContainer>
+    <MudText Typo="Typo.h4" GutterBottom="true">Room Management</MudText>
+
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="AddRoom">Add Room</MudButton>
+
+    <MudGrid>
+        <MudItem xs="12">
+            <MudText Typo="Typo.h6">Rooms List</MudText>
+        </MudItem>
+        <MudItem xs="12">
+            <MudPaper Elevation="3" Style="padding: 16px;">
+                @foreach (var room in rooms)
+                {
+                    <MudCard Style="margin-bottom: 16px;">
+                        <MudCardContent>
+                            <MudText Typo="Typo.body1">Room Number: @room.RoomNumber</MudText>
+                            <MudText Typo="Typo.body2">Category: @room.Category</MudText>
+                            <MudText Typo="Typo.body2">Status: @room.Status</MudText>
+                            <MudText Typo="Typo.body2">Price: @room.Price</MudText>
+                            <MudText Typo="Typo.body2">Description: @room.Description</MudText>
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => EditRoom(room.RoomId)">Edit</MudButton>
+                            <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="() => DeleteRoom(room.RoomId)">Delete</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                }
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+@code {
+    private List<RoomModel> rooms = new List<RoomModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadRooms();
+    }
+
+    private async Task LoadRooms()
+    {
+        var result = await _roomService.GetRoomModelsAsync();
+        if (result.IsSuccess)
+        {
+            rooms = result.Data;
+        }
+        else
+        {
+            Snackbar.Add($"Error loading rooms: {result}", Severity.Error);
+        }
+    }
+
+    private void AddRoom()
+    {
+        Navigation.NavigateTo("/rooms/add");
+    }
+
+    private void EditRoom(int roomId)
+    {
+        Navigation.NavigateTo($"/rooms/edit/{roomId}");
+    }
+
+    private async Task DeleteRoom(int roomId)
+    {
+        var result = await _roomService.DeleteRoomAsync(roomId);
+        if (result.IsSuccess)
+        {
+            Snackbar.Add("Room deleted successfully.", Severity.Success);
+            await LoadRooms();
+        }
+        else
+        {
+            Snackbar.Add($"Error deleting room: {result}", Severity.Error);
+        }
+    }
+}
