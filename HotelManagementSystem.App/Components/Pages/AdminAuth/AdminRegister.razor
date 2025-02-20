@@ -9,16 +9,16 @@
         <MudForm @ref="form">
             <MudGrid>
                 <MudItem xs="12" Class="mb-1">
-                    <MudTextField Label="Username" @bind-Value="username" Required="true" Immediate="true" Variant="Variant.Outlined" FullWidth="true" />
+                    <MudTextField Label="Username" @bind-Value="username" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true" />
                 </MudItem>
                 <MudItem xs="12" Class="mb-1">
-                    <MudTextField Label="Email" @bind-Value="email" Required="true" Immediate="true" Variant="Variant.Outlined" FullWidth="true" />
+                    <MudTextField Label="Email" @bind-Value="email" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true" />
                 </MudItem>
                 <MudItem xs="12" Class="mb-1">
-                    <MudTextField Label="Password" @bind-Value="password" Type="password" Required="true" Immediate="true" Variant="Variant.Outlined" FullWidth="true" />
+                    <MudTextField Label="Password" @bind-Value="password" Type="password" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true" />
                 </MudItem>
                 <MudItem xs="12" Class="text-center">
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit" FullWidth="true">
+                    <MudButton MudVariant="MudVariant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit" FullWidth="true">
                         Register
                     </MudButton>
                 </MudItem>

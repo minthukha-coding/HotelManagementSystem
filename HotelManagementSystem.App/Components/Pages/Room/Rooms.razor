@@ -4,7 +4,7 @@
 <MudContainer>
     <MudText Typo="Typo.h4" GutterBottom="true">Room Management</MudText>
 
-    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="AddRoom">Add Room</MudButton>
+    <MudButton MudVariant="MudVariant.Filled" Color="Color.Primary" OnClick="AddRoom">Add Room</MudButton>
 
     <MudGrid>
         <MudItem xs="12">
@@ -25,8 +25,8 @@
                                     <MudChip T="string" Color="@GetRoomStatus(room.Status)">@room.Status</MudChip>
                                 </MudCardContent>
                                 <MudCardActions Class="justify-end">
-                                    <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="() => EditRoom(room.RoomId)" Class="mr-2">Edit</MudButton>
-                                    <MudButton Variant="Variant.Outlined" Color="Color.Error" OnClick="() => DeleteRoom(room.RoomId)">Delete</MudButton>
+                                    <MudButton MudVariant="MudVariant.Outlined" Color="Color.Primary" OnClick="() => EditRoom(room.RoomId)" Class="mr-2">Edit</MudButton>
+                                    <MudButton MudVariant="MudVariant.Outlined" Color="Color.Error" OnClick="() => DeleteRoom(room.RoomId)">Delete</MudButton>
                                 </MudCardActions>
                             </MudCard>
                         </MudItem>

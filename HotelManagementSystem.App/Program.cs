@@ -5,10 +5,14 @@ using HotelManagementSystem.Domain.Features.User;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
+using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMudServices();
+
+builder.Services.AddRadzenComponents();
+
 
 try
 {
