@@ -1,4 +1,5 @@
 ﻿@page "/rooms/add"
+@using HotelManagementSystem.Shared.Enum
 @inject ISnackbar Snackbar
 @rendermode RenderMode.InteractiveServer
 
@@ -7,8 +8,10 @@
     <MudText Typo="Typo.h4" GutterBottom="true">Add Room</MudText>
 
     <MudTextField @bind-Value="roomModel.RoomNumber" Label="Room Number" />
-    <MudTextField @bind-Value="roomModel.Category" Label="Category" />
     <MudTextField @bind-Value="roomModel.Status" Label="Status" />
+
+
+
     <MudTextField @bind-Value="roomModel.Price" Label="Price" />
     <MudTextField @bind-Value="roomModel.Description" Label="Description" />
 

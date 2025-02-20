@@ -43,7 +43,7 @@ public class RoomService
             var room = new Database.Db.Room
             {
                 RoomNumber = roomModel.RoomNumber,
-                Category = roomModel.Category,
+                Category = roomModel.Category.ToString(),
                 Status = roomModel.Status,
                 Price = roomModel.Price,
                 Description = roomModel.Description

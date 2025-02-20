@@ -1,4 +1,6 @@
-﻿namespace HotelManagementSystem.Domain.Features.Room;
+﻿using HotelManagementSystem.Shared.Enum;
+
+namespace HotelManagementSystem.Domain.Features.Room;
 
 public class RoomModel
 {

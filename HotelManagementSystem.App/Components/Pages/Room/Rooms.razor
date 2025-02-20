@@ -22,7 +22,7 @@
                                     <MudText Typo="Typo.body2" Class="mb-1">Category: @room.Category</MudText>
                                     <MudText Typo="Typo.body2" Class="mb-1">Price: $@room.Price</MudText>
                                     <MudText Typo="Typo.body2" Class="mb-2">@room.Description</MudText>
-                                    <MudText Typo="Typo.body2" Class="mb-2">@room.Status</MudText>
+                                    <MudChip T="string" Color="@GetRoomStatus(room.Status)">@room.Status</MudChip>
                                 </MudCardContent>
                                 <MudCardActions Class="justify-end">
                                     <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="() => EditRoom(room.RoomId)" Class="mr-2">Edit</MudButton>
@@ -78,4 +78,16 @@
         {
         }
     }
+
+    private MudBlazor.Color GetRoomStatus(string status)
+    {
+        return status switch
+        {
+            "Available" => Color.Success,
+            "Booked" => Color.Warning,
+            "Occupied" => Color.Error,
+            _ => Color.Default
+        };
+    }
+
 }
