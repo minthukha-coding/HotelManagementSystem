@@ -1,0 +1,47 @@
+﻿@page "/booking/{roomId:int}"
+@inject NavigationManager Navigation
+@rendermode RenderMode.InteractiveServer
+
+<MudCard>
+    <MudCardContent>
+        <MudText Typo="Typo.h6">Booking Room: @RoomId</MudText>
+@*         <MudDatePicker @bind-Date="CheckInDate" Label="Check-In Date" />
+        <MudDatePicker @bind-Date="CheckOutDate" Label="Check-Out Date" /> *@
+        @* <MudDatePicker Label="Basic example" @bind-Date="_date"/> *@
+        <MudButton OnClick="BookRoom">Book Now</MudButton>
+    </MudCardContent>
+</MudCard>
+
+@code {
+    [Parameter]
+    public int RoomId { get; set; } // Route parameter is automatically bound in Blazor Server
+
+    private DateTime? CheckInDate { get; set; }
+    private DateTime? CheckOutDate { get; set; }
+
+    private DateTime? _date = DateTime.Today;
+
+    protected override void OnParametersSet()
+    {
+        // You can add additional logic here if needed
+        base.OnParametersSet();
+    }
+
+    private async Task BookRoom()
+    {
+        // Your booking logic here
+        var booking = new BookingModel
+        {
+            RoomId = RoomId,
+            CheckInDate = CheckInDate.Value,
+            CheckOutDate = CheckOutDate.Value
+        };
+    }
+
+    public class BookingModel
+    {
+        public int RoomId { get; set; }
+        public DateTime CheckInDate { get; set; }
+        public DateTime CheckOutDate { get; set; }
+    }
+}

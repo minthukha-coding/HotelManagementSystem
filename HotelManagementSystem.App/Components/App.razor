@@ -18,6 +18,10 @@
     @* notiflix *@
     <script src="https://cdn.jsdelivr.net/npm/notiflix@3.2.6/dist/notiflix-aio-3.2.6.min.js"></script>
 
+    <script src="_content/Radzen.Blazor/Radzen.Blazor.js?v=@(typeof(Radzen.Colors).Assembly.GetName().Version)"></script>
+
+    <RadzenTheme Theme="material" @rendermode="InteractiveAuto" />
+
 </head>
 
 <body>

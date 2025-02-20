@@ -1,17 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HotelManagementSystem.Domain\HotelManagementSystem.Domain.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\HotelManagementSystem.Domain\HotelManagementSystem.Domain.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MudBlazor" Version="8.2.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="MudBlazor" Version="8.2.0" />
+		<PackageReference Include="Radzen.Blazor" Version="*" />
+	</ItemGroup>
 
 </Project>
