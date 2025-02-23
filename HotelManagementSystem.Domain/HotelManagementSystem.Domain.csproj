@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\HotelManagementSystem.Database\HotelManagementSystem.Database.csproj" />
     <ProjectReference Include="..\HotelManagementSystem.Shared\HotelManagementSystem.Shared.csproj" />
   </ItemGroup>

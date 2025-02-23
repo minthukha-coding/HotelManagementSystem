@@ -1,23 +1,22 @@
 using HotelManagementSystem.App.Components;
 using HotelManagementSystem.Database.Db;
+using HotelManagementSystem.Domain.Features.Booking;
 using HotelManagementSystem.Domain.Features.Room;
 using HotelManagementSystem.Domain.Features.User;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
-using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMudServices();
-
-builder.Services.AddRadzenComponents();
 
 
 try
 {
 	builder.Services.AddScoped<UserServices>();
 	builder.Services.AddScoped<RoomService>();
+	builder.Services.AddScoped<BookingService>();
 	builder.Services.AddDbContext<AppDbContext>(options =>
 		options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 }

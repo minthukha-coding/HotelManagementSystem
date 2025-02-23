@@ -1,0 +1,60 @@
+﻿@page "/customer-bookings"
+@using HotelManagementSystem.App.Components.Pages.User.Booking
+@rendermode RenderMode.InteractiveServer
+
+<MudContainer>
+    <MudCard>
+        <MudCardHeader>
+            <MudText Typo="Typo.h5">Customer Bookings</MudText>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudTable Items="@Bookings" Hover="true" Dense="true">
+                <HeaderContent>
+                    <MudTh>Customer Name</MudTh>
+                    <MudTh>Phone</MudTh>
+                    <MudTh>Room Number</MudTh>
+                    <MudTh>Category</MudTh>
+                    <MudTh>Price</MudTh>
+                    <MudTh>Check-In</MudTh>
+                    <MudTh>Check-Out</MudTh>
+                    <MudTh>Status</MudTh>
+                </HeaderContent>
+
+                <RowTemplate>
+                    <MudTd>@context.CustomerName</MudTd>
+                    <MudTd>@context.PhoneNumber</MudTd>
+                    <MudTd>@context.RoomNumber</MudTd>
+                    <MudTd>@context.Category</MudTd>
+                    <MudTd>@context.Price.ToString("C")</MudTd>
+                    <MudTd>@context.CheckInDate.ToShortDateString()</MudTd>
+                    <MudTd>@context.CheckOutDate.ToShortDateString()</MudTd>
+                    <MudTd>
+                        <MudChip T="string" Color="@GetRoomStatus(context.Status)">@context.Status</MudChip>
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        </MudCardContent>
+    </MudCard>
+</MudContainer>
+
+@code {
+    private List<BookingResponseModel> Bookings = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await _bookingService.GetAllBookinAsync();
+        if (result.IsSuccess)
+        {
+            Bookings = result.Data;
+        }
+    }
+
+    private MudBlazor.Color GetRoomStatus(string status)
+    {
+        return status switch
+        {
+            "Confirmed" => Color.Success,
+            _ => Color.Warning
+        };
+    }
+}

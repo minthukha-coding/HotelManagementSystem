@@ -12,7 +12,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="MudBlazor" Version="8.2.0" />
-		<PackageReference Include="Radzen.Blazor" Version="*" />
 	</ItemGroup>
 
 </Project>

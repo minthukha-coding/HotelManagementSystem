@@ -27,6 +27,8 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Room> Rooms { get; set; }
 
+    public virtual DbSet<RoomPhoto> RoomPhotos { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -108,6 +110,13 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.RoomNumber).HasMaxLength(50);
             entity.Property(e => e.Status).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<RoomPhoto>(entity =>
+        {
+            entity.HasKey(e => e.PhotoId).HasName("PK__RoomPhot__21B7B5E249F47A0E");
+
+            entity.Property(e => e.Description).HasMaxLength(255);
         });
 
         modelBuilder.Entity<User>(entity =>

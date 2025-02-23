@@ -1,41 +1,80 @@
 ﻿@page "/rooms/add"
 @using HotelManagementSystem.Shared.Enum
 @inject ISnackbar Snackbar
+@inject NavigationManager Navigation
 @rendermode RenderMode.InteractiveServer
-
 
 <MudContainer>
     <MudText Typo="Typo.h4" GutterBottom="true">Add Room</MudText>
-
     <MudTextField @bind-Value="roomModel.RoomNumber" Label="Room Number" />
     <MudTextField @bind-Value="roomModel.Status" Label="Status" />
-
     <MudTextField @bind-Value="roomModel.Price" Label="Price" />
+    @* <MudFileUpload T="IReadOnlyList<IBrowserFile>" Label="Upload Photos" OnFilesChanged="OnFileUpload" Multiple="true" /> *@
+    <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles">
+        <ActivatorContent>
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       StartIcon="@Icons.Material.Filled.CloudUpload">
+                Upload Files
+            </MudButton>
+        </ActivatorContent>
+    </MudFileUpload>
     <MudTextField @bind-Value="roomModel.Description" Label="Description" />
-
-    <MudButton MudVariant="MudVariant.Filled" Color="Color.Primary" OnClick="SaveRoom">Save</MudButton>
+    <MudButton MudVariant="MudVariant.Filled" Color="Color.Primary" OnClick="SaveRoom">Add Room</MudButton>
     <MudButton MudVariant="MudVariant.Text" Color="Color.Secondary" OnClick="Cancel">Cancel</MudButton>
 </MudContainer>
 
 @code {
     private RoomModel roomModel = new RoomModel();
+    private IReadOnlyList<IBrowserFile>? uploadedFiles;
+
+    // private void OnFileUpload(InputFileChangeEventArgs e)
+    // {
+    //     uploadedFiles = e.GetMultipleFiles();
+    // }
+
+    IList<IBrowserFile> _files = new List<IBrowserFile>();
+    private void UploadFiles(IBrowserFile file)
+    {
+        _files.Add(file);
+        //TODO upload the files to the server
+    }
 
     private async Task SaveRoom()
     {
-        var result = await _roomService.AddRoomAsync(roomModel);
-        if (result.IsSuccess)
+        try
         {
-            Snackbar.Add("Room added successfully.", Severity.Success);
-            _goto.NavigateTo("/rooms");
+            // Save uploaded photos and add their paths to the roomModel
+            if (_files != null)
+            {
+                roomModel.PhotoUrls = new List<RoomPhotoModel>();
+                foreach (var file in _files)
+                {
+                    var photoUrl = await _roomService.UploadFileAsync(file);
+                    roomModel.PhotoUrls.Add(new RoomPhotoModel { PhotoUrl = photoUrl });
+                }
+            }
+            
+            // Save the room data
+            var result = await _roomService.AddRoomAsync(roomModel);
+            if (result.IsSuccess)
+            {
+                Snackbar.Add("Room added successfully.", Severity.Success);
+                Navigation.NavigateTo("/rooms");
+            }
+            else
+            {
+                Snackbar.Add($"Error adding room: {result.Message}", Severity.Error);
+            }
         }
-        else
+        catch (Exception ex)
         {
-            Snackbar.Add($"Error adding room: {result}", Severity.Error);
+            Snackbar.Add($"An error occurred: {ex.Message}", Severity.Error);
         }
     }
 
     private void Cancel()
     {
-        _goto.NavigateTo("/rooms");
+        Navigation.NavigateTo("/rooms");
     }
 }

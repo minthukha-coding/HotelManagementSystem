@@ -15,7 +15,7 @@
                 <MudGrid Spacing="4">
                     @foreach (var room in rooms)
                     {
-                        <MudItem xs="12" sm="6" md="4">
+                  @*       <MudItem xs="12" sm="6" md="4">
                             <MudCard Class="h-100">
                                 <MudCardContent>
                                     <MudText Typo="Typo.h6" Class="mb-2">Room @room.RoomNumber</MudText>
@@ -26,7 +26,49 @@
                                 </MudCardContent>
                                 <MudCardActions Class="justify-end">
                                     <MudButton MudVariant="MudVariant.Outlined" Color="Color.Primary" OnClick="() => EditRoom(room.RoomId)" Class="mr-2">Edit</MudButton>
-                                    <MudButton MudVariant="MudVariant.Outlined" Color="Color.Error" OnClick="() => DeleteRoom(room.RoomId)">Delete</MudButton>
+                                    <MudButton MudVariant="MudVariant.Outlined" Color="Color.Error" OnClick="() => DeleteRoom(room.RoomId)">Delete</MudButton> 
+                                    <MudButton MudVariant="MudVariant.Outlined" Color="Color.Primary" OnClick="() => Detail(room.RoomId)">Detail</MudButton>
+                                </MudCardActions>
+                            </MudCard>
+                        </MudItem> *@
+                        <MudItem xs="12" sm="6" md="4">
+                            <MudCard Class="h-100 d-flex flex-column">
+                                <MudCardContent Class="flex-grow-1">
+                                    <!-- Room Number -->
+                                    <MudText Typo="Typo.h6" Class="mb-2 font-weight-bold">Room No:  @room.RoomNumber</MudText>
+
+                                    <!-- Room Category -->
+                                    <MudText Typo="Typo.body2" Class="mb-1">
+                                        <MudIcon Icon="@Icons.Material.Filled.Category" Class="mr-1" />
+                                        Category: @room.Category
+                                    </MudText>
+
+                                    <!-- Room Price -->
+                                    <MudText Typo="Typo.body2" Class="mb-1">
+                                        <MudIcon Icon="@Icons.Material.Filled.AttachMoney" Class="mr-1" />
+                                        Price: $@room.Price
+                                    </MudText>
+
+                                    <!-- Room Description -->
+                                    <MudText Typo="Typo.body2" Class="mb-2">
+                                        <MudIcon Icon="@Icons.Material.Filled.Description" Class="mr-1" />
+                                        @room.Description
+                                    </MudText>
+
+                                    <!-- Room Status Chip -->
+                                    <MudChip T="string" Color="@GetRoomStatus(room.Status)" Class="mb-2">
+                                        @room.Status
+                                    </MudChip>
+
+                                </MudCardContent>
+
+                                <!-- Card Actions -->
+                                <MudCardActions Class="justify-end">
+                                    <!-- Detail Button -->
+                                    <MudButton MudVariant="MudVariant.Outlined" Color="Color.Primary" OnClick="() => Detail(room.RoomId)">
+                                        <MudIcon Icon="@Icons.Material.Filled.Info" Class="mr-1" />
+                                        Details
+                                    </MudButton>
                                 </MudCardActions>
                             </MudCard>
                         </MudItem>
@@ -77,6 +119,12 @@
         else
         {
         }
+    }  
+    
+    private async Task Detail(int roomId)
+    {
+        _goto.NavigateTo($"/rooms/details/{roomId}");
+
     }
 
     private MudBlazor.Color GetRoomStatus(string status)
