@@ -49,7 +49,7 @@
         {
             await JS.InvokeVoidAsync("notiflixNotify.success", "Login successful!");
             await Task.Delay(1000);
-            _goto.NavigateTo("/home");
+            _goto.NavigateTo("/rooms");
 
             model = new Result<UserModel>
                 {

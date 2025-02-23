@@ -66,16 +66,19 @@ public class RoomService
             }
 
             // Create a new RoomPhoto entity
-            var photo = new Database.Db.RoomPhoto
+            foreach (var photoUrl in roomModel.PhotoUrls)
             {
-                RoomId = roomId,
-                PhotoUrl = roomModel.PhotoUrls[0].PhotoUrl,
-                Description = roomModel.Description
-            };
+                var photo = new Database.Db.RoomPhoto
+                {
+                    RoomId = roomId,
+                    PhotoUrl = photoUrl.PhotoUrl, // Use the current photo URL
+                    Description = roomModel.Description // Optional: Add a description for each photo
+                };
 
-            // Add the photo to the context and save changes
-            await _context.AddAsync(photo);
-            await _context.SaveChangesAsync();
+                // Add each photo to the context
+                await _context.AddAsync(photo);
+                await _context.SaveChangesAsync();
+            }
 
             // Update the RoomModel with the new RoomId
             roomModel.RoomId = roomId;
@@ -215,6 +218,39 @@ public class RoomService
         catch (Exception ex)
         {
             return Result<RoomModel>.FailureResult(ex);
+        }
+    }
+
+    public async Task<Result<List<RoomModel>>> GetAllRoomForUserRoomListing()
+    {
+        try
+        {
+            // Fetch all rooms with their photos
+            var roomDetails = await _context.Rooms
+                .GroupJoin(
+                    _context.RoomPhotos, // The collection to join with
+                    room => room.RoomId, // Key from the Rooms table
+                    photo => photo.RoomId, // Key from the RoomPhotos table
+                    (room, photos) => new RoomModel
+                    {
+                        RoomId = room.RoomId,
+                        RoomNumber = room.RoomNumber,
+                        Category = room.Category,
+                        Status = room.Status,
+                        Price = room.Price,
+                        Description = room.Description,
+                        PhotoUrls = photos.Select(p => new RoomPhotoModel // Project the photos
+                        {
+                            PhotoUrl = p.PhotoUrl
+                        }).ToList()
+                    })
+                .ToListAsync(); // Fetch all rooms as a list
+
+            return Result<List<RoomModel>>.SuccessResult(roomDetails, "Room details fetched successfully.");
+        }
+        catch (Exception ex)
+        {
+            return Result<List<RoomModel>>.FailureResult(ex);
         }
     }
 

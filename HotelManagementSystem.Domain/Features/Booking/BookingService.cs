@@ -21,7 +21,7 @@ namespace HotelManagementSystem.Domain.Features.Booking
                                          .Join(
                                              _context.Customers,
                                              booking => booking.UserId, // Ensure this matches the column name in the Bookings table
-                                             customer => customer.UserId, // Ensure this matches the column name in the Customers table
+                                             customer => customer.CustomerId, // Ensure this matches the column name in the Customers table
                                              (booking, customer) => new { Booking = booking, Customer = customer }
                                          )
                                          .Join(
@@ -49,5 +49,21 @@ namespace HotelManagementSystem.Domain.Features.Booking
                 return Result<List<BookingResponseModel>>.FailureResult(ex);
             }
         }
+
+        public async Task<Result<bool>> BookRoom(int roomId)
+        {
+             var booking =  new Database.Db.Booking
+             {
+                RoomId = roomId,
+                UserId = 1, // This should be the actual user ID
+                CheckInDate = DateTime.Now,
+                CheckOutDate = DateTime.Now.AddDays(1),
+                Status = "Booked"
+            };
+            await _context.Bookings.AddAsync(booking);
+            await _context.SaveChangesAsync();
+            return Result<bool>.SuccessResult(true, "Room booked successfully.");
+        }
+        
     }
 }

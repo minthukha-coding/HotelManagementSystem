@@ -6,22 +6,47 @@
 
 <MudContainer>
     <MudText Typo="Typo.h4" GutterBottom="true">Add Room</MudText>
-    <MudTextField @bind-Value="roomModel.RoomNumber" Label="Room Number" />
-    <MudTextField @bind-Value="roomModel.Status" Label="Status" />
-    <MudTextField @bind-Value="roomModel.Price" Label="Price" />
-    @* <MudFileUpload T="IReadOnlyList<IBrowserFile>" Label="Upload Photos" OnFilesChanged="OnFileUpload" Multiple="true" /> *@
-    <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles">
-        <ActivatorContent>
-            <MudButton Variant="Variant.Filled"
-                       Color="Color.Primary"
-                       StartIcon="@Icons.Material.Filled.CloudUpload">
-                Upload Files
-            </MudButton>
-        </ActivatorContent>
-    </MudFileUpload>
-    <MudTextField @bind-Value="roomModel.Description" Label="Description" />
-    <MudButton MudVariant="MudVariant.Filled" Color="Color.Primary" OnClick="SaveRoom">Add Room</MudButton>
-    <MudButton MudVariant="MudVariant.Text" Color="Color.Secondary" OnClick="Cancel">Cancel</MudButton>
+
+    <MudGrid>
+        <!-- Room Number -->
+        <MudItem xs="12" sm="6">
+            <MudTextField @bind-Value="roomModel.RoomNumber" Label="Room Number" FullWidth="true" />
+        </MudItem>
+
+        <!-- Status -->
+        <MudItem xs="12" sm="6">
+            <MudTextField @bind-Value="roomModel.Status" Label="Status" FullWidth="true" />
+        </MudItem>
+
+        <!-- Price -->
+        <MudItem xs="12" sm="6">
+            <MudTextField @bind-Value="roomModel.Price" Label="Price" FullWidth="true" />
+        </MudItem>
+
+        <!-- Description -->
+        <MudItem xs="12">
+            <MudTextField @bind-Value="roomModel.Description" Label="Description" Lines="3" FullWidth="true" />
+        </MudItem>
+
+        <!-- File Upload -->
+        <MudItem xs="12">
+            <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles">
+                <ActivatorContent>
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               StartIcon="@Icons.Material.Filled.CloudUpload">
+                        Upload Files
+                    </MudButton>
+                </ActivatorContent>
+            </MudFileUpload>
+        </MudItem>
+
+        <!-- Buttons -->
+        <MudItem xs="12" class="d-flex justify-end">
+            <MudButton MudVariant="MudVariant.Text" Color="Color.Secondary" OnClick="Cancel" class="mr-2">Cancel</MudButton>
+            <MudButton MudVariant="MudVariant.Filled" Color="Color.Primary" OnClick="SaveRoom">Add Room</MudButton>
+        </MudItem>
+    </MudGrid>
 </MudContainer>
 
 @code {
