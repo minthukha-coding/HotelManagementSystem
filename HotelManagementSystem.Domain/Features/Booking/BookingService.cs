@@ -52,7 +52,7 @@ namespace HotelManagementSystem.Domain.Features.Booking
             }
         }
 
-        public async Task<Result<bool>> BookRoom(int roomId)
+        public async Task<Result<bool>> BookRoom(string roomId)
         {
              var booking =  new Database.Db.Booking
              {

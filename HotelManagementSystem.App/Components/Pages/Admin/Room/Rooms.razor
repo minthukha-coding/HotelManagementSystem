@@ -124,7 +124,7 @@
         _goto.NavigateTo($"/rooms/edit/{roomId}");
     }
 
-    private async Task DeleteRoom(int roomId)
+    private async Task DeleteRoom(string roomId)
     {
         var result = await _roomService.DeleteRoomAsync(roomId);
         if (result.IsSuccess)
@@ -136,7 +136,7 @@
         }
     }
 
-    private async Task Detail(int roomId)
+    private async Task Detail(string roomId)
     {
         _goto.NavigateTo($"/rooms/details/{roomId}");
 

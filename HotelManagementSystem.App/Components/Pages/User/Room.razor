@@ -103,7 +103,7 @@
 
     private Booking _booking = new Booking();
 
-    private async Task BookRoom(int roomId)
+    private async Task BookRoom(string roomId)
     {
         var result = await _bookingService.BookRoom(roomId);
         if (result.IsSuccess)
