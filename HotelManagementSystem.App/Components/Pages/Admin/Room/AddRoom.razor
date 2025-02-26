@@ -2,7 +2,6 @@
 @using HotelManagementSystem.Shared.Enum
 @inject ISnackbar Snackbar
 @inject NavigationManager Navigation
-@rendermode RenderMode.InteractiveServer
 
 <MudContainer>
     <MudText Typo="Typo.h4" GutterBottom="true">Add Room</MudText>
@@ -69,6 +68,8 @@
     {
         try
         {
+            await JS.InvokeVoidAsync("manageLoading", "show");
+
             // Save uploaded photos and add their paths to the roomModel
             if (_files != null)
             {
@@ -84,8 +85,9 @@
             var result = await _roomService.AddRoomAsync(roomModel);
             if (result.IsSuccess)
             {
-                Snackbar.Add("Room added successfully.", Severity.Success);
-                Navigation.NavigateTo("/rooms");
+                await JS.InvokeVoidAsync("manageLoading", "remove");
+
+                _goto.NavigateTo("/rooms");
             }
             else
             {

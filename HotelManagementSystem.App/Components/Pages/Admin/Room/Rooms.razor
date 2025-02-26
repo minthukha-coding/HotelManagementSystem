@@ -1,5 +1,4 @@
 ﻿@page "/rooms"
-@rendermode RenderMode.InteractiveServer
 
 <MudContainer>
     <MudText Typo="Typo.h4" GutterBottom="true">Room Management</MudText>
@@ -16,7 +15,7 @@
     }
     else
     {
-@*         <MudText Typo="Typo.h4" GutterBottom="true">Room Management</MudText>
+        @*         <MudText Typo="Typo.h4" GutterBottom="true">Room Management</MudText>
 
         <MudButton MudVariant="MudVariant.Filled" Color="Color.Primary" OnClick="AddRoom">Add Room</MudButton>
  *@
@@ -114,31 +113,40 @@
         }
     }
 
-    private void AddRoom()
+    private async void AddRoom()
     {
+        await JS.InvokeVoidAsync("manageLoading", "show");
         _goto.NavigateTo("/rooms/add");
+        await JS.InvokeVoidAsync("manageLoading", "remove");
     }
 
-    private void EditRoom(int roomId)
+    private async void EditRoom(int roomId)
     {
+        await JS.InvokeVoidAsync("manageLoading", "show");
         _goto.NavigateTo($"/rooms/edit/{roomId}");
+        await JS.InvokeVoidAsync("manageLoading", "remove");
     }
 
     private async Task DeleteRoom(string roomId)
     {
+        await JS.InvokeVoidAsync("manageLoading", "show");
         var result = await _roomService.DeleteRoomAsync(roomId);
         if (result.IsSuccess)
         {
             await LoadRooms();
+            await JS.InvokeVoidAsync("manageLoading", "remove");
         }
         else
         {
+
         }
     }
 
     private async Task Detail(string roomId)
     {
+        await JS.InvokeVoidAsync("manageLoading", "show");
         _goto.NavigateTo($"/rooms/details/{roomId}");
+        await JS.InvokeVoidAsync("manageLoading", "remove");
     }
 
     private MudBlazor.Color GetRoomStatus(string status)

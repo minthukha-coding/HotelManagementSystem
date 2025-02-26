@@ -1,5 +1,4 @@
 ﻿@page "/rooms/edit/{roomId:int}"
-@rendermode RenderMode.InteractiveServer
 
 <MudContainer>
     <MudText Typo="Typo.h4" GutterBottom="true">Edit Room</MudText>
@@ -42,6 +41,7 @@
 
     private async Task UpdateRoom()
     {
+
         var result = await _roomService.UpdateRoomAsync(roomModel);
         if (result.IsSuccess)
         {

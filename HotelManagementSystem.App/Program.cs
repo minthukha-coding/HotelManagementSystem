@@ -10,8 +10,6 @@ using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddMudServices();
-
 try
 {
     builder.Services.AddScoped<AdminUserServices>();
@@ -36,6 +34,7 @@ catch (Exception ex)
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddMudServices();
 
 StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
 

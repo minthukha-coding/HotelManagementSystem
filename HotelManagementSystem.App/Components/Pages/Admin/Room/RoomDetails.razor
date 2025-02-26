@@ -1,5 +1,4 @@
 ﻿@page "/rooms/details/{roomId}"
-@rendermode RenderMode.InteractiveServer
 
 @inject NavigationManager Navigation
 
@@ -146,16 +145,24 @@
         }
     }
 
-    private void BackToRooms()
+    private async void BackToRooms()
     {
+        await JS.InvokeVoidAsync("manageLoading", "show");
+
         Navigation.NavigateTo("/rooms");
+
+        await JS.InvokeVoidAsync("manageLoading", "remove");
     }
 
     private async Task DeleteRoom()
     {
+        await JS.InvokeVoidAsync("manageLoading", "show");
+
         var result = await _roomService.DeleteRoomAsync(roomId);
         if (result.IsSuccess)
         {
+            await JS.InvokeVoidAsync("manageLoading", "remove");
+
             // Optionally, show a success message
             Navigation.NavigateTo("/rooms");
         }
