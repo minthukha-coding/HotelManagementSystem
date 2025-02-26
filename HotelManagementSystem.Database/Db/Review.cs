@@ -5,7 +5,7 @@ namespace HotelManagementSystem.Database.Db;
 
 public partial class Review
 {
-    public int ReviewId { get; set; }
+    public string ReviewId { get; set; } = null!;
 
     public int UserId { get; set; }
 
@@ -15,5 +15,5 @@ public partial class Review
 
     public string? Comment { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
 }

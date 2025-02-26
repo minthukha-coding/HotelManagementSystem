@@ -3,6 +3,7 @@ using HotelManagementSystem.Shared.Enum;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using NUlid;
 
 namespace HotelManagementSystem.Domain.Features.Room;
 
@@ -45,6 +46,7 @@ public class RoomService
             // Create a new Room entity
             var room = new Database.Db.Room
             {
+                RoomId = Ulid.NewUlid().ToString(),
                 RoomNumber = roomModel.RoomNumber,
                 Category = "Standard",
                 Status = roomModel.Status,
@@ -118,7 +120,7 @@ public class RoomService
         }
     }
 
-    public async Task<Result<bool>> DeleteRoomAsync(int roomId)
+    public async Task<Result<bool>> DeleteRoomAsync(string roomId)
     {
         try
         {
@@ -188,7 +190,7 @@ public class RoomService
         return $"/uploads/roomphotos/{fileName}";
     }
 
-    public async Task<Result<RoomModel>> GetRoomByIdAsync(int roomId)
+    public async Task<Result<RoomModel>> GetRoomByIdAsync(string roomId)
     {
         try
         {

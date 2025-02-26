@@ -5,7 +5,7 @@ namespace HotelManagementSystem.Database.Db;
 
 public partial class Notification
 {
-    public int NotificationId { get; set; }
+    public string NotificationId { get; set; } = null!;
 
     public int UserId { get; set; }
 

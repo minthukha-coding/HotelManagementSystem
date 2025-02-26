@@ -5,7 +5,7 @@ namespace HotelManagementSystem.Database.Db;
 
 public partial class Payment
 {
-    public int PaymentId { get; set; }
+    public string PaymentId { get; set; } = null!;
 
     public int BookingId { get; set; }
 
@@ -17,5 +17,5 @@ public partial class Payment
 
     public decimal TotalAmount { get; set; }
 
-    public DateTime? PaymentDate { get; set; }
+    public DateTime PaymentDate { get; set; }
 }

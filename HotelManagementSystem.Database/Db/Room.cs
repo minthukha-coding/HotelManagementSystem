@@ -5,7 +5,7 @@ namespace HotelManagementSystem.Database.Db;
 
 public partial class Room
 {
-    public int RoomId { get; set; }
+    public string RoomId { get; set; } = null!;
 
     public string RoomNumber { get; set; } = null!;
 

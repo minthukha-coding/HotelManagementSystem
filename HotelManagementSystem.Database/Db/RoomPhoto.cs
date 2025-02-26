@@ -5,9 +5,9 @@ namespace HotelManagementSystem.Database.Db;
 
 public partial class RoomPhoto
 {
-    public int PhotoId { get; set; }
+    public string PhotoId { get; set; } = null!;
 
-    public int RoomId { get; set; }
+    public string RoomId { get; set; } = null!;
 
     public string PhotoUrl { get; set; } = null!;
 

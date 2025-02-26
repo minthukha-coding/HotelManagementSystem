@@ -5,7 +5,7 @@ namespace HotelManagementSystem.Database.Db;
 
 public partial class Customer
 {
-    public int CustomerId { get; set; }
+    public string CustomerId { get; set; } = null!;
 
     public int UserId { get; set; }
 

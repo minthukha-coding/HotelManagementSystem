@@ -35,9 +35,12 @@ public partial class AppDbContext : DbContext
     {
         modelBuilder.Entity<Booking>(entity =>
         {
-            entity.HasKey(e => e.BookingId).HasName("PK__Bookings__73951ACD55186C3B");
+            entity.HasKey(e => e.BookingId).HasName("PK__Bookings__73951ACD014088BC");
 
-            entity.Property(e => e.BookingId).HasColumnName("BookingID");
+            entity.Property(e => e.BookingId)
+                .HasMaxLength(200)
+                .IsUnicode(false)
+                .HasColumnName("BookingID");
             entity.Property(e => e.CheckInDate).HasColumnType("datetime");
             entity.Property(e => e.CheckOutDate).HasColumnType("datetime");
             entity.Property(e => e.CreatedAt)
@@ -50,9 +53,11 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64B8A7F5D608");
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64B878F5792B");
 
-            entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+            entity.Property(e => e.CustomerId)
+                .HasMaxLength(255)
+                .HasColumnName("CustomerID");
             entity.Property(e => e.Address).HasMaxLength(255);
             entity.Property(e => e.FullName).HasMaxLength(100);
             entity.Property(e => e.PhoneNumber).HasMaxLength(20);
@@ -61,9 +66,11 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<Notification>(entity =>
         {
-            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E32D8A2E3C4");
+            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E327A1BB097");
 
-            entity.Property(e => e.NotificationId).HasColumnName("NotificationID");
+            entity.Property(e => e.NotificationId)
+                .HasMaxLength(255)
+                .HasColumnName("NotificationID");
             entity.Property(e => e.Message).HasMaxLength(255);
             entity.Property(e => e.SentAt)
                 .HasDefaultValueSql("(getdate())")
@@ -74,39 +81,43 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<Payment>(entity =>
         {
-            entity.HasKey(e => e.PaymentId).HasName("PK__Payments__9B556A58CF613AC4");
+            entity.HasKey(e => e.PaymentId).HasName("PK__Payments__9B556A580526CA7F");
 
-            entity.Property(e => e.PaymentId).HasColumnName("PaymentID");
+            entity.Property(e => e.PaymentId)
+                .HasMaxLength(255)
+                .HasColumnName("PaymentID");
             entity.Property(e => e.Amount).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.BookingId).HasColumnName("BookingID");
             entity.Property(e => e.Discount).HasColumnType("decimal(10, 2)");
-            entity.Property(e => e.PaymentDate)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
+            entity.Property(e => e.PaymentDate).HasColumnType("datetime");
             entity.Property(e => e.Tax).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.TotalAmount).HasColumnType("decimal(10, 2)");
         });
 
         modelBuilder.Entity<Review>(entity =>
         {
-            entity.HasKey(e => e.ReviewId).HasName("PK__Reviews__74BC79AE2D8BF479");
+            entity.HasKey(e => e.ReviewId).HasName("PK__Reviews__74BC79AE528779DC");
 
-            entity.Property(e => e.ReviewId).HasColumnName("ReviewID");
+            entity.Property(e => e.ReviewId)
+                .HasMaxLength(255)
+                .HasColumnName("ReviewID");
             entity.Property(e => e.Comment).HasMaxLength(255);
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
+            entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             entity.Property(e => e.RoomId).HasColumnName("RoomID");
             entity.Property(e => e.UserId).HasColumnName("UserID");
         });
 
         modelBuilder.Entity<Room>(entity =>
         {
-            entity.HasKey(e => e.RoomId).HasName("PK__Rooms__32863919304FE77E");
+            entity.HasKey(e => e.RoomId).HasName("PK__Rooms__328639192043D959");
 
-            entity.Property(e => e.RoomId).HasColumnName("RoomID");
+            entity.Property(e => e.RoomId)
+                .HasMaxLength(255)
+                .HasColumnName("RoomID");
             entity.Property(e => e.Category).HasMaxLength(50);
-            entity.Property(e => e.Description).HasMaxLength(255);
+            entity.Property(e => e.Description)
+                .HasMaxLength(500)
+                .IsUnicode(false);
             entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.RoomNumber).HasMaxLength(50);
             entity.Property(e => e.Status).HasMaxLength(50);
@@ -114,21 +125,21 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<RoomPhoto>(entity =>
         {
-            entity.HasKey(e => e.PhotoId).HasName("PK__RoomPhot__21B7B5E249F47A0E");
+            entity.HasKey(e => e.PhotoId).HasName("PK__RoomPhot__21B7B5E2E8484DBE");
 
+            entity.Property(e => e.PhotoId).HasMaxLength(255);
             entity.Property(e => e.Description).HasMaxLength(255);
+            entity.Property(e => e.RoomId).HasMaxLength(255);
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC22F6C731");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC9E978321");
 
             entity.Property(e => e.UserId)
-                .HasMaxLength(50)
+                .HasMaxLength(200)
                 .HasColumnName("UserID");
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
+            entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             entity.Property(e => e.Email).HasMaxLength(100);
             entity.Property(e => e.PasswordHash).HasMaxLength(255);
             entity.Property(e => e.Role).HasMaxLength(50);

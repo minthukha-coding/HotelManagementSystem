@@ -5,7 +5,7 @@ namespace HotelManagementSystem.Database.Db;
 
 public partial class Booking
 {
-    public int BookingId { get; set; }
+    public string BookingId { get; set; } = null!;
 
     public int UserId { get; set; }
 
