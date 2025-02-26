@@ -1,23 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.12" />
-    <PackageReference Include="NUlid" Version="1.7.2" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.12" />
+		<PackageReference Include="NUlid" Version="1.7.2" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HotelManagementSystem.Database\HotelManagementSystem.Database.csproj" />
-    <ProjectReference Include="..\HotelManagementSystem.Shared\HotelManagementSystem.Shared.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\HotelManagementSystem.Database\HotelManagementSystem.Database.csproj" />
+		<ProjectReference Include="..\HotelManagementSystem.Shared\HotelManagementSystem.Shared.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\User\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Features\User\" />
+	</ItemGroup>
 
 </Project>

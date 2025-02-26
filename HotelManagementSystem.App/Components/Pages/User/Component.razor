@@ -1,0 +1,164 @@
+﻿@page "/test"
+@rendermode RenderMode.InteractiveServer
+@using HotelManagementSystem.Database.Db
+@using MudBlazor
+@layout EmptyLayout
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-4">
+    <MudText Typo="Typo.h4" GutterBottom="true" Class="mb-6">Available Rooms</MudText>
+
+    @if (Rooms == null)
+    {
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true" Class="my-8" />
+            <MudText Typo="Typo.body1" Align="Align.Center">Loading rooms...</MudText>
+    }
+    else if (!Rooms.Any())
+    {
+            <MudAlert Severity="Severity.Info" Class="my-8">
+                <MudText Typo="Typo.body1">No rooms available at the moment.</MudText>
+            </MudAlert>
+    }
+    else
+    {
+            <MudGrid>
+            @foreach (var room in Rooms)
+            {
+                        <MudItem xs="12" sm="6" md="4">
+                            <MudCard Class="mb-6" Elevation="3">
+                                <MudCardMedia Height="200" Image="@(room.PhotoUrls?.FirstOrDefault()?.PhotoUrl ?? "/images/no-image.jpg")" />
+                                <MudCardContent>
+                                    <MudText Typo="Typo.h6">@room.Category</MudText>
+                                    <MudText Typo="Typo.body2" Color="Color.Primary">@room.Description</MudText>
+                                    <MudText Typo="Typo.subtitle1" Color="Color.Primary" Class="mt-2">$@room.Price / night</MudText>
+                                </MudCardContent>
+                                <MudCardActions>
+                                    <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="() => ShowBookingDialog(room)">
+                                        View & Book
+                                    </MudButton>
+                                </MudCardActions>
+                            </MudCard>
+                        </MudItem>
+            }
+            </MudGrid>
+    }
+
+    <!-- Booking Dialog -->
+    <MudDialog @bind-IsVisible="showBookingDialog" Options="dialogOptions">
+        <TitleContent>
+            <MudText Typo="Typo.h6">Book Room: @(selectedRoom?.Category ?? "")</MudText>
+        </TitleContent>
+        <DialogContent>
+            @if (selectedRoom != null)
+            {
+                    <MudForm @ref="form">
+                        <MudDatePicker Label="Check-in Date" 
+                                     @bind-Date="booking.CheckInDate" 
+                                     MinDate="DateTime.Today"
+                                     Required="true"
+                                     Class="mb-4" />
+
+                        <MudDatePicker Label="Check-out Date" 
+                                     @bind-Date="booking.CheckOutDate"
+                                     MinDate="booking.CheckInDate?.AddDays(1)"
+                                     Required="true"
+                                     Class="mb-4" />
+
+                    @if (booking.CheckInDate.HasValue && booking.CheckOutDate.HasValue)
+                    {
+                                <MudText Typo="Typo.body2" Class="mb-4">
+                                    Stay Duration: @CalculateStayDuration() days
+                                    <br />
+                                    Total Price: $@CalculateTotalPrice()
+                                </MudText>
+                    }
+                    </MudForm>
+            }
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="() => showBookingDialog = false">Cancel</MudButton>
+            <MudButton Color="Color.Primary" 
+                      Variant="Variant.Filled" 
+                      OnClick="BookRoom"
+                      Disabled="!CanBook">
+                Book Now
+            </MudButton>
+        </DialogActions>
+    </MudDialog>
+</MudContainer>
+
+@code {
+    private List<RoomModel> Rooms { get; set; }
+    private RoomModel selectedRoom;
+    private Booking booking = new Booking();
+    private bool showBookingDialog = false;
+    private MudForm form;
+    private DialogOptions dialogOptions = new() { MaxWidth = MaxWidth.Small, FullWidth = true };
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadRooms();
+    }
+
+    private async Task LoadRooms()
+    {
+        var result = await _roomService.GetAllRoomForUserRoomListing();
+        if (result.IsSuccess)
+        {
+            Rooms = result.Data;
+        }
+    }
+
+    private void ShowBookingDialog(RoomModel room)
+    {
+        selectedRoom = room;
+        booking = new Booking
+            {
+                // RoomId = int.Parse(room.RoomId),
+                RoomId = (room.RoomId),
+                CheckInDate = DateTime.Today,
+                Status = "Pending"
+            };
+        showBookingDialog = true;
+    }
+
+    private async Task BookRoom()
+    {
+        await form.Validate();
+        if (!form.IsValid) return;
+
+        // var result = await _bookingService.BookRoom(booking);
+    }
+
+    private int CalculateStayDuration()
+    {
+        if (booking.CheckInDate.HasValue && booking.CheckOutDate.HasValue)
+        {
+            return (booking.CheckOutDate.Value - booking.CheckInDate.Value).Days;
+        }
+        return 0;
+    }
+
+    private decimal CalculateTotalPrice()
+    {
+        if (selectedRoom != null && booking.CheckInDate.HasValue && booking.CheckOutDate.HasValue)
+        {
+            return CalculateStayDuration() * selectedRoom.Price;
+        }
+        return 0;
+    }
+
+    private bool CanBook => booking.CheckInDate.HasValue &&
+                          booking.CheckOutDate.HasValue &&
+                          booking.CheckInDate < booking.CheckOutDate;
+
+    private class Booking
+    {
+        public string BookingId { get; set; }
+        public string UserId { get; set; }
+        public string RoomId { get; set; }
+        public DateTime? CheckInDate { get; set; }
+        public DateTime? CheckOutDate { get; set; }
+        public string Status { get; set; } = null!;
+        public DateTime? CreatedAt { get; set; }
+    }
+}

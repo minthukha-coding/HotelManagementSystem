@@ -2,7 +2,7 @@
 {
     public class BookingModel
     {
-        public int BookingId { get; set; }
+        public string BookingId { get; set; }
         public string CustomerName { get; set; } // From User table
         public string Phone { get; set; }       // From User table (assuming you have a Phone field)
         public string RoomNumber { get; set; }  // From Room table

@@ -3,6 +3,7 @@ using HotelManagementSystem.Database.Db;
 using HotelManagementSystem.Domain.Features.Booking;
 using HotelManagementSystem.Domain.Features.Room;
 using HotelManagementSystem.Domain.Features.User;
+using HotelManagementSystem.Shared;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
@@ -18,6 +19,14 @@ try
     builder.Services.AddScoped<BookingService>();
     builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+    builder.Services.AddScoped<DapperService>(provider =>
+    {
+        var configuration = provider.GetRequiredService<IConfiguration>();
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        return new DapperService(connectionString);
+    });
+
 }
 catch (Exception ex)
 {

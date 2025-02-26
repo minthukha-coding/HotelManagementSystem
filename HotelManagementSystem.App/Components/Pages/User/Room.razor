@@ -4,29 +4,6 @@
 @using MudBlazor
 @layout EmptyLayout
 
-@* <MudContainer>
-    <h3>Room</h3>
-    <MudCard>
-        <MudCardContent>
-            <MudGrid>
-                <!-- Room Image -->
-                <MudItem xs="12" md="6">
-                    <MudImage Src="/uploads/roomphotos/817515f1-f90a-4047-8bc0-20a8970ab99c.jpg" Height="100"/>
-                </MudItem>
-
-                <!-- Room Details -->
-                <MudItem xs="12" md="6">
-                    <MudText Typo="Typo.body1">Category: @SelectedRoom.Category</MudText>
-                    <MudText Typo="Typo.body1">Description: @SelectedRoom.Description</MudText>
-                    <MudText Typo="Typo.body2">Price: $@SelectedRoom.Price per night</MudText>
-                    <MudButton Variant="Variant.Filled" Class="mt-3" Color="Color.Primary" Type="Submit">Book Now</MudButton>
-                </MudItem>
-            </MudGrid>
-        </MudCardContent>
-    </MudCard>
-</MudContainer> *@
-
-
 <MudContainer>
     @if (Rooms == null)
     {
