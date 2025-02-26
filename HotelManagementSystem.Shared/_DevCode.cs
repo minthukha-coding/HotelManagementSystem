@@ -1,6 +1,4 @@
-﻿using HotelManagementSystem.Shared.Enum;
-
-namespace HotelManagementSystem.Shared;
+﻿namespace HotelManagementSystem.Shared;
 
 public class _DevCode
 {

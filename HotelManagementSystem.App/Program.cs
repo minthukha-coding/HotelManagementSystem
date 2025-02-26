@@ -13,11 +13,11 @@ builder.Services.AddMudServices();
 
 try
 {
-	builder.Services.AddScoped<AdminUserServices>();
-	builder.Services.AddScoped<RoomService>();
-	builder.Services.AddScoped<BookingService>();
-	builder.Services.AddDbContext<AppDbContext>(options =>
-		options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    builder.Services.AddScoped<AdminUserServices>();
+    builder.Services.AddScoped<RoomService>();
+    builder.Services.AddScoped<BookingService>();
+    builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 }
 catch (Exception ex)
 {

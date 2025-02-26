@@ -1,7 +1,5 @@
 ﻿using HotelManagementSystem.App.Components.Pages.User.Booking;
 using HotelManagementSystem.Database.Db;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace HotelManagementSystem.Domain.Features.Booking
 {
@@ -54,8 +52,8 @@ namespace HotelManagementSystem.Domain.Features.Booking
 
         public async Task<Result<bool>> BookRoom(string roomId)
         {
-             var booking =  new Database.Db.Booking
-             {
+            var booking = new Database.Db.Booking
+            {
                 RoomId = roomId,
                 UserId = 1, // This should be the actual user ID
                 CheckInDate = DateTime.Now,
@@ -66,6 +64,6 @@ namespace HotelManagementSystem.Domain.Features.Booking
             await _context.SaveChangesAsync();
             return Result<bool>.SuccessResult(true, "Room booked successfully.");
         }
-        
+
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace HotelManagementSystem.Database.Db;
+﻿namespace HotelManagementSystem.Database.Db;
 
 public partial class Room
 {

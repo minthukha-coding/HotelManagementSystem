@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HotelManagementSystem.Domain.Features.User
+﻿namespace HotelManagementSystem.Domain.Features.User
 {
     public class AdminUserModel
     {

@@ -1,8 +1,6 @@
 ﻿using HotelManagementSystem.Database.Db;
-using HotelManagementSystem.Shared;
 using HotelManagementSystem.Shared.Enum;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
 
 namespace HotelManagementSystem.Domain.Features.User;
 
