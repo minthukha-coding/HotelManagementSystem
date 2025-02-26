@@ -46,7 +46,10 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.RoomId).HasColumnName("RoomID");
+            entity.Property(e => e.RoomId)
+                .HasMaxLength(200)
+                .IsUnicode(false)
+                .HasColumnName("RoomID");
             entity.Property(e => e.Status).HasMaxLength(50);
             entity.Property(e => e.UserId).HasColumnName("UserID");
         });

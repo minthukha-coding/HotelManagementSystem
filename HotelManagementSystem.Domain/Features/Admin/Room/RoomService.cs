@@ -41,57 +41,84 @@ public class RoomService
 
     public async Task<Result<RoomModel>> AddRoomAsync(RoomModel roomModel)
     {
+        if (roomModel == null)
+        {
+            return Result<RoomModel>.FailureResult("Room model cannot be null.");
+        }
+
         try
         {
-            // Create a new Room entity
-            var room = new Database.Db.Room
+            // Validate required fields
+            if (string.IsNullOrWhiteSpace(roomModel.RoomNumber))
             {
-                RoomId = Ulid.NewUlid().ToString(),
-                RoomNumber = roomModel.RoomNumber,
-                Category = "Standard",
-                Status = roomModel.Status,
-                Price = roomModel.Price,
-                Description = roomModel.Description
-            };
+                return Result<RoomModel>.FailureResult("Room number is required.");
+            }
 
-            // Add the room to the context and save changes
-            await _context.AddAsync(room);
-            await _context.SaveChangesAsync();
+            if (roomModel.Price <= 0)
+            {
+                return Result<RoomModel>.FailureResult("Price must be greater than zero.");
+            }
 
-            // Get the newly generated RoomId
-            var roomId = room.RoomId;
-
-            // Ensure that PhotoUrls is not null and contains at least one photo
             if (roomModel.PhotoUrls == null || !roomModel.PhotoUrls.Any())
             {
                 return Result<RoomModel>.FailureResult("At least one photo URL is required.");
             }
 
-            // Create a new RoomPhoto entity
-            foreach (var photoUrl in roomModel.PhotoUrls)
+            // Create a new Room entity
+            var roomId = Ulid.NewUlid().ToString();
+            var room = new Database.Db.Room
             {
-                var photo = new Database.Db.RoomPhoto
+                RoomId = roomId,
+                RoomNumber = roomModel.RoomNumber.Trim(), // Clean input
+                Category = "Standard", // Consider making this configurable or part of RoomModel
+                Status = "Available",
+                Price = roomModel.Price,
+                Description = roomModel.Description?.Trim() // Handle null description
+            };
+
+            // Use a transaction for atomic operations
+            await using var transaction = await _context.Database.BeginTransactionAsync();
+
+            try
+            {
+                // Add room
+                await _context.AddAsync(room);
+
+                // Add photos
+                var photoEntities = roomModel.PhotoUrls.Select(photoUrl => new Database.Db.RoomPhoto
                 {
+                    PhotoId = Ulid.NewUlid().ToString(),
                     RoomId = roomId,
-                    PhotoUrl = photoUrl.PhotoUrl, // Use the current photo URL
-                    Description = roomModel.Description // Optional: Add a description for each photo
-                };
+                    PhotoUrl = photoUrl.PhotoUrl?.Trim(), // Clean URL
+                    Description = photoUrl.Description?.Trim() ?? roomModel.Description?.Trim() // Use photo-specific desc if available
+                }).ToList();
 
-                // Add each photo to the context
-                await _context.AddAsync(photo);
+                if (photoEntities.Any(p => string.IsNullOrWhiteSpace(p.PhotoUrl)))
+                {
+                    return Result<RoomModel>.FailureResult("Photo URLs cannot be empty.");
+                }
+
+                await _context.AddRangeAsync(photoEntities);
                 await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                // Update RoomModel with generated ID
+                roomModel.RoomId = roomId;
+
+                return Result<RoomModel>.SuccessResult(roomModel, "Room added successfully.");
             }
-
-            // Update the RoomModel with the new RoomId
-            roomModel.RoomId = roomId;
-
-            // Return success result with the updated RoomModel
-            return Result<RoomModel>.SuccessResult(roomModel, "Room added successfully.");
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                throw; // Re-throw to be caught by outer catch
+            }
         }
         catch (Exception ex)
         {
-            // Return failure result with the exception
-            return Result<RoomModel>.FailureResult(ex);
+            // Log the exception (assuming you have a logger)
+            //_logger.LogError(ex, "Failed to add room: {RoomNumber}", roomModel.RoomNumber);
+
+            return Result<RoomModel>.FailureResult(ex.Message);
         }
     }
 

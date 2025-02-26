@@ -35,9 +35,9 @@
 
     private LoginModel loginModel = new();
 
-    private async Task<Result<UserModel>?> Login()
+    private async Task<Result<AdminUserModel>?> Login()
     {
-        var model = new Result<UserModel>();
+        var model = new Result<AdminUserModel>();
 
         // await JS.InvokeVoidAsync("notiflixLoadingPulse.show");
         await JS.InvokeVoidAsync("manageLoading", "show");
@@ -51,10 +51,10 @@
             await Task.Delay(1000);
             _goto.NavigateTo("/rooms");
 
-            model = new Result<UserModel>
+            model = new Result<AdminUserModel>
                 {
                     IsSuccess = true,
-                    Data = new UserModel
+                    Data = new AdminUserModel
                     {
                         UserId = model.Data!.UserId,
                         Username = model.Data.Username,

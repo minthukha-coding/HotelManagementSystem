@@ -9,7 +9,7 @@ public partial class Booking
 
     public int UserId { get; set; }
 
-    public int RoomId { get; set; }
+    public string RoomId { get; set; } = null!;
 
     public DateTime CheckInDate { get; set; }
 

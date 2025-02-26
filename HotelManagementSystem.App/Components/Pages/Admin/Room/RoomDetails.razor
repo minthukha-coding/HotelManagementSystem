@@ -1,4 +1,4 @@
-﻿@page "/rooms/details/{roomId:int}"
+﻿@page "/rooms/details/{roomId}"
 @rendermode RenderMode.InteractiveServer
 
 @inject NavigationManager Navigation
@@ -123,7 +123,7 @@
 
 @code {
     [Parameter]
-    public string RoomId { get; set; }
+    public string roomId { get; set; }
 
     private RoomModel? room;
 
@@ -134,7 +134,7 @@
 
     private async Task LoadRoomDetails()
     {
-        var result = await _roomService.GetRoomByIdAsync(RoomId);
+        var result = await _roomService.GetRoomByIdAsync(roomId);
         if (result.IsSuccess)
         {
             room = result.Data;
@@ -153,7 +153,7 @@
 
     private async Task DeleteRoom()
     {
-        var result = await _roomService.DeleteRoomAsync(RoomId);
+        var result = await _roomService.DeleteRoomAsync(roomId);
         if (result.IsSuccess)
         {
             // Optionally, show a success message

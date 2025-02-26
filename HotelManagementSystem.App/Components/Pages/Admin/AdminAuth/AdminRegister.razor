@@ -39,11 +39,11 @@
     private string email;
 
 
-    private async Task<Result<UserModel>> HandleValidSubmit()
+    private async Task<Result<AdminUserModel>> HandleValidSubmit()
     {
-        var model = new Result<UserModel>();
+        var model = new Result<AdminUserModel>();
 
-        var reqModel = new UserModel
+        var reqModel = new AdminUserModel
             {
                 Username = username,
                 PasswordHash = password,

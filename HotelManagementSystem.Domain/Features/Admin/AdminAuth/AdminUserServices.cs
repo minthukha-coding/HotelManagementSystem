@@ -6,21 +6,21 @@ using System.Data;
 
 namespace HotelManagementSystem.Domain.Features.User;
 
-public class UserServices
+public class AdminUserServices
 {
     private readonly AppDbContext _context;
 
-    public UserServices(AppDbContext context)
+    public AdminUserServices(AppDbContext context)
     {
         _context = context;
     }
 
-    public async Task<Result<UserModel>> Register(UserModel reqModel)
+    public async Task<Result<AdminUserModel>> Register(AdminUserModel reqModel)
     {
         var item = await _context.Users.FirstOrDefaultAsync(u => u.Email == reqModel.Email);
         if (item != null)
         {
-            return Result<UserModel>.FailureResult("User already exists.");
+            return Result<AdminUserModel>.FailureResult("User already exists.");
         }
 
         var user = new Database.Db.User
@@ -39,32 +39,32 @@ public class UserServices
 
         if (response > 0)
         {
-            return Result<UserModel>.SuccessResult("User registered successfully.");
+            return Result<AdminUserModel>.SuccessResult("User registered successfully.");
         }
         else
         {
-            return Result<UserModel>.FailureResult("Failed to register user.");
+            return Result<AdminUserModel>.FailureResult("Failed to register user.");
         }
     }
 
-    public async Task<Result<UserModel>?> Login(string email, string password)
+    public async Task<Result<AdminUserModel>?> Login(string email, string password)
     {
-        var model = new Result<UserModel>();
+        var model = new Result<AdminUserModel>();
 
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         if (user == null)
         {
-            model = Result<UserModel>.FailureResult("User doesn't exists.");
+            model = Result<AdminUserModel>.FailureResult("User doesn't exists.");
             goto Result;
         }
 
         if (user.PasswordHash != password)
         {
-            model = Result<UserModel>.FailureResult("Invalid password.");
+            model = Result<AdminUserModel>.FailureResult("Invalid password.");
             goto Result;
         }
 
-        model = Result<UserModel>.SuccessResult(new UserModel
+        model = Result<AdminUserModel>.SuccessResult(new AdminUserModel
         {
             UserId = user.UserId,
             Username = user.Username,

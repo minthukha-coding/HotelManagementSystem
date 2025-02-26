@@ -11,10 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMudServices();
 
-
 try
 {
-	builder.Services.AddScoped<UserServices>();
+	builder.Services.AddScoped<AdminUserServices>();
 	builder.Services.AddScoped<RoomService>();
 	builder.Services.AddScoped<BookingService>();
 	builder.Services.AddDbContext<AppDbContext>(options =>

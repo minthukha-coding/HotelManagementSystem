@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HotelManagementSystem.Domain.Features.User
 {
-    public class UserModel
+    public class AdminUserModel
     {
         public string UserId { get; set; }
 
