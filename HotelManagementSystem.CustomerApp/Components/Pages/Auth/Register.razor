@@ -1,0 +1,67 @@
+﻿@page "/register"
+@using HotelManagementSystem.Domain.Features.User
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="mt-8">
+    <MudPaper Class="pa-4">
+        <MudText Typo="Typo.h5" Class="mb-4 text-center">Register</MudText>
+
+        <MudForm @ref="form">
+            <MudGrid>
+                <MudItem xs="12" Class="mb-1">
+                    <MudTextField Label="Username" @bind-Value="username" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true" />
+                </MudItem>
+                <MudItem xs="12" Class="mb-1">
+                    <MudTextField Label="Email" @bind-Value="email" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true" />
+                </MudItem>
+                <MudItem xs="12" Class="mb-1">
+                    <MudTextField Label="Password" @bind-Value="password" Type="password" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true" />
+                </MudItem>
+                <MudItem xs="12" Class="text-center">
+                    <MudButton MudVariant="MudVariant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit" FullWidth="true">
+                        Register
+                    </MudButton>
+                </MudItem>
+                    <MudItem xs="12" Class="text-center mt-2">
+                        <MudText Typo="Typo.body2">
+                            Already have an account? <MudLink Href="/" Color="Color.Primary">Login</MudLink>
+                        </MudText>
+                    </MudItem>
+            </MudGrid>
+        </MudForm>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private MudForm form;
+    private string username;
+    private string password;
+    private string email;
+
+
+    private async Task<Result<AdminUserModel>> HandleValidSubmit()
+    {
+        var model = new Result<AdminUserModel>();
+
+        var reqModel = new AdminUserModel
+            {
+                Username = username,
+                PasswordHash = password,
+                Email = email,
+            };
+
+        model = await _userService.Register(reqModel);
+
+        if (model!.IsSuccess)
+        {
+            await JS.InvokeVoidAsync("notiflixNotify.success", "Register successful!");
+            _goto.NavigateTo("/");
+        }
+        else
+        {
+            await JS.InvokeVoidAsync("notiflixNotify.error", "Error! Something went wrong.");
+            _goto.NavigateTo("/");
+        }
+
+        return model;
+    }
+}

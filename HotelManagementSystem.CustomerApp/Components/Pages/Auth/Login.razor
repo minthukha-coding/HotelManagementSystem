@@ -1,0 +1,81 @@
+﻿@page "/login"
+@using HotelManagementSystem.Domain.Features.User
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="mt-8">
+    <MudCard>
+        <MudCardContent>
+            <MudForm Model="loginModel">
+                <MudText Typo="Typo.h5" Class="mb-4 text-center">Login</MudText>
+                <MudGrid>
+                    <MudItem xs="12" Class="mb-4">
+                        <MudTextField Label="Email" @bind-Value="loginModel.Email" Required="true" RequiredError="Email is required" MudVariant="MudVariant.Outlined" FullWidth="true" />
+                    </MudItem>
+                    <MudItem xs="12" Class="mb-4">
+                        <MudTextField Label="Password" @bind-Value="loginModel.Password" Required="true" RequiredError="Password is required" Type="password" MudVariant="MudVariant.Outlined" FullWidth="true" />
+                    </MudItem>
+                    <MudItem xs="12" Class="text-center">
+                        <MudButton MudVariant="MudVariant.Filled" Color="Color.Primary" OnClick="LoginMethod" FullWidth="true">
+                            Login
+                        </MudButton>
+                    </MudItem>
+                    <MudItem xs="12" Class="text-center mt-2">
+                        <MudText Typo="Typo.body2">
+                            Don't have an account? <MudLink Href="/register" Color="Color.Primary">Register</MudLink>
+                        </MudText>
+                    </MudItem>
+                </MudGrid>
+            </MudForm>
+        </MudCardContent>
+    </MudCard>
+</MudContainer>
+
+
+@code {
+
+    private LoginModel loginModel = new();
+
+    private async Task<Result<AdminUserModel>?> LoginMethod()
+    {
+        var model = new Result<AdminUserModel>();
+
+        // await JS.InvokeVoidAsync("notiflixLoadingPulse.show");
+        await JS.InvokeVoidAsync("manageLoading", "show");
+        model = await _userService.Login(loginModel.Email, loginModel.Password);
+        // await JS.InvokeVoidAsync("notiflixLoadingRemove.show");
+        await JS.InvokeVoidAsync("manageLoading", "remove");
+
+        if (model!.IsSuccess)
+        {
+            await JS.InvokeVoidAsync("notiflixNotify.success", "Login successful!");
+            await Task.Delay(1000);
+            _goto.NavigateTo("/rooms");
+
+            model = new Result<AdminUserModel>
+                {
+                    IsSuccess = true,
+                    Data = new AdminUserModel
+                    {
+                        UserId = model.Data!.UserId,
+                        Username = model.Data.Username,
+                        Email = model.Data.Email,
+                        PasswordHash = model.Data.PasswordHash,
+                        Role = model.Data.Role,
+                        CreatedAt = model.Data.CreatedAt
+                    }
+                };
+        }
+        else
+        {
+            await JS.InvokeVoidAsync("notiflixNotify.error", "Error! Something went wrong.");
+            _goto.NavigateTo("/");
+        }
+
+        return model;
+    }
+
+    private class LoginModel
+    {
+        public string Email { get; set; } = "";
+        public string Password { get; set; } = "";
+    }
+}

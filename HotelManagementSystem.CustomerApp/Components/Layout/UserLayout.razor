@@ -1,0 +1,32 @@
+﻿@inherits LayoutComponentBase
+
+<MudLayout>
+    <MudAppBar Color="Color.Primary">
+        <MudText Typo="Typo.body2" Class="ml-4">
+            © @DateTime.Now.Year Hotel Management System
+        </MudText>
+    </MudAppBar>
+
+    <MudDrawer Open="true" ClipMode="DrawerClipMode.Always" Color="Color.Default">
+        <MudNavLink Href="//user/room/view" Icon="home" Match="NavLinkMatch.All">
+            Rooms
+        </MudNavLink>
+        <MudNavLink Href="/register" Icon="home" Match="NavLinkMatch.All">
+            Register
+        </MudNavLink>
+        <MudNavLink Href="/login" Icon="home" Match="NavLinkMatch.All">
+            Logout
+        </MudNavLink>
+    </MudDrawer>
+
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="pa-4">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />

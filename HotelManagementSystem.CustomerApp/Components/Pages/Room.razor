@@ -1,0 +1,115 @@
+﻿@page "/"
+@using HotelManagementSystem.CustomerApp.Components.Layout
+@using HotelManagementSystem.Database.Db
+@using HotelManagementSystem.Domain.Features.Room
+@using MudBlazor
+@layout UserLayout
+
+
+<MudContainer>
+    @if (Rooms == null)
+    {
+        <MudText Typo="Typo.body1">Loading rooms...</MudText>
+    }
+    else if (!Rooms.Any())
+    {
+        <MudText Typo="Typo.body1">No rooms available.</MudText>
+    }
+    @if (Rooms != null)
+    {
+        <h3>Rooms</h3>
+        @foreach (var room in Rooms)
+        {
+            <MudCard Class="mb-4">
+                <MudCardContent>
+                    <MudGrid>
+                        <!-- Room Image -->
+                        <MudItem xs="12" md="6">
+                            @*    @if (room.PhotoUrls != null && room.PhotoUrls.Any())
+                            {
+                                <MudImage Src="@room.PhotoUrls[0].PhotoUrl" Height="100" Alt="Room image" />
+                            } *@
+                            @if (room.PhotoUrls != null && room.PhotoUrls.Any())
+                            {
+                                <div class="d-flex flex-wrap">
+                                    @foreach (var photoUrl in room.PhotoUrls)
+                                    {
+                                        <MudImage Src="@photoUrl.PhotoUrl" Height="100" Alt="Room image" Class="m-2" />
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <MudText Typo="Typo.body2">No image available</MudText>
+                            }
+                        </MudItem>
+
+                        <!-- Room Details -->
+                        <MudItem xs="12" md="6">
+                            <MudText Typo="Typo.body1">Category: @room.Category</MudText>
+                            <MudText Typo="Typo.body1">Description: @room.Description</MudText>
+                            <MudText Typo="Typo.body2">Price: $@room.Price per night</MudText>
+                            <MudButton Variant="Variant.Filled" Class="mt-3" OnClick="() => BookRoom(room.RoomId)" Color="Color.Primary">
+                                Book Now
+                            </MudButton>
+                        </MudItem>
+                    </MudGrid>
+                </MudCardContent>
+            </MudCard>
+        }
+    }
+</MudContainer>
+
+@code {
+    private List<RoomModel> Rooms { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadRooms();
+    }
+
+    private async Task LoadRooms()
+    {
+        var result = await _roomService.GetAllRoomForUserRoomListing();
+        if (result.IsSuccess)
+        {
+            Rooms = result.Data;
+        }
+        else
+        {
+        }
+    }
+
+    private Booking _booking = new Booking();
+
+    private async Task BookRoom(string roomId)
+    {
+        _goto.NavigateTo($"/booking/{roomId}");
+        var result = await _bookingService.BookRoom(roomId);
+        if (result.IsSuccess)
+        {
+            
+        }
+        else
+        {
+        }
+    }
+
+    private class Booking
+    {
+        public int BookingId { get; set; }
+
+        public int UserId { get; set; }
+
+        public int RoomId { get; set; }
+
+        public DateTime CheckInDate { get; set; }
+
+        public DateTime CheckOutDate { get; set; }
+
+        public string Status { get; set; } = null!;
+
+        public DateTime? CreatedAt { get; set; }
+    }
+
+}
