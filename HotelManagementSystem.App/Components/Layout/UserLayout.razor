@@ -1,0 +1,78 @@
+﻿@* @inherits LayoutComponentBase
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<MudPopoverProvider /> <!-- Added this line -->
+
+<MudLayout>
+    <!-- Navbar -->
+    <MudAppBar Elevation="1" Color="Color.Primary">
+        <MudText Typo="Typo.h6" Class="ml-4">Hotel Booking System</MudText>
+        <MudSpacer />
+
+        <!-- Desktop Menu -->
+        <MudMenu Label="Menu" Color="Color.Inherit" Variant="Variant.Text" Class="mr-4">
+            <MudMenuItem Href="/user/profile">Profile</MudMenuItem>
+            <MudMenuItem Href="/user/room/view">Rooms</MudMenuItem>
+            <MudMenuItem Href="/user/booking">My Bookings</MudMenuItem>
+            <MudMenuItem OnClick="Logout">Logout</MudMenuItem>
+        </MudMenu>
+    </MudAppBar>
+
+    <!-- Main Content -->
+    <MudMainContent Class="pt-8">
+        <MudContainer MaxWidth="MaxWidth.Large">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+
+    <!-- Footer -->
+    <MudAppBar Position="AppBarPosition.Fixed" Elevation="1" Color="Color.Surface" Class="bottom-appbar">
+        <MudText Typo="Typo.body2" Class="ml-4">
+            © @DateTime.Now.Year Hotel Management System
+        </MudText>
+    </MudAppBar>
+</MudLayout>
+
+@code {
+    [Inject] private NavigationManager NavigationManager { get; set; }
+
+    private void Logout()
+    {
+        // Add your logout logic here (e.g., clear auth tokens)
+        NavigationManager.NavigateTo("/login");
+    }
+ *@
+
+
+
+@inherits LayoutComponentBase
+
+<MudLayout>
+    <MudAppBar Color="Color.Primary">
+        <MudText Typo="Typo.body2" Class="ml-4">
+            © @DateTime.Now.Year Hotel Management System
+        </MudText>
+    </MudAppBar>
+
+    <MudDrawer Open="true" ClipMode="DrawerClipMode.Always" Color="Color.Default">
+        <MudNavLink Href="//user/room/view" Icon="home" Match="NavLinkMatch.All">
+            Rooms
+        </MudNavLink>
+        <MudNavLink Href="/" Icon="home" Match="NavLinkMatch.All">
+            Logout
+        </MudNavLink>
+    </MudDrawer>
+
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="pa-4">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />

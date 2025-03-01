@@ -26,8 +26,8 @@
                     <MudTd>@context.RoomNumber</MudTd>
                     <MudTd>@context.Category</MudTd>
                     <MudTd>@context.Price.ToString("C")</MudTd>
-                    <MudTd>@context.CheckInDate.ToShortDateString()</MudTd>
-                    <MudTd>@context.CheckOutDate.ToShortDateString()</MudTd>
+                    <MudTd>@context.CheckInDate</MudTd>
+                    <MudTd>@context.CheckOutDate</MudTd>
                     <MudTd>
                         <MudChip T="string" Color="@GetRoomStatus(context.Status)">@context.Status</MudChip>
                     </MudTd>

@@ -1,8 +1,7 @@
 ﻿@page "/user/room/view"
-@rendermode RenderMode.InteractiveServer
 @using HotelManagementSystem.Database.Db
 @using MudBlazor
-@layout EmptyLayout
+@layout UserLayout
 
 <MudContainer>
     @if (Rooms == null)
@@ -13,7 +12,7 @@
     {
         <MudText Typo="Typo.body1">No rooms available.</MudText>
     }
-    else
+    @if (Rooms != null)
     {
         <h3>Rooms</h3>
         @foreach (var room in Rooms)
@@ -82,6 +81,7 @@
 
     private async Task BookRoom(string roomId)
     {
+        _goto.NavigateTo($"/booking/{roomId}");
         var result = await _bookingService.BookRoom(roomId);
         if (result.IsSuccess)
         {
