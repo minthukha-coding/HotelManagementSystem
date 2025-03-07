@@ -61,11 +61,20 @@
 </MudContainer>
 
 @code {
+    [Inject] ILogger<Room> _logger { get; set; }
+
     private List<RoomModel> Rooms { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        await LoadRooms();
+        try
+        {
+            await LoadRooms();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+        }
     }
 
     private async Task LoadRooms()
@@ -85,14 +94,14 @@
     private async Task BookRoom(string roomId)
     {
         _goto.NavigateTo($"/booking/{roomId}");
-        var result = await _bookingService.BookRoom(roomId);
-        if (result.IsSuccess)
-        {
+        // var result = await _bookingService.BookRoom(roomId);
+        // if (result.IsSuccess)
+        // {
             
-        }
-        else
-        {
-        }
+        // }
+        // else
+        // {
+        // }
     }
 
     private class Booking

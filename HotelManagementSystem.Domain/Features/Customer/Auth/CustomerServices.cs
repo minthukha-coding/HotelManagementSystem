@@ -1,12 +1,17 @@
-﻿namespace HotelManagementSystem.Domain.Features.Customer.Auth;
+﻿using HotelManagementSystem.Shared.Services;
+using static HotelManagementSystem.Shared.Services.JwtTokenService;
+
+namespace HotelManagementSystem.Domain.Features.Customer.Auth;
 
 public class CustomerServices
 {
     private readonly AppDbContext _context;
+    private readonly JwtTokenService _jwtService;
 
-    public CustomerServices(AppDbContext context)
+    public CustomerServices(AppDbContext context, JwtTokenService jwtService)
     {
         _context = context;
+        _jwtService = jwtService;
     }
 
     public async Task<Result<CustomerModel>> Register(CustomerModel reqModel)
@@ -14,7 +19,7 @@ public class CustomerServices
         try
         {
             // Validate the request model
-            if (reqModel == null)
+            if (reqModel == null!)
                 return Result<CustomerModel>.FailureResult("Request model is null.");
 
             // Check if the email is already registered
@@ -28,9 +33,9 @@ public class CustomerServices
             var customer = new Database.Db.Customer()
             {
                 CustomerId = Guid.NewGuid().ToString(),
-                FullName = reqModel.FullName,
-                PhoneNumber = reqModel.PhoneNumber,
-                Address = reqModel.Address,
+                FullName = reqModel.FullName!,
+                PhoneNumber = reqModel.PhoneNumber!,
+                Address = reqModel.Address!,
                 Email = reqModel.Email,
                 CreatedAt = DateTime.UtcNow
             };
@@ -48,45 +53,62 @@ public class CustomerServices
             return Result<CustomerModel>.FailureResult(ex);
         }
     }
-    
-    public async Task<Result<CustomerModel>?> Login(string email, string password)
+
+    public async Task<Result<LoginResponse>?> Login(string email, string password)
     {
         try
         {
             // Validate the input
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
-                return Result<CustomerModel>.FailureResult("Email and password are required.");
+                return Result<LoginResponse>.FailureResult("Email and password are required.");
 
             // Find the customer by email
             var customer = await _context.Customers
                 .FirstOrDefaultAsync(c => c.Email == email);
 
             if (customer == null)
-                return Result<CustomerModel>.FailureResult("Customer not found.");
+                return Result<LoginResponse>.FailureResult("Customer not found.");
 
             // Validate the password (you should use a proper password hashing mechanism)
             // For simplicity, this example assumes the password is stored in plain text (not recommended for production)
-            // if (custome.pas != password) // Replace with proper password hashing logic
-            //     return Result<CustomerModel>.FailureResult("Invalid password.");
+            if (customer.Password != password) // Replace with proper password hashing logic
+                return Result<LoginResponse>.FailureResult("Invalid password.");
+
+            var reqTokenModel = new AccessTokenRequestModel
+            {
+                UserId = customer.CustomerId,
+                Email = customer.Email
+            };
+            var token = _jwtService.GenerateJwtToken(reqTokenModel);
 
             // Map the Customer entity to the CustomerModel
-            var customerModel = new CustomerModel
+            var response = new LoginResponse
             {
-                CustomerId = customer.CustomerId,
-                FullName = customer.FullName,
-                PhoneNumber = customer.PhoneNumber,
-                Address = customer.Address,
-                Email = customer.Email,
-                CreatedAt = customer.CreatedAt
+                Token = token,
+                Customer = new CustomerModel
+                {
+                    CustomerId = customer.CustomerId,
+                    FullName = customer.FullName,
+                    PhoneNumber = customer.PhoneNumber,
+                    Address = customer.Address,
+                    Email = customer.Email,
+                    CreatedAt = customer.CreatedAt,
+                    Token = token
+                }
             };
 
             // Return success result
-            return Result<CustomerModel>.SuccessResult(customerModel, "Login successful.");
+            return Result<LoginResponse>.SuccessResult(response, "Login successful.");
         }
         catch (Exception ex)
         {
             // Handle exceptions
-            return Result<CustomerModel>.FailureResult(ex);
+            return Result<LoginResponse>.FailureResult(ex);
         }
+    }
+    public class LoginResponse
+    {
+        public string Token { get; set; } = string.Empty;
+        public CustomerModel Customer { get; set; } = new();
     }
 }

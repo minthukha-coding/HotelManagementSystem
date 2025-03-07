@@ -148,14 +148,14 @@
     private async Task SubmitBooking()
     {
         // Calculate number of days
-        // bookingModel.NumberOfDays = (bookingModel.CheckOutDate - bookingModel.CheckInDate)?.Days ?? 0;
+        bookingModel.NumberOfDays = (bookingModel.CheckOutDate - bookingModel.CheckInDate)?.Days ?? 0;
 
         // Submit booking to service
-        // var result = await _roomService.(bookingModel);
-        // if (result.IsSuccess)
-        // {
-        //     _goto.NavigateTo("/booking/confirmation");
-        // }
+        var result = await _bookingService.BookRoom(bookingModel);
+        if (result.IsSuccess)
+        {
+            _goto.NavigateTo("/booking/confirmation");
+        }
     }
 
     private void UpdateCheckOutMin(ChangeEventArgs e)

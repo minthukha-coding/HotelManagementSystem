@@ -9,10 +9,10 @@
                 <MudText Typo="Typo.h5" Class="mb-4 text-center">Admin Login</MudText>
                 <MudGrid>
                     <MudItem xs="12" Class="mb-4">
-                        <MudTextField Label="Email" @bind-Value="loginModel.Email" Required="true" RequiredError="Email is required" MudVariant="MudVariant.Outlined" FullWidth="true" />
+                        <MudTextField Label="Email" @bind-Value="loginModel.Email" Required="true" RequiredError="Email is required" MudVariant="MudVariant.Outlined" FullWidth="true"/>
                     </MudItem>
                     <MudItem xs="12" Class="mb-4">
-                        <MudTextField Label="Password" @bind-Value="loginModel.Password" Required="true" RequiredError="Password is required" Type="password" MudVariant="MudVariant.Outlined" FullWidth="true" />
+                        <MudTextField Label="Password" @bind-Value="loginModel.Password" Required="true" RequiredError="Password is required" Type="password" MudVariant="MudVariant.Outlined" FullWidth="true"/>
                     </MudItem>
                     <MudItem xs="12" Class="text-center">
                         <MudButton MudVariant="MudVariant.Filled" Color="Color.Primary" OnClick="Login" FullWidth="true">
@@ -32,7 +32,6 @@
 
 
 @code {
-
     private LoginModel loginModel = new();
 
     private async Task<Result<UserModel>?> Login()
@@ -52,18 +51,18 @@
             _goto.NavigateTo("/rooms");
 
             model = new Result<UserModel>
+            {
+                IsSuccess = true,
+                Data = new UserModel
                 {
-                    IsSuccess = true,
-                    Data = new UserModel
-                    {
-                        UserId = model.Data!.UserId,
-                        Username = model.Data.Username,
-                        Email = model.Data.Email,
-                        PasswordHash = model.Data.PasswordHash,
-                        Role = model.Data.Role,
-                        CreatedAt = model.Data.CreatedAt
-                    }
-                };
+                    UserId = model.Data!.UserId,
+                    Username = model.Data.Username,
+                    Email = model.Data.Email,
+                    PasswordHash = model.Data.PasswordHash,
+                    Role = model.Data.Role,
+                    CreatedAt = model.Data.CreatedAt
+                }
+            };
         }
         else
         {

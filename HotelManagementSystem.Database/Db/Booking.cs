@@ -7,7 +7,7 @@ public partial class Booking
 {
     public string BookingId { get; set; } = null!;
 
-    public int UserId { get; set; }
+    public string CustomerId { get; set; } = null!;
 
     public string RoomId { get; set; } = null!;
 
@@ -17,5 +17,5 @@ public partial class Booking
 
     public string Status { get; set; } = null!;
 
-    public DateTime? CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
 }

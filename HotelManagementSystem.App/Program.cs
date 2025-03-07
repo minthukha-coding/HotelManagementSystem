@@ -1,10 +1,3 @@
-using HotelManagementSystem.App.Components;
-using HotelManagementSystem.Database.Db;
-using HotelManagementSystem.Domain.Features.Booking;
-using HotelManagementSystem.Domain.Features.Room;
-using HotelManagementSystem.Domain.Features.User;
-using HotelManagementSystem.Shared;
-using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
 using Serilog;

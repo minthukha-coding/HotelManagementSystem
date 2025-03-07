@@ -50,12 +50,14 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.CustomerId)
+                .HasMaxLength(200)
+                .IsUnicode(false);
             entity.Property(e => e.RoomId)
                 .HasMaxLength(200)
                 .IsUnicode(false)
                 .HasColumnName("RoomID");
             entity.Property(e => e.Status).HasMaxLength(50);
-            entity.Property(e => e.UserId).HasColumnName("UserID");
         });
 
         modelBuilder.Entity<Customer>(entity =>
@@ -69,6 +71,7 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             entity.Property(e => e.Email).HasMaxLength(255);
             entity.Property(e => e.FullName).HasMaxLength(100);
+            entity.Property(e => e.Password).HasMaxLength(255);
             entity.Property(e => e.PhoneNumber).HasMaxLength(20);
         });
 

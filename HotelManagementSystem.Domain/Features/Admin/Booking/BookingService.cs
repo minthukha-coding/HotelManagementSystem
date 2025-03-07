@@ -52,17 +52,17 @@
             return Result<List<BookingResponseModel>>.SuccessResult(responseModels, "BookingModels retrieved successfully.");
         }
 
-        public async Task<Result<bool>> BookRoom(string roomId)
+        public async Task<Result<bool>> BookRoom(BookingModel reqModel)
         {
             try
             {
                 var booking = new Database.Db.Booking
                 {
                     BookingId = NUlid.Ulid.NewUlid().ToString(),
-                    RoomId = roomId,
-                    UserId = 1, // This should be the actual user ID
-                    CheckInDate = DateTime.Now,
-                    CheckOutDate = DateTime.Now.AddDays(1),
+                    RoomId = reqModel.RoomId,
+                    CustomerId = reqModel.CustomerId, // This should be the actual user ID
+                    CheckInDate = reqModel.CheckInDate ?? DateTime.UtcNow,
+                    CheckOutDate = reqModel.CheckOutDate ?? DateTime.UtcNow,
                     Status = "Booked"
                 };
                 await _context.Bookings.AddAsync(booking);
