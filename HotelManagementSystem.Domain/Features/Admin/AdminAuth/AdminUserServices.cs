@@ -1,24 +1,24 @@
-﻿using HotelManagementSystem.Database.Db;
-using HotelManagementSystem.Shared.Enum;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Extensions.Logging;
 
 namespace HotelManagementSystem.Domain.Features.User;
 
-public class AdminUserServices
+public partial class UserServices
 {
     private readonly AppDbContext _context;
+    private readonly ILogger<UserServices> _logger;
 
-    public AdminUserServices(AppDbContext context)
+    public UserServices(AppDbContext context, ILogger<UserServices> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
-    public async Task<Result<AdminUserModel>> Register(AdminUserModel reqModel)
+    public async Task<Result<UserModel>> Register(UserModel reqModel)
     {
         var item = await _context.Users.FirstOrDefaultAsync(u => u.Email == reqModel.Email);
         if (item != null)
         {
-            return Result<AdminUserModel>.FailureResult("User already exists.");
+            return Result<UserModel>.FailureResult("User already exists.");
         }
 
         var user = new Database.Db.User
@@ -37,40 +37,46 @@ public class AdminUserServices
 
         if (response > 0)
         {
-            return Result<AdminUserModel>.SuccessResult("User registered successfully.");
+            return Result<UserModel>.SuccessResult("User registered successfully.");
         }
         else
         {
-            return Result<AdminUserModel>.FailureResult("Failed to register user.");
+            return Result<UserModel>.FailureResult("Failed to register user.");
         }
     }
 
-    public async Task<Result<AdminUserModel>?> Login(string email, string password)
+    public async Task<Result<UserModel>?> Login(string email, string password)
     {
-        var model = new Result<AdminUserModel>();
+        var model = new Result<UserModel>();
 
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-        if (user == null)
+        try
         {
-            model = Result<AdminUserModel>.FailureResult("User doesn't exists.");
-            goto Result;
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            if (user == null)
+            {
+                model = Result<UserModel>.FailureResult("User doesn't exists.");
+                goto Result;
+            }
+
+            if (user.PasswordHash != password)
+            {
+                model = Result<UserModel>.FailureResult("Invalid password.");
+                goto Result;
+            }
+            model = Result<UserModel>.SuccessResult(new UserModel
+            {
+                UserId = user.UserId,
+                Username = user.Username,
+                Email = user.Email,
+                PasswordHash = user.PasswordHash,
+                Role = user.Role,
+                CreatedAt = user.CreatedAt
+            }, "Login successful.");
         }
-
-        if (user.PasswordHash != password)
+        catch (Exception)
         {
-            model = Result<AdminUserModel>.FailureResult("Invalid password.");
-            goto Result;
+            _logger.LogError("This is an error log message.");
         }
-
-        model = Result<AdminUserModel>.SuccessResult(new AdminUserModel
-        {
-            UserId = user.UserId,
-            Username = user.Username,
-            Email = user.Email,
-            PasswordHash = user.PasswordHash,
-            Role = user.Role,
-            CreatedAt = user.CreatedAt
-        }, "Login successful.");
     Result:
         return model;
     }

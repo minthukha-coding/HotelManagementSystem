@@ -16,8 +16,4 @@
 		<ProjectReference Include="..\HotelManagementSystem.Shared\HotelManagementSystem.Shared.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="Features\User\" />
-	</ItemGroup>
-
 </Project>

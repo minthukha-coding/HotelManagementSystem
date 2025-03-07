@@ -1,5 +1,4 @@
 ﻿@page "/register"
-@using HotelManagementSystem.Domain.Features.User
 
 <MudContainer MaxWidth="MaxWidth.Small" Class="mt-8">
     <MudPaper Class="pa-4">
@@ -17,9 +16,9 @@
                     <MudTextField Label="Password" @bind-Value="password" Type="password" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true" />
                 </MudItem>
                 <MudItem xs="12" Class="text-center">
-                    <MudButton MudVariant="MudVariant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit" FullWidth="true">
-                        Register
-                    </MudButton>
+                    @* <MudButton MudVariant="MudVariant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit" FullWidth="true"> *@
+                    @*     Register *@
+                    @* </MudButton> *@
                 </MudItem>
                     <MudItem xs="12" Class="text-center mt-2">
                         <MudText Typo="Typo.body2">
@@ -38,30 +37,30 @@
     private string email;
 
 
-    private async Task<Result<AdminUserModel>> HandleValidSubmit()
-    {
-        var model = new Result<AdminUserModel>();
-
-        var reqModel = new AdminUserModel
-            {
-                Username = username,
-                PasswordHash = password,
-                Email = email,
-            };
-
-        model = await _userService.Register(reqModel);
-
-        if (model!.IsSuccess)
-        {
-            await JS.InvokeVoidAsync("notiflixNotify.success", "Register successful!");
-            _goto.NavigateTo("/");
-        }
-        else
-        {
-            await JS.InvokeVoidAsync("notiflixNotify.error", "Error! Something went wrong.");
-            _goto.NavigateTo("/");
-        }
-
-        return model;
-    }
+    // private async Task<Result<UserModel>> HandleValidSubmit()
+    // {
+    //     var model = new Result<UserModel>();
+    //
+    //     var reqModel = new UserModel
+    //         {
+    //             Username = username,
+    //             PasswordHash = password,
+    //             Email = email,
+    //         };
+    //
+    //     model = await _userService.Register(reqModel);
+    //
+    //     if (model!.IsSuccess)
+    //     {
+    //         await JS.InvokeVoidAsync("notiflixNotify.success", "Register successful!");
+    //         _goto.NavigateTo("/");
+    //     }
+    //     else
+    //     {
+    //         await JS.InvokeVoidAsync("notiflixNotify.error", "Error! Something went wrong.");
+    //         _goto.NavigateTo("/");
+    //     }
+    //
+    //     return model;
+    // }
 }

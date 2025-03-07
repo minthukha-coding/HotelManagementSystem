@@ -1,10 +1,4 @@
-﻿using HotelManagementSystem.App.Components.Pages.User.Booking;
-using HotelManagementSystem.Database.Db;
-using HotelManagementSystem.Shared;
-using NUlid;
-using System.Data;
-
-namespace HotelManagementSystem.Domain.Features.Booking
+﻿namespace HotelManagementSystem.Domain.Features.Booking
 {
     public class BookingService
     {

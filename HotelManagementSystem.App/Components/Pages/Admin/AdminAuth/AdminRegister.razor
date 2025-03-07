@@ -4,7 +4,7 @@
 
 <MudContainer MaxWidth="MaxWidth.Small" Class="mt-8">
     <MudPaper Class="pa-4">
-        <MudText Typo="Typo.h5" Class="mb-4 text-center">Register</MudText>
+        <MudText Typo="Typo.h5" Class="mb-4 text-center">Admin Register</MudText>
 
         <MudForm @ref="form">
             <MudGrid>
@@ -39,11 +39,11 @@
     private string email;
 
 
-    private async Task<Result<AdminUserModel>> HandleValidSubmit()
+    private async Task<Result<UserModel>> HandleValidSubmit()
     {
-        var model = new Result<AdminUserModel>();
+        var model = new Result<UserModel>();
 
-        var reqModel = new AdminUserModel
+        var reqModel = new UserModel
             {
                 Username = username,
                 PasswordHash = password,

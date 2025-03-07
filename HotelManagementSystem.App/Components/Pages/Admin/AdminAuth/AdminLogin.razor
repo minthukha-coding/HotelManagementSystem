@@ -6,7 +6,7 @@
     <MudCard>
         <MudCardContent>
             <MudForm Model="loginModel">
-                <MudText Typo="Typo.h5" Class="mb-4 text-center">Login</MudText>
+                <MudText Typo="Typo.h5" Class="mb-4 text-center">Admin Login</MudText>
                 <MudGrid>
                     <MudItem xs="12" Class="mb-4">
                         <MudTextField Label="Email" @bind-Value="loginModel.Email" Required="true" RequiredError="Email is required" MudVariant="MudVariant.Outlined" FullWidth="true" />
@@ -35,9 +35,9 @@
 
     private LoginModel loginModel = new();
 
-    private async Task<Result<AdminUserModel>?> Login()
+    private async Task<Result<UserModel>?> Login()
     {
-        var model = new Result<AdminUserModel>();
+        var model = new Result<UserModel>();
 
         // await JS.InvokeVoidAsync("notiflixLoadingPulse.show");
         await JS.InvokeVoidAsync("manageLoading", "show");
@@ -51,10 +51,10 @@
             await Task.Delay(1000);
             _goto.NavigateTo("/rooms");
 
-            model = new Result<AdminUserModel>
+            model = new Result<UserModel>
                 {
                     IsSuccess = true,
-                    Data = new AdminUserModel
+                    Data = new UserModel
                     {
                         UserId = model.Data!.UserId,
                         Username = model.Data.Username,

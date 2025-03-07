@@ -1,6 +1,6 @@
 ﻿namespace HotelManagementSystem.Domain.Features.User
 {
-    public class AdminUserModel
+    public class UserModel
     {
         public string UserId { get; set; }
 

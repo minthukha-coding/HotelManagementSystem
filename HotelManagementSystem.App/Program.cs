@@ -7,12 +7,20 @@ using HotelManagementSystem.Shared;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+
+// Add Serilog to logging
+builder.Host.UseSerilog();
+
 try
 {
-    builder.Services.AddScoped<AdminUserServices>();
+    builder.Services.AddScoped<UserServices>();
     builder.Services.AddScoped<RoomService>();
     builder.Services.AddScoped<BookingService>();
     builder.Services.AddDbContext<AppDbContext>(options =>
@@ -22,7 +30,7 @@ try
     {
         var configuration = provider.GetRequiredService<IConfiguration>();
         var connectionString = configuration.GetConnectionString("DefaultConnection");
-        return new DapperService(connectionString);
+        return new DapperService(connectionString!);
     });
 
 }
@@ -39,6 +47,9 @@ builder.Services.AddMudServices();
 StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
 
 var app = builder.Build();
+
+// Middleware to log requests
+app.UseSerilogRequestLogging();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 try
 {
-    builder.Services.AddScoped<AdminUserServices>();
+    builder.Services.AddScoped<UserServices>();
     builder.Services.AddScoped<RoomService>();
     builder.Services.AddScoped<BookingService>();
     builder.Services.AddDbContext<AppDbContext>(options =>
