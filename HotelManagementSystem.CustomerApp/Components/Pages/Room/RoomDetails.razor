@@ -1,7 +1,4 @@
 ﻿@page "/booking/{RoomId}"
-@using HotelManagementSystem.CustomerApp.Components.Layout
-@using HotelManagementSystem.Domain.Features.Booking
-@using HotelManagementSystem.Domain.Features.Room
 @layout UserLayout
 
 <MudContainer>
@@ -136,21 +133,18 @@
 
     protected override async Task OnInitializedAsync()
     {
-        // Load room details including photos
         var result = await _roomService.GetRoomByIdAsync(RoomId);
         if (result.IsSuccess)
         {
-            room = result.Data;
+            room = result.Data!;
             bookingModel.RoomId = RoomId;
         }
     }
 
     private async Task SubmitBooking()
     {
-        // Calculate number of days
         bookingModel.NumberOfDays = (bookingModel.CheckOutDate - bookingModel.CheckInDate)?.Days ?? 0;
 
-        // Submit booking to service
         var result = await _bookingService.BookRoom(bookingModel);
         if (result.IsSuccess)
         {
@@ -160,7 +154,6 @@
 
     private void UpdateCheckOutMin(ChangeEventArgs e)
     {
-        // Update CheckInDate and trigger re-render
         if (DateTime.TryParse(e.Value?.ToString(), out DateTime newDate))
         {
             bookingModel.CheckInDate = newDate;
@@ -200,5 +193,4 @@
     {
         return IsCheckInDateValid() && IsCheckOutDateValid();
     }
-
 }

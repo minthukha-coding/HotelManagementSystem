@@ -1,10 +1,5 @@
 ﻿@page "/"
-@using HotelManagementSystem.CustomerApp.Components.Layout
-@using HotelManagementSystem.Database.Db
-@using HotelManagementSystem.Domain.Features.Room
-@using MudBlazor
 @layout UserLayout
-
 
 <MudContainer>
     @if (Rooms == null)
@@ -103,22 +98,4 @@
         // {
         // }
     }
-
-    private class Booking
-    {
-        public int BookingId { get; set; }
-
-        public int UserId { get; set; }
-
-        public int RoomId { get; set; }
-
-        public DateTime CheckInDate { get; set; }
-
-        public DateTime CheckOutDate { get; set; }
-
-        public string Status { get; set; } = null!;
-
-        public DateTime? CreatedAt { get; set; }
-    }
-
 }

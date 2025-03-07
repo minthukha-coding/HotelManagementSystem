@@ -1,5 +1,4 @@
 ﻿@page "/register"
-@using HotelManagementSystem.Domain.Features.Customer.Auth
 
 <MudContainer MaxWidth="MaxWidth.Small" Class="mt-8">
     <MudPaper Class="pa-4">
@@ -47,7 +46,6 @@
 
     private async Task HandleValidSubmit()
     {
-        // Call your registration service here
         var reqModel = new CustomerModel
             {
                 Email = email,

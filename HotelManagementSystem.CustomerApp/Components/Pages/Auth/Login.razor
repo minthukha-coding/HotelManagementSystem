@@ -1,6 +1,6 @@
 ﻿@page "/login"
 
-<MudContainer MaxWidth="MaxWidth.Small" Class="mt-8">
+<MudContainer MaxWidth="MaxWidth.Small" Class="mt-15">
     <MudCard>
         <MudCardContent>
             <MudForm Model="loginModel">
@@ -33,7 +33,6 @@
 
     private async Task LoginMethod()
     {
-        // Call your login service here
         var result = await _customerServices.Login(loginModel.Email, loginModel.Password);
 
         if (result!.IsSuccess)
