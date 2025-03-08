@@ -1,4 +1,4 @@
-﻿@page "/login"
+﻿@page "/"
 
 <MudContainer MaxWidth="MaxWidth.Small" Class="mt-15">
     <MudCard>
@@ -37,6 +37,7 @@
 
         if (result!.IsSuccess)
         {
+            await JS.InvokeVoidAsync("localStorage.setItem", "authToken", result.Data.Token);
             await JS.InvokeVoidAsync("notiflixNotify.success", "Login successful!");
             _goto.NavigateTo("/rooms");
         }

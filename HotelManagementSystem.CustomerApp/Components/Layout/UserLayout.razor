@@ -7,13 +7,22 @@
         </MudText>
     </MudAppBar>
 
-    <MudDrawer Open="true" ClipMode="DrawerClipMode.Always" Color="Color.Default">
-        <MudNavLink Href="/user/room/view" Icon="home" Match="NavLinkMatch.All">
+    @*  <MudDrawer Open="true" ClipMode="DrawerClipMode.Always" Color="Color.Default">
+        <MudNavLink Href="room/view" Icon="home" Match="NavLinkMatch.All">
             Rooms
         </MudNavLink>
-        <MudNavLink Href="/login" Icon="home" Match="NavLinkMatch.All">
+        <button Icon="home" Match="NavLinkMatch.All" @onclick="Logout">
             Logout
+        </button>
+    </MudDrawer> *@
+
+    <MudDrawer Open="true" ClipMode="DrawerClipMode.Always" Color="Color.Default">
+        <MudNavLink Href="room/view" Icon="@Icons.Material.Filled.Home" Match="NavLinkMatch.All">
+            Rooms
         </MudNavLink>
+        <MudButton OnClick="Logout" StartIcon="@Icons.Material.Filled.Logout" Color="Color.Default">
+            Logout
+        </MudButton>
     </MudDrawer>
 
     <MudMainContent>
@@ -27,3 +36,14 @@
 <MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
+
+@code {
+    public async Task Logout()
+    {
+        // Clear the token from localStorage
+        await JS.InvokeVoidAsync("localStorage.removeItem", "authToken");
+
+        // Navigate to the logi page
+        _goto.NavigateTo("/", forceLoad: true);
+    }
+}

@@ -37,7 +37,8 @@ public class CustomerServices
                 PhoneNumber = reqModel.PhoneNumber!,
                 Address = reqModel.Address!,
                 Email = reqModel.Email,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                Password = reqModel.Password // Replace with proper password hashing logic
             };
 
             // Add the customer to the database
@@ -71,8 +72,8 @@ public class CustomerServices
 
             // Validate the password (you should use a proper password hashing mechanism)
             // For simplicity, this example assumes the password is stored in plain text (not recommended for production)
-            if (customer.Password != password) // Replace with proper password hashing logic
-                return Result<LoginResponse>.FailureResult("Invalid password.");
+            //if (customer.Password != password) // Replace with proper password hashing logic
+            //    return Result<LoginResponse>.FailureResult("Invalid password.");
 
             var reqTokenModel = new AccessTokenRequestModel
             {

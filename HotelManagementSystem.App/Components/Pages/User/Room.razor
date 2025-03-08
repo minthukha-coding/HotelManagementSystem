@@ -46,9 +46,9 @@
                             <MudText Typo="Typo.body1">Category: @room.Category</MudText>
                             <MudText Typo="Typo.body1">Description: @room.Description</MudText>
                             <MudText Typo="Typo.body2">Price: $@room.Price per night</MudText>
-                            <MudButton Variant="Variant.Filled" Class="mt-3" OnClick="() => BookRoom(room.RoomId)" Color="Color.Primary">
+                    @*         <MudButton Variant="Variant.Filled" Class="mt-3" OnClick="() => BookRoom(room.RoomId)" Color="Color.Primary">
                                 Book Now
-                            </MudButton>
+                            </MudButton> *@
                         </MudItem>
                     </MudGrid>
                 </MudCardContent>
@@ -79,18 +79,18 @@
 
     private Booking _booking = new Booking();
 
-    private async Task BookRoom(string roomId)
-    {
-        _goto.NavigateTo($"/booking/{roomId}");
-        var result = await _bookingService.BookRoom(roomId);
-        if (result.IsSuccess)
-        {
+    // private async Task BookRoom(string roomId)
+    // {
+    //     _goto.NavigateTo($"/booking/{roomId}");
+    //     var result = await _bookingService.BookRoom(roomId);
+    //     if (result.IsSuccess)
+    //     {
             
-        }
-        else
-        {
-        }
-    }
+    //     }
+    //     else
+    //     {
+    //     }
+    // }
 
     private class Booking
     {

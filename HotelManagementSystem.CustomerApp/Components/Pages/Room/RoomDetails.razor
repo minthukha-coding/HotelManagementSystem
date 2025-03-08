@@ -1,4 +1,6 @@
 ﻿@page "/booking/{RoomId}"
+@using HotelManagementSystem.Domain.Features.Booking
+@using System.IdentityModel.Tokens.Jwt
 @layout UserLayout
 
 <MudContainer>
@@ -129,7 +131,7 @@
     private MudForm form;
     private bool isValid;
 
-    private BookingModel bookingModel = new BookingModel();
+    public BookingModel bookingModel = new BookingModel();
 
     protected override async Task OnInitializedAsync()
     {
@@ -143,12 +145,32 @@
 
     private async Task SubmitBooking()
     {
-        bookingModel.NumberOfDays = (bookingModel.CheckOutDate - bookingModel.CheckInDate)?.Days ?? 0;
-
-        var result = await _bookingService.BookRoom(bookingModel);
-        if (result.IsSuccess)
+        var token = await JS.InvokeAsync<string>("localStorage.getItem", "authToken");
+        if (!string.IsNullOrEmpty(token))
         {
-            _goto.NavigateTo("/booking/confirmation");
+            // Get the user ID from the token
+            var userId = GetUserIdFromToken(token);
+
+            if (!string.IsNullOrEmpty(userId))
+            {
+                bookingModel.NumberOfDays = (bookingModel.CheckOutDate - bookingModel.CheckInDate)?.Days ?? 0;
+                bookingModel.CustomerId = userId;
+
+                var result = await _bookingService.BookRoom(bookingModel);
+                if (result.IsSuccess)
+                {
+                    await JS.InvokeVoidAsync("notiflixNotify.success", "Booking Success");
+                    _goto.NavigateTo("/booking/confirmation");
+                }
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("notiflixNotify.error", "User ID not found in token.");
+            }
+        }
+        else
+        {
+            await JS.InvokeVoidAsync("notiflixNotify.error", "Token not found in localStorage.");
         }
     }
 
@@ -193,4 +215,25 @@
     {
         return IsCheckInDateValid() && IsCheckOutDateValid();
     }
+
+    public string GetUserIdFromToken(string token)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+
+        if (tokenHandler.CanReadToken(token))
+        {
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+
+            // Extract the user ID from the token
+            var userIdClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == JwtRegisteredClaimNames.Sub);
+
+            if (userIdClaim != null)
+            {
+                return userIdClaim.Value;
+            }
+        }
+
+        return null;
+    }
+
 }
