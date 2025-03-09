@@ -72,8 +72,8 @@ public class CustomerServices
 
             // Validate the password (you should use a proper password hashing mechanism)
             // For simplicity, this example assumes the password is stored in plain text (not recommended for production)
-            //if (customer.Password != password) // Replace with proper password hashing logic
-            //    return Result<LoginResponse>.FailureResult("Invalid password.");
+            if (customer.Password != password) // Replace with proper password hashing logic
+                return Result<LoginResponse>.FailureResult("Invalid password.");
 
             var reqTokenModel = new AccessTokenRequestModel
             {
@@ -94,7 +94,6 @@ public class CustomerServices
                     Address = customer.Address,
                     Email = customer.Email,
                     CreatedAt = customer.CreatedAt,
-                    Token = token
                 }
             };
 

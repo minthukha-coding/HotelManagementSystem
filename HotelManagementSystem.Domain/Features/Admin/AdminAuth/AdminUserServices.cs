@@ -72,10 +72,11 @@ public partial class UserServices
                 Role = user.Role,
                 CreatedAt = user.CreatedAt
             }, "Login successful.");
-        }
-        catch (Exception)
-        {
             _logger.LogError("This is an error log message.");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"This is an error log message.{ex}");
         }
     Result:
         return model;
