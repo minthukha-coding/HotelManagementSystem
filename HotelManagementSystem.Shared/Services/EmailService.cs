@@ -19,7 +19,7 @@ public class EmailService
             var result = await _email
                .To("minthukha1239788@gmail.com")
                .Subject(userSubject)
-               .Body(userBody)
+               .Body(userBody,isHtml: true)
                .SendAsync();
         }
         catch (Exception ex)

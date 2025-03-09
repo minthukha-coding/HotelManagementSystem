@@ -23,11 +23,13 @@ public partial class Booking
         };
     }
 
-    private void ViewBookingDetails(string bookingId)
+    private async void ViewBookingDetails(string bookingId)
     {
         try
         {
+            await JS.InvokeVoidAsync("manageLoading", "show");
             _goto.NavigateTo($"/booking-details/{bookingId}");
+            await JS.InvokeVoidAsync("manageLoading", "remove");
         }
         catch (Exception ex)
         {
@@ -37,35 +39,55 @@ public partial class Booking
 
     private async Task ConfirmBooking(string bookingId)
     {
+        await JS.InvokeVoidAsync("manageLoading", "show");
+
         //var result = await _bookingService.ConfirmBookingAsync(bookingId);
         //if (result.IsSuccess)
         //{
         //    // Optionally, send an email to the customer
-        //    await _emailService.SendConfirmationEmailAsync(bookingId);
+        string userSubject = "Booking Confirmation";
+        string userBody = $@"
+                <h1>Dear ,</h1>
+                <p>Your booking with ID <strong></strong> has been confirmed.</p>
+                <p>Room Type: </p>
+                <p>Booking Date: </p>
+                <p>Thank you for choosing our service!</p>
+                <p>For more information, please visit: <a href=''>Booking Details</a></p>
+                <p>Best regards,<br>Hotel Myaungmya</p>";
 
-        //    // Refresh the bookings list
-        //    var bookingsResult = await _bookingService.GetAllBookinAsync();
-        //    if (bookingsResult.IsSuccess)
+        // Send email to user
+        await _emailService.SendEmail(userSubject, userBody);
+
+        await JS.InvokeVoidAsync("notiflixNotify.error", "Booking Confirmation successful!");
+        _goto.NavigateTo("/customer-bookings");
+        await JS.InvokeVoidAsync("manageLoading", "remove");
+
+        //    // Refresh the booking details
+        //    var bookingResult = await _bookingService.GetBookingByIdAsync(bookingId);
+        //    if (bookingResult.IsSuccess)
         //    {
-        //        Bookings = bookingsResult.Data;
+        //        Booking = bookingResult.Data;
         //    }
         //}
     }
 
     private async Task CancelBooking(string bookingId)
     {
-        //var result = await _bookingService.CancelBookingAsync(bookingId);
-        //if (result.IsSuccess)
-        //{
-        //    // Optionally, send an email to the customer
-        //    await _emailService.SendCancellationEmailAsync(bookingId);
+        await JS.InvokeVoidAsync("manageLoading", "show");
 
-        //    // Refresh the bookings list
-        //    var bookingsResult = await _bookingService.GetAllBookinAsync();
-        //    if (bookingsResult.IsSuccess)
-        //    {
-        //        Bookings = bookingsResult.Data;
-        //    }
-        //}
+        string userSubject = "Room Unavailable";
+        string userBody = $@"
+                <h1>Dear ,</h1>
+                <p>We regret to inform you that the <strong></strong> room is not available for your selected dates.</p>
+                <p>Reason: </p>
+                <p>We suggest the following alternative: <strong></strong>.</p>
+                <p>For more information, please visit: <a href=''>Booking Details</a></p>
+                <p>Best regards,<br>Hotel Myaungmya</p>";
+
+        // Send email to user
+        await _emailService.SendEmail(userSubject, userBody);
+        await JS.InvokeVoidAsync("notiflixNotify.error", "CancelBooking successful!");
+        _goto.NavigateTo("/customer-bookings");
+        await JS.InvokeVoidAsync("manageLoading", "remove");
     }
 }

@@ -30,6 +30,8 @@ public partial class BookingDetails
 
     private async Task ConfirmBooking(string bookingId)
     {
+        await JS.InvokeVoidAsync("manageLoading", "show");
+
         //var result = await _bookingService.ConfirmBookingAsync(bookingId);
         //if (result.IsSuccess)
         //{
@@ -42,10 +44,14 @@ public partial class BookingDetails
                 <p>Booking Date: {Booking.CheckInDate}</p>
                 <p>Thank you for choosing our service!</p>
                 <p>For more information, please visit: <a href='{Booking.BookingId}'>Booking Details</a></p>
-                <p>Best regards,<br>Your Company</p>";
+                <p>Best regards,<br>Hotel Myaungmya</p>";
 
         // Send email to user
         await _emailService.SendEmail(userSubject, userBody);
+
+        await JS.InvokeVoidAsync("notiflixNotify.error", "Booking Confirmation successful!");
+        _goto.NavigateTo("/customer-bookings");
+        await JS.InvokeVoidAsync("manageLoading", "remove");
 
         //    // Refresh the booking details
         //    var bookingResult = await _bookingService.GetBookingByIdAsync(bookingId);
@@ -58,6 +64,8 @@ public partial class BookingDetails
 
     private async Task CancelBooking(string bookingId)
     {
+        await JS.InvokeVoidAsync("manageLoading", "show");
+
         string userSubject = "Room Unavailable";
         string userBody = $@"
                 <h1>Dear {Booking.CustomerName},</h1>
@@ -65,14 +73,20 @@ public partial class BookingDetails
                 <p>Reason: {Booking.CheckInDate}</p>
                 <p>We suggest the following alternative: <strong>{Booking.CheckInDate}</strong>.</p>
                 <p>For more information, please visit: <a href='{Booking.CheckInDate}'>Booking Details</a></p>
-                <p>Best regards,<br>Your Company</p>";
+                <p>Best regards,<br>Hotel Myaungmya</p>";
 
         // Send email to user
         await _emailService.SendEmail(userSubject, userBody);
+        await JS.InvokeVoidAsync("notiflixNotify.error", "CancelBooking successful!");
+        _goto.NavigateTo("/customer-bookings");
+        await JS.InvokeVoidAsync("manageLoading", "remove");
+
     }
 
     private async Task Back()
     {
+        await JS.InvokeVoidAsync("manageLoading", "show");
         _goto.NavigateTo("/customer-bookings");
+        await JS.InvokeVoidAsync("manageLoading", "remove");
     }
 }

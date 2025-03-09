@@ -44,12 +44,12 @@ public partial class AddRoom
             }
             else
             {
-                Snackbar.Add($"Error adding room: {result.Message}", Severity.Error);
+                await JS.InvokeVoidAsync("manageLoading", "remove");
             }
         }
         catch (Exception ex)
         {
-            Snackbar.Add($"An error occurred: {ex.Message}", Severity.Error);
+            await JS.InvokeVoidAsync("manageLoading", "remove");
         }
     }
 
