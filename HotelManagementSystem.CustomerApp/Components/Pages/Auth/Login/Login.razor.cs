@@ -16,7 +16,7 @@ public partial class Login
         {
             await JS.InvokeVoidAsync("localStorage.setItem", "authToken", result.Data.Token);
             await JS.InvokeVoidAsync("notiflixNotify.success", "Login successful!");
-            _goto.NavigateTo("/rooms");
+            _goto.NavigateTo("/room/view");
         }
         else
         {
