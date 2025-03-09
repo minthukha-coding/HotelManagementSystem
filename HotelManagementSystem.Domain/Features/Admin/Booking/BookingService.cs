@@ -1,4 +1,6 @@
-﻿namespace HotelManagementSystem.Domain.Features.Booking
+﻿using HotelManagementSystem.Database.Db;
+
+namespace HotelManagementSystem.Domain.Features.Booking
 {
     public class BookingService
     {
@@ -50,6 +52,33 @@
             }).ToList();
 
             return Result<List<BookingResponseModel>>.SuccessResult(responseModels, "BookingModels retrieved successfully.");
+        }
+        
+        public async Task<Result<BookingResponseModel>> GetBookingDeatilsById(string bookingId)
+        {
+            var bookings = await _dapperService.ExecuteQueryStoreProcedure<BookingModel>("GetBookingDeatilsById", new { BookingId = bookingId });
+
+            if (!bookings.IsSuccess)
+            {
+                return Result<BookingResponseModel>.FailureResult(bookings.Message);
+            }
+
+            // If you need to transform BookingModel to BookingResponseModel
+            var responseModels = bookings.Data.Select(b => new BookingResponseModel
+            {
+                BookingId = b.BookingId,
+                CustomerName = b.CustomerName,
+                Phone = b.Phone,
+                PhoneNumber = b.Phone,
+                RoomNumber = b.RoomNumber,
+                Category = b.Category,
+                Price = b.Price,
+                CheckInDate = b.CheckInDate,
+                CheckOutDate = b.CheckOutDate,
+                Status = b.Status
+            }).FirstOrDefault();
+
+            return Result<BookingResponseModel>.SuccessResult(responseModels, "BookingModels retrieved successfully.");
         }
 
         public async Task<Result<bool>> BookRoom(BookingModel reqModel)

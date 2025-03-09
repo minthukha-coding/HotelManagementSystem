@@ -32,6 +32,6 @@ public partial class Room
    
     private async Task BookRoom(string roomId)
     {
-        _goto.NavigateTo($"/room/details/{roomId}");
+        _goto.NavigateTo($"/book/{roomId}");
     }
 }

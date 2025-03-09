@@ -1,6 +1,6 @@
 ﻿namespace HotelManagementSystem.CustomerApp.Components.Pages.Room;
 
-public partial class RoomDetails
+public partial class BookRoom
 {
     [Parameter] public string RoomId { get; set; }
     private RoomModel room;

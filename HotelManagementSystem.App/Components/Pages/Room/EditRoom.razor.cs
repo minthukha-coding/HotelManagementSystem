@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace HotelManagementSystem.App.Components.Pages.Admin.Room;
+namespace HotelManagementSystem.App.Components.Pages.Room;
 
 public partial class EditRoom
 {

@@ -1,5 +1,6 @@
 ﻿@page "/customer-bookings"
 @using HotelManagementSystem.App.Components.Pages.User.Booking
+@inject NavigationManager NavigationManager
 
 <MudContainer>
     <MudCard>
@@ -10,18 +11,19 @@
             <MudTable Items="@Bookings" Hover="true" Dense="true">
                 <HeaderContent>
                     <MudTh>Customer Name</MudTh>
-                    <MudTh>Phone</MudTh>
+                    @* <MudTh>Phone</MudTh> *@
                     <MudTh>Room Number</MudTh>
                     <MudTh>Category</MudTh>
                     <MudTh>Price</MudTh>
                     <MudTh>Check-In</MudTh>
                     <MudTh>Check-Out</MudTh>
                     <MudTh>Status</MudTh>
+                    <MudTh>Actions</MudTh>
                 </HeaderContent>
 
                 <RowTemplate>
                     <MudTd>@context.CustomerName</MudTd>
-                    <MudTd>@context.PhoneNumber</MudTd>
+                    @* <MudTd>@context.PhoneNumber</MudTd> *@
                     <MudTd>@context.RoomNumber</MudTd>
                     <MudTd>@context.Category</MudTd>
                     <MudTd>@context.Price.ToString("C")</MudTd>
@@ -29,6 +31,11 @@
                     <MudTd>@context.CheckOutDate</MudTd>
                     <MudTd>
                         <MudChip T="string" Color="@GetRoomStatus(context.Status)">@context.Status</MudChip>
+                    </MudTd>
+                    <MudTd>
+                        <MudButton OnClick="() => ViewBookingDetails(context.BookingId)" Color="Color.Primary">Details</MudButton>
+                        <MudButton OnClick="() => ConfirmBooking(context.BookingId)" Color="Color.Success" Disabled="@(context.Status == "Confirmed")">Confirm</MudButton>
+                        <MudButton OnClick="() => CancelBooking(context.BookingId)" Color="Color.Error" Disabled="@(context.Status == "Cancelled")">Cancel</MudButton>
                     </MudTd>
                 </RowTemplate>
             </MudTable>

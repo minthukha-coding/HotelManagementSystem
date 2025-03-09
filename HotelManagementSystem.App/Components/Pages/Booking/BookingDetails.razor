@@ -1,0 +1,26 @@
+﻿@page "/booking-details/{bookingId}"
+@using HotelManagementSystem.App.Components.Pages.User.Booking
+@inject NavigationManager NavigationManager
+
+<MudContainer>
+    <MudCard>
+        <MudCardHeader>
+            <MudText Typo="Typo.h5">Booking Details</MudText>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudText Typo="Typo.body1" Class="mb-2">Customer Name: @Booking.CustomerName</MudText>
+            <MudText Typo="Typo.body1" Class="mb-2">Phone: @Booking.PhoneNumber</MudText>
+            <MudText Typo="Typo.body1" Class="mb-2">Room Number: @Booking.RoomNumber</MudText>
+            <MudText Typo="Typo.body1" Class="mb-2">Category: @Booking.Category</MudText>
+            <MudText Typo="Typo.body1" Class="mb-2">Price: @Booking.Price.ToString("C")</MudText>
+            <MudText Typo="Typo.body1" Class="mb-2">Check-In: @Booking.CheckInDate</MudText>
+            <MudText Typo="Typo.body1" Class="mb-2">Check-Out: @Booking.CheckOutDate</MudText>
+            <MudText Typo="Typo.body1" Class="mb-2">Status: <MudChip T="string" Color="@GetRoomStatus(Booking.Status)">@Booking.Status</MudChip></MudText>
+
+            <MudButton OnClick="() => ConfirmBooking(Booking.BookingId)" Color="Color.Success" Disabled="@(Booking.Status == "Confirmed")">Confirm</MudButton>
+            <MudButton OnClick="() => CancelBooking(Booking.BookingId)" Color="Color.Error" Disabled="@(Booking.Status == "Cancelled")">Cancel</MudButton>
+            <MudButton OnClick="() => Back()" Color="Color.Primary">Back</MudButton>
+
+</MudCardContent>
+    </MudCard>
+</MudContainer>

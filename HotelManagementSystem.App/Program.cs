@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
 using Serilog;
+using System.Net.Mail;
+using System.Net;
+using HotelManagementSystem.Shared.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +14,18 @@ Log.Logger = new LoggerConfiguration()
 // Add Serilog to logging
 builder.Host.UseSerilog();
 
+builder.Services
+    .AddFluentEmail("studyplannerhub@gmail.com") // Default sender email
+    .AddSmtpSender(new SmtpClient("smtp.gmail.com")
+    {
+        Port = 587, // Change based on your SMTP provider
+        Credentials = new NetworkCredential("studyplannerhub@gmail.com", "nhyr ysyd owwk jama"),
+        EnableSsl = true
+    });
+
 try
 {
+    builder.Services.AddScoped<EmailService>();
     builder.Services.AddScoped<UserServices>();
     builder.Services.AddScoped<RoomService>();
     builder.Services.AddScoped<BookingService>();

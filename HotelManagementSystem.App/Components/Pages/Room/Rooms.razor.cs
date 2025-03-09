@@ -1,4 +1,4 @@
-﻿namespace HotelManagementSystem.App.Components.Pages.Admin.Room;
+﻿namespace HotelManagementSystem.App.Components.Pages.Room;
 
 public partial class Rooms
 {
@@ -57,7 +57,7 @@ public partial class Rooms
         await JS.InvokeVoidAsync("manageLoading", "remove");
     }
 
-    private MudBlazor.Color GetRoomStatus(string status)
+    private Color GetRoomStatus(string status)
     {
         return status switch
         {

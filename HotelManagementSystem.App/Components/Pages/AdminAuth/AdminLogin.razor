@@ -5,7 +5,7 @@
 <MudContainer MaxWidth="MaxWidth.Small" Class="mt-8">
     <MudCard>
         <MudCardContent>
-            <MudForm Model="loginModel">
+            <MudForm @ref="form" Model="loginModel">
                 <MudText Typo="Typo.h5" Class="mb-4 text-center">Admin Login</MudText>
                 <MudGrid>
                     <MudItem xs="12" Class="mb-4">

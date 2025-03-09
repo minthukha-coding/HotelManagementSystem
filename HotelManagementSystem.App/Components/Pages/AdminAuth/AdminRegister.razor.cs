@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace HotelManagementSystem.App.Components.Pages.Admin.AdminAuth;
+namespace HotelManagementSystem.App.Components.Pages.AdminAuth;
 
 public partial class AdminRegister
 {
@@ -31,18 +31,22 @@ public partial class AdminRegister
             PasswordHash = password,
             Email = email,
         };
+        await form.Validate();
 
-        model = await _userService.Register(reqModel);
-
-        if (model!.IsSuccess)
+        if (form.IsValid)
         {
-            await JS.InvokeVoidAsync("notiflixNotify.success", "Register successful!");
-            _goto.NavigateTo("/");
-        }
-        else
-        {
-            await JS.InvokeVoidAsync("notiflixNotify.error", "Error! Something went wrong.");
-            _goto.NavigateTo("/");
+            model = await _userService.Register(reqModel);
+            if (model!.IsSuccess)
+            {
+                await JS.InvokeVoidAsync("notiflixNotify.success", "Register successful!");
+                _goto.NavigateTo("/");
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("notiflixNotify.error", "Error! Something went wrong.");
+                _goto.NavigateTo("/");
+            }
+            return model;
         }
 
         return model;
