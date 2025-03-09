@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace HotelManagementSystem.Domain.Features.User;
+﻿namespace HotelManagementSystem.Domain.Features.User;
 
 public partial class UserServices
 {

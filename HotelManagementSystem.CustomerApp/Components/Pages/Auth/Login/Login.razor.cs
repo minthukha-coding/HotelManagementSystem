@@ -6,7 +6,11 @@ public partial class Login
 
     private async Task LoginMethod()
     {
+        await JS.InvokeVoidAsync("manageLoading", "show");
+
         var result = await _customerServices.Login(loginModel.Email, loginModel.Password);
+
+        await JS.InvokeVoidAsync("manageLoading", "remove");
 
         if (result!.IsSuccess)
         {

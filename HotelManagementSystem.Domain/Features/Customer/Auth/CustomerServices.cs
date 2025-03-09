@@ -1,7 +1,4 @@
-﻿using HotelManagementSystem.Shared.Services;
-using static HotelManagementSystem.Shared.Services.JwtTokenService;
-
-namespace HotelManagementSystem.Domain.Features.Customer.Auth;
+﻿namespace HotelManagementSystem.Domain.Features.Customer.Auth;
 
 public class CustomerServices
 {
