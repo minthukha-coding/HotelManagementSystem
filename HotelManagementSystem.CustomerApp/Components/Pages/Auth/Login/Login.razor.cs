@@ -1,8 +1,23 @@
-﻿namespace HotelManagementSystem.CustomerApp.Components.Pages.Auth.Login;
+﻿using System.Text.RegularExpressions;
+using static MudBlazor.CategoryTypes;
+
+namespace HotelManagementSystem.CustomerApp.Components.Pages.Auth.Login;
 
 public partial class Login
 {
     private LoginModel loginModel = new();
+
+    private string EmailValidation(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+            return "Email is required.";
+
+        var regex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+        if (!regex.IsMatch(email))
+            return "Please enter a valid email address.";
+
+        return null;
+    }
 
     private async Task LoginMethod()
     {
@@ -16,7 +31,7 @@ public partial class Login
         {
             await JS.InvokeVoidAsync("localStorage.setItem", "authToken", result.Data.Token);
             await JS.InvokeVoidAsync("notiflixNotify.success", "Login successful!");
-            _goto.NavigateTo("/room/view");
+            _goto.NavigateTo("/");
         }
         else
         {

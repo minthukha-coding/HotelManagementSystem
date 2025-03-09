@@ -9,7 +9,7 @@
                 <MudText Typo="Typo.h5" Class="mb-4 text-center">Admin Login</MudText>
                 <MudGrid>
                     <MudItem xs="12" Class="mb-4">
-                        <MudTextField Label="Email" @bind-Value="loginModel.Email" Required="true" RequiredError="Email is required" MudVariant="MudVariant.Outlined" FullWidth="true"/>
+                        <MudTextField Label="Email" Validation="@EmailValidation" @bind-Value="loginModel.Email" Required="true" RequiredError="Email is required" MudVariant="MudVariant.Outlined" FullWidth="true" />
                     </MudItem>
                     <MudItem xs="12" Class="mb-4">
                         <MudTextField Label="Password" @bind-Value="loginModel.Password" Required="true" RequiredError="Password is required" Type="password" MudVariant="MudVariant.Outlined" FullWidth="true"/>

@@ -1,4 +1,4 @@
-﻿@page "/booking/{RoomId}"
+﻿@page "/room/details/{RoomId}"
 @using HotelManagementSystem.Domain.Features.Booking
 @using System.IdentityModel.Tokens.Jwt
 @layout UserLayout
@@ -112,13 +112,11 @@
                                            HtmlTag="button"
                                            ButtonType="ButtonType.Submit"
                                            Class="mt-2">
-                                    Confirm Booking
+                                    Booking
                                 </MudButton>
                             </MudItem>
                         </MudGrid>
                     </form>
-
-
                 </MudItem>
             </MudGrid>
         </MudPaper>

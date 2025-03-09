@@ -17,7 +17,7 @@
     </MudDrawer> *@
 
     <MudDrawer Open="true" ClipMode="DrawerClipMode.Always" Color="Color.Default">
-        <MudNavLink Href="room/view" Icon="@Icons.Material.Filled.Home" Match="NavLinkMatch.All">
+        <MudNavLink Href="/" Icon="@Icons.Material.Filled.Home" Match="NavLinkMatch.All">
             Rooms
         </MudNavLink>
         <MudButton OnClick="Logout" StartIcon="@Icons.Material.Filled.Logout" Color="Color.Default">
@@ -44,6 +44,6 @@
         await JS.InvokeVoidAsync("localStorage.removeItem", "authToken");
 
         // Navigate to the logi page
-        _goto.NavigateTo("/", forceLoad: true);
+        _goto.NavigateTo("/login", forceLoad: true);
     }
 }

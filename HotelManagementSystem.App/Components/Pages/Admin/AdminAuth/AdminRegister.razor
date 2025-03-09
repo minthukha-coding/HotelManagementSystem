@@ -8,7 +8,7 @@
         <MudForm @ref="form">
             <MudGrid>
                 <MudItem xs="12" Class="mb-1">
-                    <MudTextField Label="Username" @bind-Value="username" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true"/>
+                    <MudTextField Label="Username" Validation="@EmailValidation" @bind-Value="username" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true" />
                 </MudItem>
                 <MudItem xs="12" Class="mb-1">
                     <MudTextField Label="Email" @bind-Value="email" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true"/>

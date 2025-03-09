@@ -1,9 +1,22 @@
-﻿namespace HotelManagementSystem.App.Components.Pages.Admin.AdminAuth;
+﻿using System.Text.RegularExpressions;
+
+namespace HotelManagementSystem.App.Components.Pages.Admin.AdminAuth;
 
 public partial class AdminLogin
 {
     private LoginModel loginModel = new();
 
+    private string EmailValidation(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+            return "Email is required.";
+
+        var regex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+        if (!regex.IsMatch(email))
+            return "Please enter a valid email address.";
+
+        return null;
+    }
     private async Task<Result<UserModel>?> Login()
     {
         var model = new Result<UserModel>();

@@ -36,17 +36,19 @@ public partial class RoomDetails
                 if (result.IsSuccess)
                 {
                     await JS.InvokeVoidAsync("notiflixNotify.success", "Booking Success");
-                    _goto.NavigateTo("/booking/confirmation");
+                    _goto.NavigateTo("/");
                 }
             }
             else
             {
-                await JS.InvokeVoidAsync("notiflixNotify.error", "User ID not found in token.");
+                await JS.InvokeVoidAsync("notiflixNotify.error", "Pls firstly login for booking.");
+                _goto.NavigateTo("/login");
             }
         }
         else
         {
-            await JS.InvokeVoidAsync("notiflixNotify.error", "Token not found in localStorage.");
+            await JS.InvokeVoidAsync("notiflixNotify.error", "Pls firstly login for booking");
+            _goto.NavigateTo("/login");
         }
     }
 
@@ -111,5 +113,15 @@ public partial class RoomDetails
 
         return null;
     }
+
+    //private void SubmitBooking()
+    //{
+    //    if (IsFormValid())
+    //    {
+    //        Console.WriteLine(room.RoomId,bookingModel.CheckInDate,bookingModel.CheckOutDate);
+    //        // Navigate to the booking details page with the booking model and room details
+    //        _goto.NavigateTo($"/booking-details?roomId={room.RoomId}&checkInDate={bookingModel.CheckInDate:yyyy-MM-dd}&checkOutDate={bookingModel.CheckOutDate:yyyy-MM-dd}");
+    //    }
+    //}
 
 }

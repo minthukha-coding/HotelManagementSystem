@@ -2,7 +2,7 @@
 
 <MudContainer MaxWidth="MaxWidth.Small" Class="mt-8">
     <MudPaper Class="pa-4">
-        <MudText Typo="Typo.h5" Class="mb-4 text-center">Register</MudText>
+        <MudText Typo="Typo.h5" Class="mb-4 text-center">User Register</MudText>
 
         <MudForm @ref="form">
             <MudGrid>
@@ -13,7 +13,7 @@
                     <MudTextField Label="PhoneNumber" @bind-Value="phoneNumber" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true" />
                 </MudItem>
                 <MudItem xs="12" Class="mb-1">
-                    <MudTextField Label="Email" @bind-Value="email" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true" />
+                    <MudTextField Label="Email" Validation="@EmailValidation" @bind-Value="email" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true" />
                 </MudItem>
                 <MudItem xs="12" Class="mb-1">
                     <MudTextField Label="Password" @bind-Value="password" Type="password" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true" />

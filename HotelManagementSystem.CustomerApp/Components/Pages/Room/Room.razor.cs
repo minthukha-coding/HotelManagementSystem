@@ -29,19 +29,9 @@ public partial class Room
         {
         }
     }
-
-    private Booking _booking = new Booking();
-
+   
     private async Task BookRoom(string roomId)
     {
-        _goto.NavigateTo($"/booking/{roomId}");
-        // var result = await _bookingService.BookRoom(roomId);
-        // if (result.IsSuccess)
-        // {
-
-        // }
-        // else
-        // {
-        // }
+        _goto.NavigateTo($"/room/details/{roomId}");
     }
 }
