@@ -1,11 +1,11 @@
-﻿namespace HotelManagementSystem.CustomerApp.Components.Pages.Room;
+﻿using HotelManagementSystem.Shared;
+
+namespace HotelManagementSystem.CustomerApp.Components.Pages.Room;
 
 public partial class BookRoom
 {
     [Parameter] public string RoomId { get; set; }
     private RoomModel room;
-    private MudForm form;
-    private bool isValid;
 
     public BookingModel bookingModel = new BookingModel();
 
@@ -24,8 +24,7 @@ public partial class BookRoom
         var token = await JS.InvokeAsync<string>("localStorage.getItem", "authToken");
         if (!string.IsNullOrEmpty(token))
         {
-            // Get the user ID from the token
-            var userId = GetUserIdFromToken(token);
+            var userId = _DevCode.GetUserIdFromToken(token);
 
             if (!string.IsNullOrEmpty(userId))
             {
@@ -93,35 +92,4 @@ public partial class BookRoom
     {
         return IsCheckInDateValid() && IsCheckOutDateValid();
     }
-
-    public string GetUserIdFromToken(string token)
-    {
-        var tokenHandler = new JwtSecurityTokenHandler();
-
-        if (tokenHandler.CanReadToken(token))
-        {
-            var jwtToken = tokenHandler.ReadJwtToken(token);
-
-            // Extract the user ID from the token
-            var userIdClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == JwtRegisteredClaimNames.Sub);
-
-            if (userIdClaim != null)
-            {
-                return userIdClaim.Value;
-            }
-        }
-
-        return null;
-    }
-
-    //private void SubmitBooking()
-    //{
-    //    if (IsFormValid())
-    //    {
-    //        Console.WriteLine(room.RoomId,bookingModel.CheckInDate,bookingModel.CheckOutDate);
-    //        // Navigate to the booking details page with the booking model and room details
-    //        _goto.NavigateTo($"/booking-details?roomId={room.RoomId}&checkInDate={bookingModel.CheckInDate:yyyy-MM-dd}&checkOutDate={bookingModel.CheckOutDate:yyyy-MM-dd}");
-    //    }
-    //}
-
 }

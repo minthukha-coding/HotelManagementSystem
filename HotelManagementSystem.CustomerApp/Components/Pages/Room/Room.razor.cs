@@ -1,4 +1,7 @@
-﻿namespace HotelManagementSystem.CustomerApp.Components.Pages.Room;
+﻿using HotelManagementSystem.Shared;
+using Newtonsoft.Json.Linq;
+
+namespace HotelManagementSystem.CustomerApp.Components.Pages.Room;
 
 public partial class Room
 {
@@ -32,6 +35,15 @@ public partial class Room
    
     private async Task BookRoom(string roomId)
     {
-        _goto.NavigateTo($"/book/{roomId}");
+        var token = await JS.InvokeAsync<string>("localStorage.getItem", "authToken");
+
+        if(token is not null)
+        {
+            _goto.NavigateTo($"/book/{roomId}");
+            return;
+        }
+
+        await JS.InvokeVoidAsync("notiflixNotify.error", "Pls firstly login for booking.");
+        _goto.NavigateTo("/login");
     }
 }

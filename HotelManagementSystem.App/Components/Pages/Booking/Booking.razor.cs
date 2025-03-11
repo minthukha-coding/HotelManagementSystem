@@ -40,12 +40,9 @@ public partial class Booking
     private async Task ConfirmBooking(string bookingId)
     {
         await JS.InvokeVoidAsync("manageLoading", "show");
-
-        //var result = await _bookingService.ConfirmBookingAsync(bookingId);
-        //if (result.IsSuccess)
-        //{
-        //    // Optionally, send an email to the customer
+   
         string userSubject = "Booking Confirmation";
+
         string userBody = $@"
                 <h1>Dear ,</h1>
                 <p>Your booking with ID <strong></strong> has been confirmed.</p>
@@ -55,20 +52,11 @@ public partial class Booking
                 <p>For more information, please visit: <a href=''>Booking Details</a></p>
                 <p>Best regards,<br>Hotel Myaungmya</p>";
 
-        // Send email to user
         await _emailService.SendEmail(userSubject, userBody);
 
-        await JS.InvokeVoidAsync("notiflixNotify.error", "Booking Confirmation successful!");
+        await JS.InvokeVoidAsync("notiflixNotify.success", "Booking Confirmation successful!");
         _goto.NavigateTo("/customer-bookings");
         await JS.InvokeVoidAsync("manageLoading", "remove");
-
-        //    // Refresh the booking details
-        //    var bookingResult = await _bookingService.GetBookingByIdAsync(bookingId);
-        //    if (bookingResult.IsSuccess)
-        //    {
-        //        Booking = bookingResult.Data;
-        //    }
-        //}
     }
 
     private async Task CancelBooking(string bookingId)
@@ -84,9 +72,8 @@ public partial class Booking
                 <p>For more information, please visit: <a href=''>Booking Details</a></p>
                 <p>Best regards,<br>Hotel Myaungmya</p>";
 
-        // Send email to user
         await _emailService.SendEmail(userSubject, userBody);
-        await JS.InvokeVoidAsync("notiflixNotify.error", "CancelBooking successful!");
+        await JS.InvokeVoidAsync("notiflixNotify.success", "CancelBooking successful!");
         _goto.NavigateTo("/customer-bookings");
         await JS.InvokeVoidAsync("manageLoading", "remove");
     }

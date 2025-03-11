@@ -1,10 +1,25 @@
-﻿namespace HotelManagementSystem.Shared;
+﻿using System.IdentityModel.Tokens.Jwt;
 
-public class _DevCode
+namespace HotelManagementSystem.Shared;
+
+public static class _DevCode
 {
-    //public static string EnumToString<TEnum>(TEnum value) where TEnum : Enum
-    //{
-    //    return value.ToString();
-    //}
+    public static string GetUserIdFromToken(string token)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
 
+        if (tokenHandler.CanReadToken(token))
+        {
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+
+            var userIdClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == JwtRegisteredClaimNames.Sub);
+
+            if (userIdClaim != null)
+            {
+                return userIdClaim.Value;
+            }
+        }
+
+        return null;
+    }
 }
