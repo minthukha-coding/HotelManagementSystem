@@ -4,7 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace HotelManagementSystem.Shared.Services;
+namespace HotelManagementSystem.Shared.Services.JwtService;
 
 public class JwtTokenService
 {

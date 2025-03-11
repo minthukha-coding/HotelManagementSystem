@@ -1,4 +1,6 @@
-﻿namespace HotelManagementSystem.Domain.Features.Customer.Auth;
+﻿using HotelManagementSystem.Shared.Services.JwtService;
+
+namespace HotelManagementSystem.Domain.Features.Customer.Auth;
 
 public class CustomerServices
 {

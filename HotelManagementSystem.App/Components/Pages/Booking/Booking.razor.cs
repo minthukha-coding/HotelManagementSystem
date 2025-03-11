@@ -77,4 +77,5 @@ public partial class Booking
         _goto.NavigateTo("/customer-bookings");
         await JS.InvokeVoidAsync("manageLoading", "remove");
     }
+
 }

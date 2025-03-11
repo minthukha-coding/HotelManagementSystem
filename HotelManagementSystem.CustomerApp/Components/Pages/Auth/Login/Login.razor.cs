@@ -1,4 +1,7 @@
-﻿using System.Text.RegularExpressions;
+﻿using HotelManagementSystem.Shared.Services;
+using HotelManagementSystem.Shared.Services.JwtService;
+using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
 using static MudBlazor.CategoryTypes;
 
 namespace HotelManagementSystem.CustomerApp.Components.Pages.Auth.Login;
@@ -7,6 +10,10 @@ public partial class Login
 {
     private MudForm form;
     private LoginModel loginModel = new();
+
+    [Inject] JwtAuthStateProviderService _authStateProvider { get; set; }
+    [Inject] LocalStorageService _localStorage { get; set; }
+
 
     private string EmailValidation(string email)
     {
@@ -34,7 +41,9 @@ public partial class Login
 
             if (result!.IsSuccess)
             {
-                await JS.InvokeVoidAsync("localStorage.setItem", "authToken", result.Data.Token);
+                var token = result.Data!.Token;
+                await _localStorage.SetItemAsync("authToken", token);
+                _authStateProvider.NotifyUserAuthentication(token);
                 await JS.InvokeVoidAsync("notiflixNotify.success", "Login successful!");
                 _goto.NavigateTo("/");
             }

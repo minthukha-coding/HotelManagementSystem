@@ -5,7 +5,9 @@ using HotelManagementSystem.Domain.Features.Customer.Auth;
 using HotelManagementSystem.Domain.Features.Room;
 using HotelManagementSystem.Shared;
 using HotelManagementSystem.Shared.Services;
+using HotelManagementSystem.Shared.Services.JwtService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -43,6 +45,9 @@ try
 
     builder.Services.AddScoped<JwtSecurityTokenHandler>();
     builder.Services.AddScoped<JwtTokenService>();
+    builder.Services.AddScoped<LocalStorageService>();
+    builder.Services.AddScoped<JwtAuthStateProviderService>();
+    builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthStateProviderService>();
     builder.Services.AddScoped<BookingService>();
     builder.Services.AddScoped<RoomService>();
     builder.Services.AddScoped<CustomerServices>();
@@ -56,7 +61,8 @@ try
         return new DapperService(connectionString);
     });
 
-}catch (Exception ex)
+}
+catch (Exception ex)
 {
     Console.WriteLine(ex.Message);
 }

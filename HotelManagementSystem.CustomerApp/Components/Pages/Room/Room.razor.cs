@@ -1,4 +1,8 @@
-﻿using HotelManagementSystem.Shared;
+﻿using HotelManagementSystem.Domain.Features.Booking;
+using HotelManagementSystem.Shared;
+using HotelManagementSystem.Shared.Services.JwtService;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json.Linq;
 
 namespace HotelManagementSystem.CustomerApp.Components.Pages.Room;
@@ -6,8 +10,11 @@ namespace HotelManagementSystem.CustomerApp.Components.Pages.Room;
 public partial class Room
 {
     [Inject] ILogger<Room> _logger { get; set; }
+    [Inject] JwtAuthStateProviderService AuthStateProvider { get; set; }
 
     private List<RoomModel> Rooms { get; set; }
+
+    private bool _isAuthenticated;
 
     protected override async Task OnInitializedAsync()
     {
@@ -18,6 +25,30 @@ public partial class Room
         catch (Exception ex)
         {
             Console.WriteLine(ex.ToString());
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+                var user = authState.User;
+
+                _isAuthenticated = user.Identity!.IsAuthenticated;
+
+                if (!user.Identity.IsAuthenticated)
+                {
+                    _goto.NavigateTo("/login");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 
@@ -32,12 +63,12 @@ public partial class Room
         {
         }
     }
-   
+
     private async Task BookRoom(string roomId)
     {
         var token = await JS.InvokeAsync<string>("localStorage.getItem", "authToken");
 
-        if(token is not null)
+        if (token is not null)
         {
             _goto.NavigateTo($"/book/{roomId}");
             return;

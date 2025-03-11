@@ -10,4 +10,4 @@ global using Microsoft.EntityFrameworkCore;
 global using NUlid;
 global using Microsoft.Extensions.Logging;
 global using HotelManagementSystem.Shared.Services;
-global using static HotelManagementSystem.Shared.Services.JwtTokenService;
+global using static HotelManagementSystem.Shared.Services.JwtService.JwtTokenService;
