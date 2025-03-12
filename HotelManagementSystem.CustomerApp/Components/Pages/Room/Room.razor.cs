@@ -28,29 +28,29 @@ public partial class Room
         }
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            try
-            {
-                var authState = await AuthStateProvider.GetAuthenticationStateAsync();
-                var user = authState.User;
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    if (firstRender)
+    //    {
+    //        try
+    //        {
+    //            var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+    //            var user = authState.User;
 
-                _isAuthenticated = user.Identity!.IsAuthenticated;
+    //            _isAuthenticated = user.Identity!.IsAuthenticated;
 
-                if (!user.Identity.IsAuthenticated)
-                {
-                    _goto.NavigateTo("/login");
-                    return;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-    }
+    //            if (!user.Identity.IsAuthenticated)
+    //            {
+    //                _goto.NavigateTo("/login");
+    //                return;
+    //            }
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            Console.WriteLine(ex.ToString());
+    //        }
+    //    }
+    //}
 
     private async Task LoadRooms()
     {
@@ -64,17 +64,17 @@ public partial class Room
         }
     }
 
-    private async Task BookRoom(string roomId)
+    private async Task RoomDetails(string roomId)
     {
-        var token = await JS.InvokeAsync<string>("localStorage.getItem", "authToken");
+        //var token = await JS.InvokeAsync<string>("localStorage.getItem", "authToken");
 
-        if (token is not null)
-        {
-            _goto.NavigateTo($"/book/{roomId}");
-            return;
-        }
+        //if (token is not null)
+        //{
+        _goto.NavigateTo($"/room/details/{roomId}");
+        return;
+        //}
 
-        await JS.InvokeVoidAsync("notiflixNotify.error", "Pls firstly login for booking.");
-        _goto.NavigateTo("/login");
+        //await JS.InvokeVoidAsync("notiflixNotify.error", "Pls firstly login for booking.");
+        //_goto.NavigateTo("/login");
     }
 }

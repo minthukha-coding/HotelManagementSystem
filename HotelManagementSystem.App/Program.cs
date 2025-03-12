@@ -4,6 +4,9 @@ using Serilog;
 using System.Net.Mail;
 using System.Net;
 using HotelManagementSystem.Shared.Services;
+using HotelManagementSystem.Shared.Services.JwtService;
+using Microsoft.AspNetCore.Components.Authorization;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +28,11 @@ builder.Services
 
 try
 {
+    builder.Services.AddScoped<JwtSecurityTokenHandler>();
+    builder.Services.AddScoped<JwtTokenService>();
+    builder.Services.AddScoped<LocalStorageService>();
+    builder.Services.AddScoped<JwtAuthStateProviderService>();
+    builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthStateProviderService>();
     builder.Services.AddScoped<EmailService>();
     builder.Services.AddScoped<UserServices>();
     builder.Services.AddScoped<RoomService>();

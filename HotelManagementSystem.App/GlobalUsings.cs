@@ -5,7 +5,7 @@ global using System.Net.Http.Json;
 global using HotelManagementSystem.App;
 global using HotelManagementSystem.App.Components;
 global using HotelManagementSystem.App.Components.Layout;
-global using HotelManagementSystem.App.Components.Pages.User.Booking;
+global using HotelManagementSystem.App.Components.Pages.Booking;
 global using HotelManagementSystem.Database.Db;
 global using HotelManagementSystem.Domain.Features.Booking;
 global using HotelManagementSystem.Domain.Features.Room;

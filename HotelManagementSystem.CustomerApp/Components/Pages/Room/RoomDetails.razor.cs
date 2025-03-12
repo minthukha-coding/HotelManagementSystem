@@ -2,7 +2,7 @@
 
 namespace HotelManagementSystem.CustomerApp.Components.Pages.Room;
 
-public partial class BookRoom
+public partial class RoomDetails
 {
     [Parameter] public string RoomId { get; set; }
     private RoomModel room;
@@ -31,7 +31,7 @@ public partial class BookRoom
                 bookingModel.NumberOfDays = (bookingModel.CheckOutDate - bookingModel.CheckInDate)?.Days ?? 0;
                 bookingModel.CustomerId = userId;
 
-                var result = await _bookingService.BookRoom(bookingModel);
+                var result = await _bookingService.UserBookRoom(bookingModel);
                 if (result.IsSuccess)
                 {
                     await JS.InvokeVoidAsync("notiflixNotify.success", "Booking Success");

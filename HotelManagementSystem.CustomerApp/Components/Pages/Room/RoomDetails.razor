@@ -1,10 +1,10 @@
-﻿@page "/book/{RoomId}"
+﻿@page "/room/details/{RoomId}"
 @using HotelManagementSystem.Domain.Features.Booking
 @using System.IdentityModel.Tokens.Jwt
 @layout UserLayout
 
 <MudContainer>
-    <MudText Typo="Typo.h4" GutterBottom="true">Book Room</MudText>
+    <MudText Typo="Typo.h4" GutterBottom="true">Room Details</MudText>
 
     @if (room == null)
     {
@@ -112,7 +112,7 @@
                                            HtmlTag="button"
                                            ButtonType="ButtonType.Submit"
                                            Class="mt-2">
-                                    Booking
+                                    Book Now
                                 </MudButton>
                             </MudItem>
                         </MudGrid>

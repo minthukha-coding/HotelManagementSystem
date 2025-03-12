@@ -1,11 +1,18 @@
-﻿using System.Text.RegularExpressions;
+﻿using HotelManagementSystem.Shared.Services.JwtService;
+using HotelManagementSystem.Shared.Services;
+using Microsoft.AspNetCore.Components;
+using System.Text.RegularExpressions;
 
 namespace HotelManagementSystem.App.Components.Pages.AdminAuth;
 
 public partial class AdminLogin
 {
     private MudForm form;
+
     private LoginModel loginModel = new();
+
+    [Inject] JwtAuthStateProviderService _authStateProvider { get; set; }
+    [Inject] LocalStorageService _localStorage { get; set; }
 
     private string EmailValidation(string email)
     {
@@ -27,29 +34,18 @@ public partial class AdminLogin
         {
             // await JS.InvokeVoidAsync("notiflixLoadingPulse.show");
             await JS.InvokeVoidAsync("manageLoading", "show");
-            model = await _userService.Login(loginModel.Email, loginModel.Password);
+            var result = await _userService.Login(loginModel.Email, loginModel.Password);
             // await JS.InvokeVoidAsync("notiflixLoadingRemove.show");
             await JS.InvokeVoidAsync("manageLoading", "remove");
 
-            if (model!.IsSuccess)
+            if (result!.IsSuccess)
             {
+                var token = result.Data!.Token;
+                await _localStorage.SetItemAsync("authToken", token);
+                _authStateProvider.NotifyUserAuthentication(token);
                 await JS.InvokeVoidAsync("notiflixNotify.success", "Login successful!");
                 await Task.Delay(1000);
                 _goto.NavigateTo("/rooms");
-
-                model = new Result<UserModel>
-                {
-                    IsSuccess = true,
-                    Data = new UserModel
-                    {
-                        UserId = model.Data!.UserId,
-                        Username = model.Data.Username,
-                        Email = model.Data.Email,
-                        PasswordHash = model.Data.PasswordHash,
-                        Role = model.Data.Role,
-                        CreatedAt = model.Data.CreatedAt
-                    }
-                };
             }
             else
             {
@@ -57,7 +53,7 @@ public partial class AdminLogin
                 _goto.NavigateTo("/");
             }
 
-            return model;
+            return Result<UserModel>.SuccessResult("Login success");
         }
         return model;
     }

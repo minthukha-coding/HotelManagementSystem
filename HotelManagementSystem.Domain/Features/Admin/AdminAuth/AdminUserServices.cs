@@ -1,14 +1,20 @@
-﻿namespace HotelManagementSystem.Domain.Features.User;
+﻿using HotelManagementSystem.Database.Db;
+using HotelManagementSystem.Domain.Features.Customer.Auth;
+using HotelManagementSystem.Shared.Services.JwtService;
+
+namespace HotelManagementSystem.Domain.Features.User;
 
 public partial class UserServices
 {
     private readonly AppDbContext _context;
+    private readonly JwtTokenService _jwtService;
     private readonly ILogger<UserServices> _logger;
 
-    public UserServices(AppDbContext context, ILogger<UserServices> logger)
+    public UserServices(AppDbContext context, ILogger<UserServices> logger, JwtTokenService jwtService)
     {
         _context = context;
         _logger = logger;
+        _jwtService = jwtService;
     }
 
     public async Task<Result<UserModel>> Register(UserModel reqModel)
@@ -43,34 +49,50 @@ public partial class UserServices
         }
     }
 
-    public async Task<Result<UserModel>?> Login(string email, string password)
+    public async Task<Result<LoginResponse>?> Login(string email, string password)
     {
-        var model = new Result<UserModel>();
+        var model = new Result<LoginResponse>();
 
         try
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
             if (user == null)
             {
-                model = Result<UserModel>.FailureResult("User doesn't exists.");
+                model = Result<LoginResponse>.FailureResult("User doesn't exists.");
                 goto Result;
             }
 
             if (user.PasswordHash != password)
             {
-                model = Result<UserModel>.FailureResult("Invalid password.");
+                model = Result<LoginResponse>.FailureResult("Invalid password.");
                 goto Result;
             }
-            model = Result<UserModel>.SuccessResult(new UserModel
+
+            var reqTokenModel = new AccessTokenRequestModel
             {
                 UserId = user.UserId,
-                Username = user.Username,
-                Email = user.Email,
-                PasswordHash = user.PasswordHash,
-                Role = user.Role,
-                CreatedAt = user.CreatedAt
-            }, "Login successful.");
-            _logger.LogError("This is an error log message.");
+                Email = user.Email!
+            };
+
+            var token = _jwtService.GenerateJwtToken(reqTokenModel);
+
+
+            var response = new LoginResponse
+            {
+                Token = token,
+                Customer = new UserModel
+                {
+                    UserId = user.UserId,
+                    Username = user.Username,
+                    Email = user.Email,
+                    PasswordHash = user.PasswordHash,
+                    Role = user.Role,
+                    CreatedAt = user.CreatedAt
+                }
+            };
+
+            return Result<LoginResponse>.SuccessResult(response, "Login successful.");
+
         }
         catch (Exception ex)
         {
@@ -79,4 +101,11 @@ public partial class UserServices
     Result:
         return model;
     }
+
+    public class LoginResponse
+    {
+        public string Token { get; set; } = string.Empty;
+        public UserModel Customer { get; set; } = new();
+    }
+
 }

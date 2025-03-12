@@ -1,4 +1,7 @@
-﻿namespace HotelManagementSystem.App.Components.Pages.Room;
+﻿using HotelManagementSystem.Shared.Services.JwtService;
+using Microsoft.AspNetCore.Components;
+
+namespace HotelManagementSystem.App.Components.Pages.Room;
 
 public partial class AddRoom
 {
@@ -9,6 +12,34 @@ public partial class AddRoom
     // {
     //     uploadedFiles = e.GetMultipleFiles();
     // }
+
+    [Inject] JwtAuthStateProviderService AuthStateProvider { get; set; }
+
+    private bool _isAuthenticated;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+                var user = authState.User;
+
+                _isAuthenticated = user.Identity!.IsAuthenticated;
+
+                if (!user.Identity.IsAuthenticated)
+                {
+                    _goto.NavigateTo("/");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+    }
 
     IList<IBrowserFile> _files = new List<IBrowserFile>();
     private void UploadFiles(IBrowserFile file)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using HotelManagementSystem.Shared.Services.JwtService;
+using Microsoft.AspNetCore.Components;
 
 namespace HotelManagementSystem.App.Components.Pages.Room;
 
@@ -9,6 +10,33 @@ public partial class RoomDetails
 
     private RoomModel? room;
 
+    [Inject] JwtAuthStateProviderService AuthStateProvider { get; set; }
+
+    private bool _isAuthenticated;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+                var user = authState.User;
+
+                _isAuthenticated = user.Identity!.IsAuthenticated;
+
+                if (!user.Identity.IsAuthenticated)
+                {
+                    _goto.NavigateTo("/");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+    }
     protected override async Task OnParametersSetAsync()
     {
         await LoadRoomDetails();

@@ -1,8 +1,4 @@
 using HotelManagementSystem.CustomerApp.Components;
-using HotelManagementSystem.Database.Db;
-using HotelManagementSystem.Domain.Features.Booking;
-using HotelManagementSystem.Domain.Features.Customer.Auth;
-using HotelManagementSystem.Domain.Features.Room;
 using HotelManagementSystem.Shared;
 using HotelManagementSystem.Shared.Services;
 using HotelManagementSystem.Shared.Services.JwtService;
@@ -12,13 +8,12 @@ using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MudBlazor.Services;
-using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = builder.Configuration;
-var key = Encoding.UTF8.GetBytes(configuration["Jwt:Key"]);
+var key = Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!);
 
 try
 {

@@ -1,4 +1,6 @@
-﻿namespace HotelManagementSystem.CustomerApp.Components.Pages.Booking;
+﻿using HotelManagementSystem.Shared.Services.JwtService;
+
+namespace HotelManagementSystem.CustomerApp.Components.Pages.Booking;
 
 public partial class BookingDetails
 {
@@ -9,6 +11,34 @@ public partial class BookingDetails
     public RoomModel room { get; set; }
 
     private decimal totalPrice;
+
+    [Inject] JwtAuthStateProviderService AuthStateProvider { get; set; }
+
+    private bool _isAuthenticated;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+                var user = authState.User;
+
+                _isAuthenticated = user.Identity!.IsAuthenticated;
+
+                if (!user.Identity.IsAuthenticated)
+                {
+                    _goto.NavigateTo("/login");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+    }
 
     protected override void OnParametersSet()
     {

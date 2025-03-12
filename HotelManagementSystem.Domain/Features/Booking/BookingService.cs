@@ -13,20 +13,6 @@ namespace HotelManagementSystem.Domain.Features.Booking
             _dapperService = dapperService;
         }
 
-        //public async Task<Result<List<BookingResponseModel>>> GetAllBookinAsync()
-        //{
-        //    try
-        //    {
-        //        var booking = _dapperService.ExecuteQueryStoreProcedure<BookingModel>("GetAllBookingDetails");
-
-        //        return Result<List<BookingResponseModel>>.SuccessResult("BookingModels retrieved successfully.");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Result<List<BookingResponseModel>>.FailureResult(ex);
-        //    }
-        //}
-
         public async Task<Result<List<BookingResponseModel>>> GetAllBookinAsync()
         {
             var bookings = await _dapperService.ExecuteQueryStoreProcedure<BookingModel>("GetAllBookingDetails");
@@ -53,7 +39,7 @@ namespace HotelManagementSystem.Domain.Features.Booking
 
             return Result<List<BookingResponseModel>>.SuccessResult(responseModels, "BookingModels retrieved successfully.");
         }
-        
+
         public async Task<Result<BookingResponseModel>> GetBookingDeatilsById(string bookingId)
         {
             var bookings = await _dapperService.ExecuteQueryStoreProcedure<BookingModel>("GetBookingDeatilsById", new { BookingId = bookingId });
@@ -81,7 +67,7 @@ namespace HotelManagementSystem.Domain.Features.Booking
             return Result<BookingResponseModel>.SuccessResult(responseModels, "BookingModels retrieved successfully.");
         }
 
-        public async Task<Result<bool>> BookRoom(BookingModel reqModel)
+        public async Task<Result<bool>> UserBookRoom(BookingModel reqModel)
         {
             try
             {
@@ -105,5 +91,58 @@ namespace HotelManagementSystem.Domain.Features.Booking
             return Result<bool>.SuccessResult(true);
         }
 
+        public async Task<Result<BookingConfirmationResponseModel>> BookingConfirm(BookingModel reqModel)
+        {
+            try
+            {
+                var item = await _context.Bookings.FirstOrDefaultAsync(x => x.BookingId == reqModel.BookingId);
+                if (item == null)
+                {
+                    return Result<BookingConfirmationResponseModel>.FailureResult("Booking not found.");
+                }
+
+                var duplicateBook = await _context.Bookings
+                    .FirstOrDefaultAsync(x => x.RoomId == item.RoomId &&
+                                         x.Status == "Confirmed" &&
+                                         x.CheckInDate == item.CheckInDate &&
+                                         x.CheckOutDate == item.CheckOutDate);
+                if (duplicateBook != null)
+                {
+                    return Result<BookingConfirmationResponseModel>.FailureResult("Room already booked by other customer.");
+                }
+
+                item.Status = "Confirmed";
+                _context.Bookings.Update(item);
+                await _context.SaveChangesAsync();
+
+                var bookingUser = await _context.Customers.FirstOrDefaultAsync(x => x.CustomerId == item.CustomerId);
+
+                var room = await _context.Rooms.FirstOrDefaultAsync(x => x.RoomId == item.RoomId);
+
+                var model = new BookingConfirmationResponseModel
+                {
+                    CustomerName = bookingUser.FullName,
+                    BookingId = item.BookingId,
+                    RoomType = room.Category,
+                    BookingDate = item.CheckInDate,
+                    BookingDetailsUrl = "https://hotelmanagement.com/booking-details/" + item.BookingId
+                };
+                return Result<BookingConfirmationResponseModel>.SuccessResult(model,"Booking Success");
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            return Result<BookingConfirmationResponseModel>.SuccessResult();
+        }
+
+        public class BookingConfirmationResponseModel
+        {
+            public string CustomerName { get; set; }
+            public string BookingId { get; set; }
+            public string RoomType { get; set; }
+            public DateTime BookingDate { get; set; }
+            public string BookingDetailsUrl { get; set; }
+        }
     }
 }

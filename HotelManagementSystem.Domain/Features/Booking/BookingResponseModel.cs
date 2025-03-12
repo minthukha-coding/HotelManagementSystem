@@ -1,9 +1,9 @@
-﻿namespace HotelManagementSystem.App.Components.Pages.User.Booking;
+﻿namespace HotelManagementSystem.Domain.Features.Booking;
 
 public class BookingResponseModel
 {
-    public string BookingId { get; set; } 
-    public string Phone { get; set; } 
+    public string BookingId { get; set; }
+    public string Phone { get; set; }
     public string CustomerName { get; set; } = string.Empty;
     public string? PhoneNumber { get; set; }
     public string RoomNumber { get; set; } = string.Empty;
