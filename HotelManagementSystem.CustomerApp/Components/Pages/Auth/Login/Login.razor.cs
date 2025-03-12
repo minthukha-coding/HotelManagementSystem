@@ -1,8 +1,6 @@
 ﻿using HotelManagementSystem.Shared.Services;
 using HotelManagementSystem.Shared.Services.JwtService;
-using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
-using static MudBlazor.CategoryTypes;
 
 namespace HotelManagementSystem.CustomerApp.Components.Pages.Auth.Login;
 
