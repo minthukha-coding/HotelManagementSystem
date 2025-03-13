@@ -1,14 +1,22 @@
 ﻿<MudNavMenu>
-    <MudNavLink Href="/rooms" Icon="home" Match="NavLinkMatch.All">
+    <MudNavLink Href="/rooms" Icon="@Icons.Material.Filled.Home" Match="NavLinkMatch.All">
         Room
     </MudNavLink>
-    <MudNavLink Href="/customer-bookings" Icon="home" Match="NavLinkMatch.All">
-        Customer Booking
-    </MudNavLink>
-    @* <MudNavLink Href="/user/room/view" Icon="home" Match="NavLinkMatch.All">
+
+    <MudNavGroup Title="Customer Booking" Icon="@Icons.Material.Filled.Book">
+        <MudNavLink Href="/customer-bookings" Icon="@Icons.Material.Filled.List" Match="NavLinkMatch.All">
+            Bookings
+        </MudNavLink>
+        <MudNavLink Href="/customer-booking-history" Icon="@Icons.Material.Filled.History" Match="NavLinkMatch.All">
+            Booking History
+        </MudNavLink>
+    </MudNavGroup>
+
+    @* <MudNavLink Href="/user/room/view" Icon="@Icons.Material.Filled.Home" Match="NavLinkMatch.All">
         Customer Room View
     </MudNavLink> *@
-    <MudNavLink Href="/" Icon="home" Match="NavLinkMatch.All">
+
+    <MudNavLink Href="/" Icon="@Icons.Material.Filled.ExitToApp" Match="NavLinkMatch.All">
         Logout
     </MudNavLink>
 </MudNavMenu>

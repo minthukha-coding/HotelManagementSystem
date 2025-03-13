@@ -18,7 +18,7 @@
 
         <!-- Price -->
         <MudItem xs="12" sm="6">
-            <MudTextField @bind-Value="roomModel.Price" Label="Price" FullWidth="true" />
+            <MudTextField Value="@formattedPrice" OnInput="@OnPriceInput" Label="Price" FullWidth="true" />
         </MudItem>
 
         <!-- Description -->
@@ -31,7 +31,7 @@
             <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="UploadFiles">
                 <ActivatorContent>
                     <MudButton Variant="Variant.Filled"
-                               Color="Color.Primary"
+                               Color="Color.Transparent"
                                StartIcon="@Icons.Material.Filled.CloudUpload">
                         Upload Room Photos
                     </MudButton>

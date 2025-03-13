@@ -18,4 +18,8 @@ public partial class Booking
     public string Status { get; set; } = null!;
 
     public DateTime CreatedAt { get; set; }
+
+    public decimal? Price { get; set; }
+
+    public string? NumberOfDays { get; set; }
 }

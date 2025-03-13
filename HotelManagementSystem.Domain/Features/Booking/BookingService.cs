@@ -40,6 +40,33 @@ namespace HotelManagementSystem.Domain.Features.Booking
             return Result<List<BookingResponseModel>>.SuccessResult(responseModels, "BookingModels retrieved successfully.");
         }
 
+        public async Task<Result<List<BookingModel>>> GetAllBookingHistory()
+        {
+            var bookings = await _dapperService.ExecuteQueryStoreProcedure<BookingModel>("GetConfirmedBookings");
+
+            if (!bookings.IsSuccess)
+            {
+                return Result<List<BookingModel>>.FailureResult(bookings.Message);
+            }
+
+            // If you need to transform BookingModel to BookingResponseModel
+            var responseModels = bookings.Data.Select(b => new BookingModel
+            {
+                BookingId = b.BookingId,
+                CustomerName = b.CustomerName,
+                Phone = b.Phone,
+                RoomNumber = b.RoomNumber,
+                Category = b.Category,
+                Price = b.Price,
+                CheckInDate = b.CheckInDate,
+                CheckOutDate = b.CheckOutDate,
+                Status = b.Status,
+                NumberOfDays = b.NumberOfDays
+            }).ToList();
+
+            return Result<List<BookingModel>>.SuccessResult(responseModels, "BookingModels retrieved successfully.");
+        }
+
         public async Task<Result<BookingResponseModel>> GetBookingDeatilsById(string bookingId)
         {
             var bookings = await _dapperService.ExecuteQueryStoreProcedure<BookingModel>("GetBookingDeatilsById", new { BookingId = bookingId });
@@ -87,8 +114,8 @@ namespace HotelManagementSystem.Domain.Features.Booking
             catch (Exception ex)
             {
                 Console.Write(ex.ToString());
+                return Result<bool>.SuccessResult(false);
             }
-            return Result<bool>.SuccessResult(true);
         }
 
         public async Task<Result<BookingConfirmationResponseModel>> BookingConfirm(BookingModel reqModel)
@@ -125,6 +152,7 @@ namespace HotelManagementSystem.Domain.Features.Booking
                     BookingId = item.BookingId,
                     RoomType = room.Category,
                     BookingDate = item.CheckInDate,
+                    CustomerEmail = bookingUser.Email,
                     BookingDetailsUrl = "https://hotelmanagement.com/booking-details/" + item.BookingId
                 };
                 return Result<BookingConfirmationResponseModel>.SuccessResult(model,"Booking Success");
@@ -139,6 +167,7 @@ namespace HotelManagementSystem.Domain.Features.Booking
         public class BookingConfirmationResponseModel
         {
             public string CustomerName { get; set; }
+            public string CustomerEmail { get; set; }
             public string BookingId { get; set; }
             public string RoomType { get; set; }
             public DateTime BookingDate { get; set; }

@@ -7,6 +7,7 @@ public partial class AddRoom
 {
     private RoomModel roomModel = new RoomModel();
     private IReadOnlyList<IBrowserFile>? uploadedFiles;
+    private string formattedPrice = "";
 
     // private void OnFileUpload(InputFileChangeEventArgs e)
     // {
@@ -91,4 +92,28 @@ public partial class AddRoom
     {
         Navigation.NavigateTo("/rooms");
     }
+
+    private void OnPriceInput(ChangeEventArgs e)
+    {
+        var input = e.Value?.ToString();
+        if (string.IsNullOrEmpty(input))
+        {
+            formattedPrice = "";
+            roomModel.Price = 0;
+            return;
+        }
+
+        // Remove all non-digit characters
+        var digitsOnly = new string(input.Where(char.IsDigit).ToArray());
+
+        // Parse the digits to a decimal
+        if (decimal.TryParse(digitsOnly, out var parsedValue))
+        {
+            roomModel.Price = parsedValue;
+            // Format the value with thousand separators
+            formattedPrice = parsedValue.ToString("N0");
+        }
+    }
+
+
 }

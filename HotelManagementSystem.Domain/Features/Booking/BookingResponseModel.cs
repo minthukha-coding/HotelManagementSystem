@@ -12,4 +12,5 @@ public class BookingResponseModel
     public DateTime? CheckInDate { get; set; }
     public DateTime? CheckOutDate { get; set; }
     public string Status { get; set; } = string.Empty;
+    public string NumberOfDays { get; set; } = string.Empty;
 }

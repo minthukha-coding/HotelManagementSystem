@@ -42,6 +42,7 @@ public partial class Rooms
 
     private async Task LoadRooms()
     {
+        await _roomService.UpdateRoomStatusesAsync();
         var result = await _roomService.GetRoomModelsAsync();
         if (result.IsSuccess)
         {

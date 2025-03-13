@@ -1,0 +1,29 @@
+﻿@page "/customer-booking-history"
+
+<MudContainer>
+    <MudText Typo="Typo.h4" GutterBottom="true">Bookings</MudText>
+
+    <MudTable Items="@bookings" Hover="true">
+        <HeaderContent>
+            <MudTh>Customer Name</MudTh>
+            <MudTh>Room No</MudTh>
+            <MudTh>Check-In</MudTh>
+            <MudTh>Check-Out</MudTh>
+            <MudTh>Status</MudTh>
+            <MudTh>Number Of Days</MudTh>
+            <MudTh>Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>@context.CustomerName</MudTd>
+            <MudTd>@context.RoomNumber</MudTd>
+            <MudTd>@context.CheckInDate</MudTd>
+            <MudTd>@context.CheckOutDate</MudTd>
+            <MudTd>@context.Status</MudTd>
+            <MudTd>@context.NumberOfDays</MudTd>
+            <MudTd>
+                <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="() => EditBooking(context.BookingId)" />
+                <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="() => DeleteBooking(context.BookingId)" />
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+</MudContainer>

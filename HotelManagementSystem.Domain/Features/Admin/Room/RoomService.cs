@@ -1,12 +1,18 @@
-﻿namespace HotelManagementSystem.Domain.Features.Room;
+﻿using HotelManagementSystem.Database.Db;
+using HotelManagementSystem.Domain.Features.Booking;
+using HotelManagementSystem.Shared;
+
+namespace HotelManagementSystem.Domain.Features.Room;
 
 public class RoomService
 {
     private AppDbContext _context;
+    private DapperService _dapperService;
 
-    public RoomService(AppDbContext context)
+    public RoomService(AppDbContext context, DapperService dapperService)
     {
         _context = context;
+        _dapperService = dapperService;
     }
 
     public async Task<Result<List<RoomModel>>> GetRoomModelsAsync()
@@ -274,6 +280,41 @@ public class RoomService
         {
             return Result<List<RoomModel>>.FailureResult(ex);
         }
+    }
+
+    public async Task UpdateRoomStatusesAsync()
+    {
+        var currentDate = DateTime.Now;
+
+        // Get all rooms that are currently booked
+        var occupiedRoomIds = await _context.Bookings
+            .Where(b => b.CheckInDate <= currentDate && b.CheckOutDate >= currentDate)
+            .Select(b => b.RoomId)
+            .Distinct()
+            .ToListAsync();
+
+        // Update rooms to 'Occupied' if they are booked
+        var roomsToOccupy = await _context.Rooms
+            .Where(r => occupiedRoomIds.Contains(r.RoomId))
+            .ToListAsync();
+
+        foreach (var room in roomsToOccupy)
+        {
+            room.Status = "Occupied";
+        }
+
+        // Update rooms to 'Available' if they are not booked
+        var roomsToMakeAvailable = await _context.Rooms
+            .Where(r => !occupiedRoomIds.Contains(r.RoomId))
+            .ToListAsync();
+
+        foreach (var room in roomsToMakeAvailable)
+        {
+            room.Status = "Available";
+        }
+
+        // Save changes to the database
+        await _context.SaveChangesAsync();
     }
 
 }

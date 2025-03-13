@@ -28,7 +28,7 @@ public class CustomerServices
 
             var customer = new Database.Db.Customer()
             {
-                CustomerId = Guid.NewGuid().ToString(),
+                CustomerId = Ulid.NewUlid().ToString(),
                 FullName = reqModel.FullName!,
                 PhoneNumber = reqModel.PhoneNumber!,
                 Address = reqModel.Address!,
