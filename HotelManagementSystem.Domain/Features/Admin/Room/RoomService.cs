@@ -69,7 +69,7 @@ public class RoomService
             {
                 RoomId = roomId,
                 RoomNumber = roomModel.RoomNumber.Trim(), // Clean input
-                Category = "Standard", // Consider making this configurable or part of RoomModel
+                Category = roomModel.Category, // Consider making this configurable or part of RoomModel
                 Status = "Available",
                 Price = roomModel.Price,
                 Description = roomModel.Description?.Trim() // Handle null description

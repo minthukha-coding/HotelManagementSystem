@@ -73,12 +73,13 @@ public partial class AddRoom
             var result = await _roomService.AddRoomAsync(roomModel);
             if (result.IsSuccess)
             {
+                await JS.InvokeVoidAsync("notiflixNotify.success", result.Message);
                 await JS.InvokeVoidAsync("manageLoading", "remove");
-
                 _goto.NavigateTo("/rooms");
             }
             else
             {
+                await JS.InvokeVoidAsync("notiflixNotify.error", result.Message);
                 await JS.InvokeVoidAsync("manageLoading", "remove");
             }
         }

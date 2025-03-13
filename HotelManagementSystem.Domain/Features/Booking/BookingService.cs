@@ -170,9 +170,8 @@ namespace HotelManagementSystem.Domain.Features.Booking
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                return Result<BookingConfirmationResponseModel>.FailureResult(ex.Message.ToString());
             }
-            return Result<BookingConfirmationResponseModel>.SuccessResult();
         }
 
         public class BookingConfirmationResponseModel

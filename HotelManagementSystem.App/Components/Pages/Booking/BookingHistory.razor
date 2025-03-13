@@ -11,6 +11,7 @@
             <MudTh>Check-Out</MudTh>
             <MudTh>Status</MudTh>
             <MudTh>Number Of Days</MudTh>
+            <MudTh>Total Price</MudTh>
             <MudTh>Actions</MudTh>
         </HeaderContent>
         <RowTemplate>
@@ -20,6 +21,7 @@
             <MudTd>@context.CheckOutDate</MudTd>
             <MudTd>@context.Status</MudTd>
             <MudTd>@context.NumberOfDays</MudTd>
+            <MudTd>@context.Price $</MudTd>
             <MudTd>
                 <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="() => EditBooking(context.BookingId)" />
                 <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="() => DeleteBooking(context.BookingId)" />

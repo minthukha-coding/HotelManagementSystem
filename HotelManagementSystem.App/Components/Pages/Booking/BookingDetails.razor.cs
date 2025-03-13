@@ -81,9 +81,9 @@ public partial class BookingDetails
                 <p>Best regards,<br>Hotel Myaungmya</p>";
 
         // Send email to user
-        await _emailService.SendEmail(userSubject, userBody,result.Data!.CustomerEmail);
+        //await _emailService.SendEmail(userSubject, userBody,result.Data!.CustomerEmail);
 
-        await JS.InvokeVoidAsync("notiflixNotify.error", "Booking Confirmation successful!");
+        await JS.InvokeVoidAsync("notiflixNotify.success", "Booking Confirmation successful!");
         _goto.NavigateTo("/customer-bookings");
         await JS.InvokeVoidAsync("manageLoading", "remove");
 

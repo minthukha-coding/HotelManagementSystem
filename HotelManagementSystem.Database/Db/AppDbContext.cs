@@ -30,7 +30,6 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<RoomPhoto> RoomPhotos { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Booking>(entity =>
@@ -49,7 +48,6 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.CustomerId)
                 .HasMaxLength(200)
                 .IsUnicode(false);
-            entity.Property(e => e.NumberOfDays).HasMaxLength(50);
             entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
             entity.Property(e => e.RoomId)
                 .HasMaxLength(200)

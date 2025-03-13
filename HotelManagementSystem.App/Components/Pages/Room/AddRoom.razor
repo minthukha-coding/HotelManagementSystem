@@ -11,14 +11,13 @@
             <MudTextField @bind-Value="roomModel.RoomNumber" Label="Room Number" FullWidth="true" />
         </MudItem>
 
-@*         <!-- Status -->
         <MudItem xs="12" sm="6">
-            <MudTextField @bind-Value="roomModel.Status" Label="Status" FullWidth="true" />
-        </MudItem> *@
+            <MudTextField @bind-Value="roomModel.Category" Label="Category" FullWidth="true" />
+        </MudItem>
 
         <!-- Price -->
         <MudItem xs="12" sm="6">
-            <MudTextField Value="@formattedPrice" OnInput="@OnPriceInput" Label="Price" FullWidth="true" />
+            <MudTextField @bind-Value="roomModel.Price" Label="Price" FullWidth="true" />
         </MudItem>
 
         <!-- Description -->
