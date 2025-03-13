@@ -8,15 +8,9 @@ public partial class AddRoom
     private RoomModel roomModel = new RoomModel();
     private IReadOnlyList<IBrowserFile>? uploadedFiles;
     private string formattedPrice = "";
-
-    // private void OnFileUpload(InputFileChangeEventArgs e)
-    // {
-    //     uploadedFiles = e.GetMultipleFiles();
-    // }
-
-    [Inject] JwtAuthStateProviderService AuthStateProvider { get; set; }
-
+    IList<IBrowserFile> _files = new List<IBrowserFile>();
     private bool _isAuthenticated;
+    [Inject] JwtAuthStateProviderService AuthStateProvider { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -42,7 +36,6 @@ public partial class AddRoom
         }
     }
 
-    IList<IBrowserFile> _files = new List<IBrowserFile>();
     private void UploadFiles(IReadOnlyList<IBrowserFile> files)
     {
         foreach (var file in files)
@@ -115,6 +108,4 @@ public partial class AddRoom
             formattedPrice = parsedValue.ToString("N0");
         }
     }
-
-
 }

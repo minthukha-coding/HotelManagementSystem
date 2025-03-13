@@ -49,7 +49,7 @@ public partial class AdminLogin
             }
             else
             {
-                await JS.InvokeVoidAsync("notiflixNotify.error", "Error! Something went wrong.");
+                await JS.InvokeVoidAsync("notiflixNotify.error", result.Message);
                 _goto.NavigateTo("/");
             }
 

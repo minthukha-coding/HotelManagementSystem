@@ -43,7 +43,7 @@ public partial class Register
             if (result!.IsSuccess)
             {
                 await JS.InvokeVoidAsync("notiflixNotify.success", "Register successful!");
-                _goto.NavigateTo("/");
+                _goto.NavigateTo("/login");
             }
             else
             {

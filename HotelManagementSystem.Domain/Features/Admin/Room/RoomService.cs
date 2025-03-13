@@ -194,7 +194,8 @@ public class RoomService
     public async Task<string> UploadFileAsync(IBrowserFile file)
     {
         // Define the local directory to save the images
-        var uploadDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "roomphotos");
+        //var uploadDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "roomphotos");
+        var uploadDirectory = Path.Combine("D:\\SharedUploads", "roomphotos");
 
         // Ensure the directory exists
         if (!Directory.Exists(uploadDirectory))

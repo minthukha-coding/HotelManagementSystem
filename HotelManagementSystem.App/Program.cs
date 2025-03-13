@@ -7,6 +7,7 @@ using HotelManagementSystem.Shared.Services;
 using HotelManagementSystem.Shared.Services.JwtService;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -77,6 +78,12 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(@"D:\SharedUploads"),
+    RequestPath = "/uploads"
+});
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();

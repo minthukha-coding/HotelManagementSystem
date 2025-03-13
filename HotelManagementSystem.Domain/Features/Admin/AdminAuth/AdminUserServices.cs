@@ -76,7 +76,6 @@ public partial class UserServices
 
             var token = _jwtService.GenerateJwtToken(reqTokenModel);
 
-
             var response = new LoginResponse
             {
                 Token = token,
