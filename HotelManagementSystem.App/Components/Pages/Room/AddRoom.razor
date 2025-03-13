@@ -28,12 +28,12 @@
 
         <!-- File Upload -->
         <MudItem xs="12">
-            <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles">
+            <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="UploadFiles">
                 <ActivatorContent>
                     <MudButton Variant="Variant.Filled"
                                Color="Color.Primary"
                                StartIcon="@Icons.Material.Filled.CloudUpload">
-                        Upload Files
+                        Upload Room Photos
                     </MudButton>
                 </ActivatorContent>
             </MudFileUpload>

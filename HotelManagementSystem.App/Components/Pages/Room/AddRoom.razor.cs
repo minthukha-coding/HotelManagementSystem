@@ -42,10 +42,13 @@ public partial class AddRoom
     }
 
     IList<IBrowserFile> _files = new List<IBrowserFile>();
-    private void UploadFiles(IBrowserFile file)
+    private void UploadFiles(IReadOnlyList<IBrowserFile> files)
     {
-        _files.Add(file);
-        //TODO upload the files to the server
+        foreach (var file in files)
+        {
+            _files.Add(file);
+            //TODO upload the files to the server
+        }
     }
 
     private async Task SaveRoom()
