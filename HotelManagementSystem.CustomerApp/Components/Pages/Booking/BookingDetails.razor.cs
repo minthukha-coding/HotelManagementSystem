@@ -5,16 +5,28 @@ namespace HotelManagementSystem.CustomerApp.Components.Pages.Booking;
 public partial class BookingDetails
 {
     [Parameter]
-    public BookingModel bookingModel { get; set; }
 
-    [Parameter]
-    public RoomModel room { get; set; }
+    public string BookingId { get; set; }   
+
+    public BookingResponseModel bookingModel = new BookingResponseModel();
+
+    public RoomModel room = new RoomModel();
 
     private decimal totalPrice;
 
     [Inject] JwtAuthStateProviderService AuthStateProvider { get; set; }
 
     private bool _isAuthenticated;
+
+    protected override async Task OnInitializedAsync()
+    {
+        bookingModel.BookingId = BookingId;
+        var result = await _bookingService.GetBookingDeatilsById(BookingId);
+        if (result.IsSuccess)
+        {
+            bookingModel = result.Data!;
+        }
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -40,16 +52,16 @@ public partial class BookingDetails
         }
     }
 
-    protected override void OnParametersSet()
-    {
-        if (bookingModel.CheckInDate.HasValue && bookingModel.CheckOutDate.HasValue)
-        {
-            totalPrice = (bookingModel.CheckOutDate.Value - bookingModel.CheckInDate.Value).Days * room.Price;
-        }
-    }
+    //protected override void OnParametersSet()
+    //{
+        //if (bookingModel.CheckInDate.HasValue && bookingModel.CheckOutDate.HasValue)
+        //{
+        //    totalPrice = (bookingModel.CheckOutDate.Value - bookingModel.CheckInDate.Value).Days * room.Price;
+        //}
+    //}
 
     private void ConfirmBooking()
     {
-        _goto.NavigateTo("/booking-success");
+        _goto.NavigateTo("/");
     }
 }

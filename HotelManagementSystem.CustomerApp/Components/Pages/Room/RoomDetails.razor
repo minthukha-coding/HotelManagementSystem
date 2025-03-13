@@ -5,7 +5,6 @@
 
 <MudContainer>
     <MudText Typo="Typo.h4" GutterBottom="true">Room Details</MudText>
-
     @if (room == null)
     {
         <MudText>Loading room details...</MudText>
@@ -15,22 +14,13 @@
         <MudPaper Elevation="3" Class="pa-4">
             <MudGrid>
                 <MudItem xs="12" md="6">
-                    <!-- Room Details -->
                     <MudText Typo="Typo.h6">Room @room.RoomNumber</MudText>
                     <MudText>Category: @room.Category</MudText>
                     <MudText>Price: $@room.Price/night</MudText>
                     <MudText>@room.Description</MudText>
                 </MudItem>
                 <MudItem xs="12" md="6">
-                    <!-- Room Photos -->
                     <MudCarousel TData="string" Style="height:200px;">
-                        @*   @foreach (var photo in room.Photos)
-                        {
-                            <MudCarouselItem>
-                                <img src="@photo" alt="Room photo" style="width:100%;height:200px;object-fit:cover;" />
-                            </MudCarouselItem>
-                        } *@
-
                         @if (room.PhotoUrls != null && room.PhotoUrls.Any())
                         {
                             @foreach (var photoUrl in room.PhotoUrls)
@@ -39,7 +29,6 @@
                                     <MudImage Src="@photoUrl.PhotoUrl" style="width:100%;height:200px;object-fit:cover;" Alt="Room image" Class="m-2" />
                                 </MudCarouselItem>
                             }
-                            @* <img src="@room.PhotoUrls" alt="Room photo" style="width:100%;height:200px;object-fit:cover;" /> *@
                         }
                         else
                         {
@@ -49,17 +38,6 @@
                     </MudCarousel>
                 </MudItem>
                 <MudItem xs="12">
-                    <!-- Booking Form -->
-                    @*  <MudForm @ref="form" @bind-IsValid="@isValid"> 
-                         <MudDatePicker Label="Check-in Date" MinDate="DateTime.Today" DateFormat="MM/dd/yyyy" @bind-Date="bookingModel.CheckInDate"/>
-
-
-                        <MudButton Variant="Variant.Filled"
-                                   Color="Color.Primary"
-                                   Disabled="!isValid"
-                                   OnClick="SubmitBooking">Confirm Booking</MudButton>
-                    </MudForm>  *@
-
                     <form @onsubmit="SubmitBooking">
                         <MudGrid Spacing="2">
                             <MudItem xs="12" sm="6">
@@ -99,9 +77,20 @@
                                 @if (bookingModel.CheckInDate.HasValue && bookingModel.CheckOutDate.HasValue)
                                 {
                                     <MudText Typo="Typo.body2" Class="mb-2">
-                                        Stay Duration:
+                                        @* Stay Duration:
                                         @((bookingModel.CheckOutDate.Value - bookingModel.CheckInDate.Value).Days) nights
-                                        (Total: $@((bookingModel.CheckOutDate.Value - bookingModel.CheckInDate.Value).Days * room.Price))
+                                        (Total: $@((bookingModel.CheckOutDate.Value - bookingModel.CheckInDate.Value).Days * room.Price)) *@
+                                        @if (bookingModel.CheckInDate.HasValue && bookingModel.CheckOutDate.HasValue)
+                                        {
+                                            int nights = (bookingModel.CheckOutDate.Value - bookingModel.CheckInDate.Value).Days;
+                                            totalPrice = nights * room.Price;
+
+                                            Price = $"Stay Duration: {nights} nights (Total: ${totalPrice})"; // Update the property
+
+                                            <MudText Typo="Typo.body2" Class="mb-2">
+                                                @Price <!-- Display the price string -->
+                                            </MudText>
+                                        }
                                     </MudText>
                                 }
                             </MudItem>

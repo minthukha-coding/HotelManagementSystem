@@ -7,6 +7,9 @@ public partial class RoomDetails
     [Parameter] public string RoomId { get; set; }
     private RoomModel room;
 
+    private string Price;
+    private decimal totalPrice;
+
     public BookingModel bookingModel = new BookingModel();
 
     protected override async Task OnInitializedAsync()
@@ -30,12 +33,13 @@ public partial class RoomDetails
             {
                 bookingModel.NumberOfDays = (bookingModel.CheckOutDate - bookingModel.CheckInDate)?.Days ?? 0;
                 bookingModel.CustomerId = userId;
+                bookingModel.Price = totalPrice;
 
                 var result = await _bookingService.UserBookRoom(bookingModel);
                 if (result.IsSuccess)
                 {
                     await JS.InvokeVoidAsync("notiflixNotify.success", "Booking Success");
-                    _goto.NavigateTo("/");
+                    _goto.NavigateTo($"/booking-details/{result.Data.BookingId}");
                 }
             }
             else

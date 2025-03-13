@@ -21,5 +21,5 @@ public partial class Booking
 
     public decimal? Price { get; set; }
 
-    public string? NumberOfDays { get; set; }
+    public int? NumberOfDays { get; set; }
 }

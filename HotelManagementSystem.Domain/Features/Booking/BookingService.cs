@@ -1,4 +1,5 @@
-﻿using HotelManagementSystem.Database.Db;
+﻿using Azure;
+using HotelManagementSystem.Database.Db;
 
 namespace HotelManagementSystem.Domain.Features.Booking
 {
@@ -94,7 +95,7 @@ namespace HotelManagementSystem.Domain.Features.Booking
             return Result<BookingResponseModel>.SuccessResult(responseModels, "BookingModels retrieved successfully.");
         }
 
-        public async Task<Result<bool>> UserBookRoom(BookingModel reqModel)
+        public async Task<Result<BookingConfirmationResponseModel>> UserBookRoom(BookingModel reqModel)
         {
             try
             {
@@ -105,16 +106,26 @@ namespace HotelManagementSystem.Domain.Features.Booking
                     CustomerId = reqModel.CustomerId, // This should be the actual user ID
                     CheckInDate = reqModel.CheckInDate ?? DateTime.UtcNow,
                     CheckOutDate = reqModel.CheckOutDate ?? DateTime.UtcNow,
-                    Status = "Booked"
+                    Status = "Booked",
+                    Price = reqModel.Price,
+                    NumberOfDays = reqModel.NumberOfDays
+                };
+                var respone = new BookingConfirmationResponseModel
+                {
+                    CustomerName = reqModel.CustomerName,
+                    BookingId = booking.BookingId,
+                    RoomType = reqModel.Category,
+                    BookingDate = booking.CheckInDate,
+                    BookingDetailsUrl = "https://hotelmanagement.com/booking-details/" + booking.BookingId
                 };
                 await _context.Bookings.AddAsync(booking);
                 await _context.SaveChangesAsync();
-                return Result<bool>.SuccessResult(true, "Room booked successfully.");
+                return Result<BookingConfirmationResponseModel>.SuccessResult(respone, "Room booked successfully.");
             }
             catch (Exception ex)
             {
                 Console.Write(ex.ToString());
-                return Result<bool>.SuccessResult(false);
+                return Result<BookingConfirmationResponseModel>.SuccessResult();
             }
         }
 
