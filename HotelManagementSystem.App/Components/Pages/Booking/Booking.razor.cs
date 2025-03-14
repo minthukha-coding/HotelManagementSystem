@@ -81,18 +81,18 @@ public partial class Booking
 
         if(result.IsSuccess)
         {
-            //string userSubject = "Booking Confirmation";
+            string userSubject = "Booking Confirmation";
 
-            //string userBody = $@"
-            //                 <h1>Dear {result.Data!.CustomerName},</h1>
-            //                 <p>Your booking with ID <strong>{result.Data.BookingId}</strong> has been confirmed.</p>
-            //                 <p>Room Type: {result.Data.RoomType}</p>
-            //                 <p>Booking Date: {result.Data.BookingDate:yyyy-MM-dd}</p>
-            //                 <p>Thank you for choosing our service!</p>
-            //                 <p>For more information, please visit: <a href=''>Booking Details</a></p>
-            //                 <p>Best regards,<br>Hotel Myaungmya</p>";
-            //var toMail = result.Data!.CustomerEmail;
-            //await _emailService.SendEmail(userSubject, userBody, toMail);
+            string userBody = $@"
+                             <h1>Dear {result.Data!.CustomerName},</h1>
+                             <p>Your booking with ID <strong>{result.Data.BookingId}</strong> has been confirmed.</p>
+                             <p>Room Type: {result.Data.RoomType}</p>
+                             <p>Booking Date: {result.Data.BookingDate:yyyy-MM-dd}</p>
+                             <p>Thank you for choosing our service!</p>
+                             <p>For more information, please visit: <a href=''>Booking Details</a></p>
+                             <p>Best regards,<br>Hotel Myaungmya</p>";
+            var toMail = result.Data!.CustomerEmail;
+            await _emailService.SendEmail(userSubject, userBody, toMail);
             await JS.InvokeVoidAsync("manageLoading", "remove");
             _goto.NavigateTo("/customer-bookings", true);
             await JS.InvokeVoidAsync("notiflixNotify.success", "Booking Confirmation successful!");

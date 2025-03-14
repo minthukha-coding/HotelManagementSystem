@@ -20,11 +20,11 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 builder.Services
-    .AddFluentEmail("studyplannerhub@gmail.com") // Default sender email
+    .AddFluentEmail("minthukha.dev@gmail.com") // Default sender email
     .AddSmtpSender(new SmtpClient("smtp.gmail.com")
     {
         Port = 587, // Change based on your SMTP provider
-        Credentials = new NetworkCredential("studyplannerhub@gmail.com", "nhyr ysyd owwk jama"),
+        Credentials = new NetworkCredential("minthukha.dev@gmail.com", "zaax qfki nure hslh"),
         EnableSsl = true
     });
 

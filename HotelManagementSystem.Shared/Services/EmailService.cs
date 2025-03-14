@@ -16,11 +16,11 @@ public class EmailService
     {
         try
         {
-            //var result = await _email
-            //   .To(toMail)
-            //   .Subject(userSubject)
-            //   .Body(userBody,isHtml: true)
-            //   .SendAsync();
+            var result = await _email
+               .To(toMail)
+               .Subject(userSubject)
+               .Body(userBody, isHtml: true)
+               .SendAsync();
         }
         catch (Exception ex)
         {
