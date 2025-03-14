@@ -29,7 +29,7 @@ public partial class Register
 
         if (form.IsValid)
         {
-            var reqModel = new CustomerModel
+            var reqModel = new CustomerAuthModel
             {
                 Email = email,
                 PhoneNumber = phoneNumber,
@@ -38,7 +38,7 @@ public partial class Register
                 Address = address
             };
 
-            var result = await _customerServices.Register(reqModel);
+            var result = await _customerAuthServices.Register(reqModel);
 
             if (result!.IsSuccess)
             {

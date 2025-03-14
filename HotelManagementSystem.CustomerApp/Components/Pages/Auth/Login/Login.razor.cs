@@ -33,7 +33,7 @@ public partial class Login
         {
             await JS.InvokeVoidAsync("manageLoading", "show");
 
-            var result = await _customerServices.Login(loginModel.Email, loginModel.Password);
+            var result = await _customerAuthServices.Login(loginModel.Email, loginModel.Password);
 
             await JS.InvokeVoidAsync("manageLoading", "remove");
 

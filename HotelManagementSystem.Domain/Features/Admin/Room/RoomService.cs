@@ -1,6 +1,7 @@
 ﻿using HotelManagementSystem.Database.Db;
 using HotelManagementSystem.Domain.Features.Booking;
 using HotelManagementSystem.Shared;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelManagementSystem.Domain.Features.Room;
 
@@ -318,4 +319,18 @@ public class RoomService
         await _context.SaveChangesAsync();
     }
 
+    public async Task<Result<List<CustomBookingRoomDateRange>>> GetRoomBookingDatesAsync(string roomId)
+    {
+        var bookings = await _context.Bookings
+            .Where(b => b.RoomId == roomId && b.Status == "Confirmed")
+            .Select(b => new CustomBookingRoomDateRange
+            {
+                Start = b.CheckInDate,
+                End = b.CheckOutDate,
+                RoomID = roomId
+            })
+            .ToListAsync();
+
+        return Result<List<CustomBookingRoomDateRange>>.SuccessResult(bookings);
+    }
 }

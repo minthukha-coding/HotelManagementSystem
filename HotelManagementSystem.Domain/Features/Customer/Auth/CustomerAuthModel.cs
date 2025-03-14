@@ -1,6 +1,6 @@
 ﻿namespace HotelManagementSystem.Domain.Features.Customer.Auth;
 
-public class CustomerModel
+public class CustomerAuthModel
 {
     public string? CustomerId { get; set; }
     public string? FullName { get; set; }

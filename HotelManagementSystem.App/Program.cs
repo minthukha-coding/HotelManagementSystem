@@ -8,6 +8,7 @@ using HotelManagementSystem.Shared.Services.JwtService;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.FileProviders;
+using HotelManagementSystem.Domain.Features.Admin.Customer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,7 @@ try
     builder.Services.AddScoped<LocalStorageService>();
     builder.Services.AddScoped<JwtAuthStateProviderService>();
     builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthStateProviderService>();
+    builder.Services.AddScoped<CustomerService>();
     builder.Services.AddScoped<EmailService>();
     builder.Services.AddScoped<UserServices>();
     builder.Services.AddScoped<RoomService>();

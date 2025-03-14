@@ -2,49 +2,49 @@
 
 namespace HotelManagementSystem.Domain.Features.Customer.Auth;
 
-public class CustomerServices
+public class CustomerAuthServices
 {
     private readonly AppDbContext _context;
     private readonly JwtTokenService _jwtService;
 
-    public CustomerServices(AppDbContext context, JwtTokenService jwtService)
+    public CustomerAuthServices(AppDbContext context, JwtTokenService jwtService)
     {
         _context = context;
         _jwtService = jwtService;
     }
 
-    public async Task<Result<CustomerModel>> Register(CustomerModel reqModel)
+    public async Task<Result<CustomerAuthModel>> Register(CustomerAuthModel reqAuthModel)
     {
         try
         {
-            if (reqModel == null!)
-                return Result<CustomerModel>.FailureResult("Request model is null.");
+            if (reqAuthModel == null!)
+                return Result<CustomerAuthModel>.FailureResult("Request model is null.");
 
             var existingCustomer = await _context.Customers
-                .FirstOrDefaultAsync(c => c.Email == reqModel.Email);
+                .FirstOrDefaultAsync(c => c.Email == reqAuthModel.Email);
 
             if (existingCustomer != null)
-                return Result<CustomerModel>.FailureResult("Email is already registered.");
+                return Result<CustomerAuthModel>.FailureResult("Email is already registered.");
 
             var customer = new Database.Db.Customer()
             {
                 CustomerId = Ulid.NewUlid().ToString(),
-                FullName = reqModel.FullName!,
-                PhoneNumber = reqModel.PhoneNumber!,
-                Address = reqModel.Address!,
-                Email = reqModel.Email,
+                FullName = reqAuthModel.FullName!,
+                PhoneNumber = reqAuthModel.PhoneNumber!,
+                Address = reqAuthModel.Address!,
+                Email = reqAuthModel.Email,
                 CreatedAt = DateTime.UtcNow,
-                Password = reqModel.Password
+                Password = reqAuthModel.Password
             };
 
             _context.Customers.Add(customer);
             await _context.SaveChangesAsync();
 
-            return Result<CustomerModel>.SuccessResult(reqModel, "Customer registered successfully.");
+            return Result<CustomerAuthModel>.SuccessResult(reqAuthModel, "Customer registered successfully.");
         }
         catch (Exception ex)
         {
-            return Result<CustomerModel>.FailureResult(ex);
+            return Result<CustomerAuthModel>.FailureResult(ex);
         }
     }
 
@@ -75,7 +75,7 @@ public class CustomerServices
             var response = new LoginResponse
             {
                 Token = token,
-                Customer = new CustomerModel
+                CustomerAuth = new CustomerAuthModel
                 {
                     CustomerId = customer.CustomerId,
                     FullName = customer.FullName,
@@ -97,6 +97,6 @@ public class CustomerServices
     public class LoginResponse
     {
         public string Token { get; set; } = string.Empty;
-        public CustomerModel Customer { get; set; } = new();
+        public CustomerAuthModel CustomerAuth { get; set; } = new();
     }
 }

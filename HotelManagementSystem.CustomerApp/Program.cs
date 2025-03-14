@@ -46,7 +46,7 @@ try
     builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthStateProviderService>();
     builder.Services.AddScoped<BookingService>();
     builder.Services.AddScoped<RoomService>();
-    builder.Services.AddScoped<CustomerServices>();
+    builder.Services.AddScoped<CustomerAuthServices>();
     builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 

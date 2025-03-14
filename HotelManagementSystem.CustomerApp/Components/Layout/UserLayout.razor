@@ -7,22 +7,13 @@
         </MudText>
     </MudAppBar>
 
-    @*  <MudDrawer Open="true" ClipMode="DrawerClipMode.Always" Color="Color.Default">
-        <MudNavLink Href="room/view" Icon="home" Match="NavLinkMatch.All">
-            Rooms
-        </MudNavLink>
-        <button Icon="home" Match="NavLinkMatch.All" @onclick="Logout">
-            Logout
-        </button>
-    </MudDrawer> *@
-
     <MudDrawer Open="true" ClipMode="DrawerClipMode.Always" Color="Color.Default">
         <MudNavLink Href="/" Icon="@Icons.Material.Filled.Home" Match="NavLinkMatch.All">
             Rooms
         </MudNavLink>
-        <MudButton OnClick="Logout" StartIcon="@Icons.Material.Filled.Logout" Color="Color.Default">
+        <MudNavLink OnClick="Logout" Icon="@Icons.Material.Filled.ExitToApp" Match="NavLinkMatch.All">
             Logout
-        </MudButton>
+        </MudNavLink>
     </MudDrawer>
 
     <MudMainContent>

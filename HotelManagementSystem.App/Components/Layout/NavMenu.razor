@@ -2,21 +2,31 @@
     <MudNavLink Href="/rooms" Icon="@Icons.Material.Filled.Home" Match="NavLinkMatch.All">
         Room
     </MudNavLink>
-
-    <MudNavGroup Title="Customer Booking" Icon="@Icons.Material.Filled.Book">
+    <MudNavGroup Title="Booking" Icon="@Icons.Material.Filled.Book">
         <MudNavLink Href="/customer-bookings" Icon="@Icons.Material.Filled.List" Match="NavLinkMatch.All">
             Bookings
         </MudNavLink>
         <MudNavLink Href="/customer-booking-history" Icon="@Icons.Material.Filled.History" Match="NavLinkMatch.All">
             Booking History
         </MudNavLink>
+    </MudNavGroup>  
+    <MudNavGroup Title="Customer Management" Icon="@Icons.Material.Filled.Group">
+        <MudNavLink Href="/customer-management" Icon="@Icons.Material.Filled.List" Match="NavLinkMatch.All">
+            Customer
+        </MudNavLink>
     </MudNavGroup>
-
-    @* <MudNavLink Href="/user/room/view" Icon="@Icons.Material.Filled.Home" Match="NavLinkMatch.All">
-        Customer Room View
-    </MudNavLink> *@
-
-    <MudNavLink Href="/" Icon="@Icons.Material.Filled.ExitToApp" Match="NavLinkMatch.All">
+    <MudNavLink OnClick="Logout" Icon="@Icons.Material.Filled.ExitToApp" Match="NavLinkMatch.All">
         Logout
     </MudNavLink>
 </MudNavMenu>
+
+@code {
+    public async Task Logout()
+    {
+        // Clear the token from localStorage
+        await JS.InvokeVoidAsync("localStorage.removeItem", "authToken");
+
+        // Navigate to the logi page
+        _goto.NavigateTo("/", forceLoad: true);
+    }
+}

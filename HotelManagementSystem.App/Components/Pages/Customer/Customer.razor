@@ -1,0 +1,24 @@
+﻿@page "/customer-management"
+
+<MudContainer>
+    <MudText Typo="Typo.h4" GutterBottom="true">Customer Management</MudText>
+
+    <MudTable Items="@Customers" Hover="true" Striped="true">
+        <HeaderContent>
+            <MudTh>Customer Name</MudTh>
+            <MudTh>Email</MudTh>
+            <MudTh>Phone</MudTh>
+            <MudTh>Address</MudTh>
+            <MudTh>Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Customer Name">@context.CustomerFullName</MudTd>
+            <MudTd DataLabel="Email">@context.Email</MudTd>
+            <MudTd DataLabel="Phone">@context.Phone</MudTd>
+            <MudTd DataLabel="Address">@context.Address</MudTd>
+            <MudTd DataLabel="Actions">
+                <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="() => DeleteCustomer(context.CustomerId)" />
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+</MudContainer>

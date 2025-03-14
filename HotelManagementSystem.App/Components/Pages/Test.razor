@@ -1,0 +1,49 @@
+﻿@page "/test"
+
+<MudCard>
+    <MudCardContent>
+        <MudText Typo="Typo.h6" Class="mb-3">Room Availability</MudText>
+
+        @if (bookedDates.Any())
+        {
+            <MudTable Items="bookedDates">
+                <HeaderContent>
+                    <MudTh>Room Id</MudTh>
+                    <MudTh>Check-In Date</MudTh>
+                    <MudTh>Check-Out Date</MudTh>
+                    <MudTh>Status</MudTh>
+                </HeaderContent>
+                <RowTemplate Context="date">
+                    <MudTd>@date.RoomID</MudTd>
+                    <MudTd>@date.Start.ToShortDateString()</MudTd>
+                    <MudTd>@date.End.ToShortDateString()</MudTd>
+                    <MudTd>Booked</MudTd>
+                </RowTemplate>
+            </MudTable>
+        }
+        else
+        {
+            <MudText Typo="Typo.body2" Color="Color.Success">
+                This room is available for booking.
+            </MudText>
+        }
+    </MudCardContent>
+</MudCard>
+
+@code {
+    private List<CustomBookingRoomDateRange> bookedDates = new();
+
+    private async Task LoadRoomBookingDates()
+    {
+        var result = await _roomService.GetRoomBookingDatesAsync("01JP7F0CCS6VG8HWJSA80P6NQF");
+        if (result.IsSuccess && result.Data != null)
+        {
+            bookedDates = result.Data;
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await LoadRoomBookingDates();
+    }
+}

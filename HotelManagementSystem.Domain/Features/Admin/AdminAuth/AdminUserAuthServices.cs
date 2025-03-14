@@ -106,5 +106,5 @@ public partial class UserServices
         public string Token { get; set; } = string.Empty;
         public UserModel Customer { get; set; } = new();
     }
-
+    
 }
