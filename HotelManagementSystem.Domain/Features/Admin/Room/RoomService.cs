@@ -290,7 +290,7 @@ public class RoomService
 
         // Get all rooms that are currently booked
         var occupiedRoomIds = await _context.Bookings
-            .Where(b => b.CheckInDate <= currentDate && b.CheckOutDate >= currentDate)
+            .Where(b => b.CheckInDate <= currentDate && b.CheckOutDate >= currentDate && b.Status == "Confirmed")
             .Select(b => b.RoomId)
             .Distinct()
             .ToListAsync();

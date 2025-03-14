@@ -19,13 +19,8 @@
             <MudItem>
                 <MudButton Variant="Variant.Filled"
                            Color="Color.Info"
-                           OnClick="ConfirmBooking">
-                    Confirm
-                </MudButton>
-                <MudButton Variant="Variant.Filled"
-                           Color="Color.Primary"
-                           OnClick="ConfirmBooking">
-                    Cancel Booking
+                           @onclick=ClickOk>
+                    Ok
                 </MudButton>
             </MudItem>
         </MudGrid>

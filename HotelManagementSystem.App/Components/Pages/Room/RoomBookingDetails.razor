@@ -1,4 +1,4 @@
-﻿@page "/test"
+﻿@page "/rooms/booking/details/{roomId}"
 
 <MudCard>
     <MudCardContent>
@@ -29,21 +29,3 @@
         }
     </MudCardContent>
 </MudCard>
-
-@code {
-    private List<CustomBookingRoomDateRange> bookedDates = new();
-
-    private async Task LoadRoomBookingDates()
-    {
-        var result = await _roomService.GetRoomBookingDatesAsync("01JP7F0CCS6VG8HWJSA80P6NQF");
-        if (result.IsSuccess && result.Data != null)
-        {
-            bookedDates = result.Data;
-        }
-    }
-
-    protected override async Task OnParametersSetAsync()
-    {
-        await LoadRoomBookingDates();
-    }
-}

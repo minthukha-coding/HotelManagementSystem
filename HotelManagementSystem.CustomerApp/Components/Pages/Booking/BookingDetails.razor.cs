@@ -54,14 +54,16 @@ public partial class BookingDetails
 
     //protected override void OnParametersSet()
     //{
-        //if (bookingModel.CheckInDate.HasValue && bookingModel.CheckOutDate.HasValue)
-        //{
-        //    totalPrice = (bookingModel.CheckOutDate.Value - bookingModel.CheckInDate.Value).Days * room.Price;
-        //}
+    //if (bookingModel.CheckInDate.HasValue && bookingModel.CheckOutDate.HasValue)
+    //{
+    //    totalPrice = (bookingModel.CheckOutDate.Value - bookingModel.CheckInDate.Value).Days * room.Price;
+    //}
     //}
 
-    private void ConfirmBooking()
+    private async void ClickOk()
     {
+        await JS.InvokeVoidAsync("manageLoading", "show");
         _goto.NavigateTo("/");
+        await JS.InvokeVoidAsync("manageLoading", "remove");
     }
 }

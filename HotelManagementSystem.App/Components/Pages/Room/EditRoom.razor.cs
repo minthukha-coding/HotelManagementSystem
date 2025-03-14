@@ -60,10 +60,14 @@ public partial class EditRoom
 
     private async Task UpdateRoom()
     {
-
+        await JS.InvokeVoidAsync("manageLoading", "show");
         var result = await _roomService.UpdateRoomAsync(roomModel);
+        await JS.InvokeVoidAsync("manageLoading", "remove");
+
         if (result.IsSuccess)
         {
+            await JS.InvokeVoidAsync("notiflixNotify.success", result.Message!.ToString());
+            await JS.InvokeVoidAsync("manageLoading", "remove");
             _goto.NavigateTo("/rooms");
         }
         else
@@ -71,8 +75,10 @@ public partial class EditRoom
         }
     }
 
-    private void Cancel()
+    private async void Cancel()
     {
+        await JS.InvokeVoidAsync("manageLoading", "show");
         _goto.NavigateTo("/rooms");
+        await JS.InvokeVoidAsync("manageLoading", "remove");
     }
 }

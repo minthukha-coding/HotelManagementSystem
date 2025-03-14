@@ -72,6 +72,15 @@ public partial class RoomDetails
         _goto.NavigateTo($"/rooms/edit/{roomId}");
 
         await JS.InvokeVoidAsync("manageLoading", "remove");
+    } 
+    
+    private async void BookDetailsForRoomAvaliable()
+    {
+        await JS.InvokeVoidAsync("manageLoading", "show");
+
+        _goto.NavigateTo($"/rooms/booking/details/{roomId}");
+
+        await JS.InvokeVoidAsync("manageLoading", "remove");
     }
 
     private async Task DeleteRoom()

@@ -11,54 +11,6 @@
     }
     else
     {
-        @*         <MudGrid>
-            <MudCardContent Class="flex-grow-1">
-                <!-- Room Category -->
-                <MudText Typo="Typo.body2" Class="mb-1">
-                    <MudIcon Icon="@Icons.Material.Filled.Category" Class="mr-1" />
-                    Category: @room.Category
-                </MudText>
-
-                <!-- Room Price -->
-                <MudText Typo="Typo.body2" Class="mb-1">
-                    <MudIcon Icon="@Icons.Material.Filled.AttachMoney" Class="mr-1" />
-                    Price: $@room.Price
-                </MudText>
-
-                <!-- Room Description -->
-                <MudText Typo="Typo.body2" Class="mb-2">
-                    <MudIcon Icon="@Icons.Material.Filled.Description" Class="mr-1" />
-                    @room.Description
-                </MudText>
-
-                <!-- Room Status Chip -->
-                <MudChip T="string" Color="@GetRoomStatus(room.Status)" Class="mb-2">
-                    @room.Status
-                </MudChip>
-
-            </MudCardContent>
-
-            <MudItem xs="12" sm="6">
-                <MudText Typo="Typo.h6" Class="mb-2">Room Photos</MudText>
-                @if (room.PhotoUrls != null && room.PhotoUrls.Any())
-                {
-                    <MudGrid Spacing="2">
-                        @foreach (var photo in room.PhotoUrls)
-                        {
-                            <MudItem xs="6" sm="4" md="3">
-                                <MudImage Src="@photo.PhotoUrl" Class="room-photo" Style="max-width: 100%; height: auto;" />
-                            </MudItem>
-                        }
-                    </MudGrid>
-                }
-                else
-                {
-                    <MudText Typo="Typo.body2">No photos available for this room.</MudText>
-                }
-            </MudItem>
-        </MudGrid>
- *@
-
         <MudGrid>
             <MudItem xs="12" sm="6">
                 <MudCard>
@@ -114,7 +66,8 @@
         </MudGrid>
 
         <div class="button-container mt-4">
-            <MudButton MudVariant="MudVariant.Outlined" Color="Color.Primary" OnClick="BackToRooms" Class="mr-2">Back to Rooms</MudButton>
+            <MudButton MudVariant="MudVariant.Outlined" Color="Color.Warning" OnClick="BackToRooms" Class="mr-2">Back</MudButton>
+            <MudButton MudVariant="MudVariant.Outlined" Color="Color.Surface" OnClick="BookDetailsForRoomAvaliable" Class="mr-2">View Booking</MudButton>
             <MudButton MudVariant="MudVariant.Outlined" Color="Color.Primary" OnClick="EditRoom" Class="mr-2">Edit Room</MudButton>
             <MudButton MudVariant="MudVariant.Outlined" Color="Color.Error" OnClick="DeleteRoom">Delete Room</MudButton>
         </div>

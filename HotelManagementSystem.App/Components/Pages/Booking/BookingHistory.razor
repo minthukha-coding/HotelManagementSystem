@@ -12,7 +12,6 @@
             <MudTh>Status</MudTh>
             <MudTh>Stay Duration</MudTh>
             <MudTh>Total Price</MudTh>
-            <MudTh>Actions</MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd>@context.CustomerName</MudTd>
@@ -22,10 +21,6 @@
             <MudTd>@context.Status</MudTd>
             <MudTd>@context.NumberOfDays Nx ight</MudTd>
             <MudTd>@context.Price $</MudTd>
-            <MudTd>
-                <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="() => EditBooking(context.BookingId)" />
-                <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="() => DeleteBooking(context.BookingId)" />
-            </MudTd>
         </RowTemplate>
     </MudTable>
 </MudContainer>
