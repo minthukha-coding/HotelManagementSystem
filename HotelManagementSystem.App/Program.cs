@@ -30,6 +30,22 @@ builder.Services
 
 try
 {
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("CorsPolicy", policy =>
+        {
+            policy.AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials()
+                  .SetIsOriginAllowed(origin => true);
+        });
+    });
+    builder.Services.AddSignalR(options =>
+    {
+        options.EnableDetailedErrors = true;
+    });
+    builder.Services.AddScoped<ChatService>();
+
     builder.Services.AddScoped<JwtSecurityTokenHandler>();
     builder.Services.AddScoped<JwtTokenService>();
     builder.Services.AddScoped<LocalStorageService>();
@@ -54,6 +70,8 @@ try
 catch (Exception ex)
 {
     Console.WriteLine(ex.Message);
+    Console.WriteLine("Some error pls check");
+    Console.ReadKey();
 }
 
 // Add services to the container.
@@ -80,6 +98,10 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+app.UseCors("CorsPolicy");
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.UseStaticFiles(new StaticFileOptions
 {
