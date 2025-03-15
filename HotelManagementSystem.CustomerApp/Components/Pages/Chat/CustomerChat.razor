@@ -1,54 +1,27 @@
 ﻿@page "/customer-chat"
+@using HotelManagementSystem.App
+@using HotelManagementSystem.Domain.Features.Customer.CustomerInfo
+@using HotelManagementSystem.Shared
+@using HotelManagementSystem.Shared.Services.JwtService
 @inject ChatService ChatService
+@inject CustomerInfoService _customerInfoService
+@layout UserLayout
 
-<h3>Customer Chat</h3>
+<h3>Live Chat</h3>
 
-<MudTextField @bind-Value="UserName" Label="Your Name" Variant="Variant.Outlined" FullWidth="true" Margin="Margin.Dense" />
-
-<MudTextField @bind-Value="Message" Label="Type a message..." Variant="Variant.Outlined" Multiline="true" Rows="4" FullWidth="true" Margin="Margin.Dense" />
-
-<MudButton OnClick="SendMessage" Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Margin="Margin.Dense">
-    Send
-</MudButton>
-
-<MudItem>
+<MudItem Class="mt-3">
     @foreach (var msg in Messages)
     {
         <MudItem>
             <MudText Typo="Typo.body1">
-                <strong>@msg.SenderType (@msg.User:</strong> @msg.Text
+                <strong>@msg.SenderType (@msg.User) :</strong> @msg.Text
             </MudText>
         </MudItem>
     }
 </MudItem>
 
-@code {
-    private string UserName = "Customer";
-    private string Message;
-    private List<(string SenderType, string User, string Text)> Messages = new();
+<MudTextField Class="mt-2" @bind-Value="Message" Label="Type a message..." Variant="Variant.Outlined" Multiline="true" Rows="4" FullWidth="true" Margin="Margin.Dense" />
 
-    protected override async Task OnInitializedAsync()
-    {
-        ChatService.OnMessageReceived += async (senderType, user, message) =>
-              {
-                  await InvokeAsync(() =>
-                  {
-                      Messages.Add((senderType, user, message));
-                      StateHasChanged();
-                  });
-              };
-
-        await ChatService.StartConnectionAsync("https://localhost:7014", "Customer");
-    }
-
-    private async Task SendMessage()
-    {
-        await ChatService.SendMessageAsync(UserName, Message);
-        Message = string.Empty;
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        await ChatService.StopConnectionAsync();
-    }
-}
+<MudButton Class="mt-2" OnClick="SendMessage" Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Margin="Margin.Dense">
+    Send
+</MudButton>

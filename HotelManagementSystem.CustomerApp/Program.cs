@@ -10,6 +10,8 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using MudBlazor.Services;
 using System.Text;
+using HotelManagementSystem.App;
+using HotelManagementSystem.Domain.Features.Customer.CustomerInfo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,11 +41,28 @@ try
         };
     });
 
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("CorsPolicy", policy =>
+        {
+            policy.AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials()
+                .SetIsOriginAllowed(origin => true);
+        });
+    });
+    builder.Services.AddSignalR(options =>
+    {
+        options.EnableDetailedErrors = true;
+    });
+    builder.Services.AddScoped<ChatService>();
+    
     builder.Services.AddScoped<JwtSecurityTokenHandler>();
     builder.Services.AddScoped<JwtTokenService>();
     builder.Services.AddScoped<LocalStorageService>();
     builder.Services.AddScoped<JwtAuthStateProviderService>();
     builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthStateProviderService>();
+    builder.Services.AddScoped<CustomerInfoService>();
     builder.Services.AddScoped<BookingService>();
     builder.Services.AddScoped<RoomService>();
     builder.Services.AddScoped<CustomerAuthServices>();
@@ -87,6 +106,10 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+app.UseCors("CorsPolicy");
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.UseStaticFiles(new StaticFileOptions
 {

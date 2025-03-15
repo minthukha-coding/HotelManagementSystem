@@ -3,64 +3,19 @@
 
 <h3>Admin Chat</h3>
 
-<input @bind="UserName" placeholder="Your Name" />
-<textarea @bind="Message" placeholder="Type a message..." />
-<button @onclick="SendMessage">Send</button>
-
-<ul>
+<MudItem Class="mt-3">
     @foreach (var msg in Messages)
     {
-        <li><strong>@msg.SenderType (@msg.User):</strong> @msg.Text</li>
+        <MudItem>
+            <MudText Typo="Typo.body1">
+                <strong>@msg.SenderType (@msg.User) :</strong> @msg.Text
+            </MudText>
+        </MudItem>
     }
-</ul>
+</MudItem>
 
-@code {
-    private string UserName = "Admin";
-    private string Message;
-    private List<(string SenderType, string User, string Text)> Messages = new();
+<MudTextField Class="mt-2" @bind-Value="Message" Label="Type a message..." Variant="Variant.Outlined" Multiline="true" Rows="4" FullWidth="true" Margin="Margin.Dense" />
 
-    protected override async Task OnInitializedAsync()
-    {
-        try
-        {
-            _chatService.OnMessageReceived += async (senderType, user, message) =>
-            {
-                await InvokeAsync(() =>
-                {
-                    Messages.Add((senderType, user, message));
-                    StateHasChanged();
-                });
-           };
-            await _chatService.StartConnectionAsync("https://localhost:7014", "Admin");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
-    }
-
-    private async Task SendMessage()
-    {
-        try
-        {
-            await _chatService.SendMessageAsync(UserName, Message);
-            Message = string.Empty;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        try
-        {
-            await _chatService.StopConnectionAsync();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
-    }
-}
+<MudButton Class="mt-2" OnClick="SendMessage" Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Margin="Margin.Dense">
+    Send
+</MudButton>
