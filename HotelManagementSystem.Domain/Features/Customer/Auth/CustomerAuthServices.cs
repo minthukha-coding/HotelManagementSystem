@@ -34,7 +34,8 @@ public class CustomerAuthServices
                 Address = reqAuthModel.Address!,
                 Email = reqAuthModel.Email,
                 CreatedAt = DateTime.UtcNow,
-                Password = reqAuthModel.Password
+                Password = reqAuthModel.Password,
+                DelFlag = '0'
             };
 
             _context.Customers.Add(customer);
