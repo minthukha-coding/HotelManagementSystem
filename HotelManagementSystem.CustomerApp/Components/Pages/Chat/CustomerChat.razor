@@ -3,16 +3,24 @@
 
 <h3>Customer Chat</h3>
 
-<input @bind="UserName" placeholder="Your Name" />
-<textarea @bind="Message" placeholder="Type a message..." />
-<button @onclick="SendMessage">Send</button>
+<MudTextField @bind-Value="UserName" Label="Your Name" Variant="Variant.Outlined" FullWidth="true" Margin="Margin.Dense" />
 
-<ul>
+<MudTextField @bind-Value="Message" Label="Type a message..." Variant="Variant.Outlined" Multiline="true" Rows="4" FullWidth="true" Margin="Margin.Dense" />
+
+<MudButton OnClick="SendMessage" Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Margin="Margin.Dense">
+    Send
+</MudButton>
+
+<MudItem>
     @foreach (var msg in Messages)
     {
-        <li><strong>@msg.SenderType (@msg.User):</strong> @msg.Text</li>
+        <MudItem>
+            <MudText Typo="Typo.body1">
+                <strong>@msg.SenderType (@msg.User:</strong> @msg.Text
+            </MudText>
+        </MudItem>
     }
-</ul>
+</MudItem>
 
 @code {
     private string UserName = "Customer";
