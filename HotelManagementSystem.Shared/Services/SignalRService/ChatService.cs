@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using Azure.Identity;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace HotelManagementSystem.App;
 
@@ -8,6 +9,7 @@ public class ChatService
     private string _userType;
 
     public event Action<string, string, string> OnMessageReceived;
+    public event Action<string> typingUsers;
 
     public async Task StartConnectionAsync(string baseUrl, string userType)
     {
@@ -22,6 +24,11 @@ public class ChatService
             OnMessageReceived?.Invoke(senderType, senderName, message);
         });
 
+        _hubConnection.On<string>("ReceiveTypingNotification", (userName) =>
+        {
+            typingUsers.Invoke(userName);
+        });
+
         await _hubConnection.StartAsync();
         await _hubConnection.SendAsync("RegisterUser", userType);
     }
@@ -31,6 +38,14 @@ public class ChatService
         if (_hubConnection.State == HubConnectionState.Connected)
         {
             await _hubConnection.SendAsync("SendMessage", _userType, userName, message);
+        }
+    }
+
+    public async Task NotifyTypingAsync(string userName)
+    {
+        if (_hubConnection.State == HubConnectionState.Connected)
+        {
+            await _hubConnection.SendAsync("NotifyTyping", userName);
         }
     }
 

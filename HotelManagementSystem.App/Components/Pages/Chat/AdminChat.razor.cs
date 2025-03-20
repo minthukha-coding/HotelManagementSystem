@@ -4,6 +4,7 @@ public partial class AdminChat
 {
     private string UserName = "Hotel Myaungmya Admin";
     private string Message;
+    private HashSet<string> typingUsers = new();
     private List<(string SenderType, string User, string Text)> Messages = new();
 
     protected override async Task OnInitializedAsync()
@@ -15,6 +16,21 @@ public partial class AdminChat
                 await InvokeAsync(() =>
                 {
                     Messages.Add((senderType, user, message));
+                    StateHasChanged();
+                });
+            };
+
+            _chatService.typingUsers += async (userName) =>
+            {
+                await InvokeAsync(() =>
+                {
+                    typingUsers.Add(userName);
+                    StateHasChanged();
+                });
+                await Task.Delay(2000);
+                await InvokeAsync(() =>
+                {
+                    typingUsers.Remove(userName);
                     StateHasChanged();
                 });
             };
@@ -50,4 +66,17 @@ public partial class AdminChat
             Console.WriteLine(ex.Message);
         }
     }
+
+    public async Task NotifyTyping()
+    {
+        try
+        {
+            await _chatService.NotifyTypingAsync(UserName);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
 }

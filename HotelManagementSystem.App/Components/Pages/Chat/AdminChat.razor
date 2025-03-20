@@ -12,9 +12,15 @@
             </MudText>
         </MudItem>
     }
+    @if (typingUsers.Any())
+    {
+        <div>
+            @string.Join(", ", typingUsers) is typing...
+        </div>
+    }
 </MudItem>
 
-<MudTextField Class="mt-2" @bind-Value="Message" Label="Type a message..." Variant="Variant.Outlined" Multiline="true" Rows="4" FullWidth="true" Margin="Margin.Dense" />
+<input Class="mt-2" @oninput="NotifyTyping" @bind-value="Message" placeholder="Type a message" />
 
 <MudButton Class="mt-2" OnClick="SendMessage" Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Margin="Margin.Dense">
     Send

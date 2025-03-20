@@ -59,4 +59,15 @@ public class ChatHub : Hub
         }
     }
 
+    public async Task NotifyTyping(string user)
+    {
+        try
+        {
+            await Clients.All.SendAsync("ReceiveTypingNotification", user);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
 }
