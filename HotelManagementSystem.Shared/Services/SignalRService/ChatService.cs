@@ -1,4 +1,5 @@
 ﻿using Azure.Identity;
+using HotelManagementSystem.Shared;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace HotelManagementSystem.App;
@@ -30,7 +31,8 @@ public class ChatService
         });
 
         await _hubConnection.StartAsync();
-        await _hubConnection.SendAsync("RegisterUser", userType);
+        var connectionId = _DevCode.GetUlid();
+        await _hubConnection.SendAsync("RegisterUser", connectionId,userType);
     }
 
     public async Task SendMessageAsync(string userName, string message)

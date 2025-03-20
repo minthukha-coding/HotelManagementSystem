@@ -1,17 +1,16 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using System.Collections.Concurrent;
 
 namespace HotelManagementSystem.App;
 
 public class ChatHub : Hub
 {
-    private static Dictionary<string, string> _connectedUsers = new();
+    private static ConcurrentDictionary<string, string> _connectionIdMap = new();
 
     public override async Task OnConnectedAsync()
     {
         try
         {
-            string userId = Context.ConnectionId;
-            _connectedUsers[userId] = "Unknown";
             await Clients.Caller.SendAsync("ReceiveSystemMessage", "Connected to chat server.");
             await base.OnConnectedAsync();
         }
@@ -25,7 +24,6 @@ public class ChatHub : Hub
     {
         try
         {
-            _connectedUsers.Remove(Context.ConnectionId);
             await base.OnDisconnectedAsync(exception);
         }
         catch (Exception ex)
@@ -34,12 +32,13 @@ public class ChatHub : Hub
         }
     }
 
-    public async Task RegisterUser(string userType)
+    public async Task RegisterUser(string connectionId,string userType)
     {
         try
         {
-            _connectedUsers[Context.ConnectionId] = userType;
             await Clients.All.SendAsync("UserRegistered", Context.ConnectionId, userType);
+            Console.WriteLine($"User {Context.ConnectionId} registered as {userType}");
+            Console.ReadLine();
         }
         catch (Exception ex)
         {
@@ -59,7 +58,7 @@ public class ChatHub : Hub
         }
     }
 
-    public async Task NotifyTyping(string user)
+    public async Task NotifyTyping(string user) 
     {
         try
         {

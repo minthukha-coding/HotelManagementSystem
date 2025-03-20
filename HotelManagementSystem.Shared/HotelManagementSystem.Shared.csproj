@@ -18,6 +18,7 @@
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1" />
+		<PackageReference Include="NUlid" Version="1.7.2" />
 	</ItemGroup>
 
 </Project>

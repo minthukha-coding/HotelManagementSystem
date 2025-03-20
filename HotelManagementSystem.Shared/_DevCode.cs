@@ -1,4 +1,5 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using NUlid;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace HotelManagementSystem.Shared;
 
@@ -22,4 +23,10 @@ public static class _DevCode
 
         return null;
     }
+
+    public static string GetUlid()
+    {
+        return Ulid.NewUlid().ToString();
+    }
+
 }
