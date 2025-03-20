@@ -111,9 +111,12 @@ app.UseCors("CorsPolicy");
 
 app.MapHub<ChatHub>("/chatHub");
 
+string folderPath = @"D:\SharedUploads";
+Directory.CreateDirectory(folderPath);
+
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(@"D:\SharedUploads"),
+    FileProvider = new PhysicalFileProvider(folderPath),
     RequestPath = "/uploads"
 });
 
