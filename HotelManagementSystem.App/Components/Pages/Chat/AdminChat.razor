@@ -3,25 +3,34 @@
 
 <h3>Admin Chat</h3>
 
-<MudItem Class="mt-3">
-    @foreach (var msg in Messages)
-    {
-        <MudItem>
-            <MudText Typo="Typo.body1">
-                <strong>@msg.SenderType (@msg.User) :</strong> @msg.Text
-            </MudText>
-        </MudItem>
-    }
+<MudPaper Class="p-3 mt-3">
+
+    <MudList T="string">
+        @foreach (var msg in Messages)
+        {
+            <MudListItem>
+                <MudText Typo="Typo.body1">
+                    <strong>@msg.SenderType (@msg.User):</strong> @msg.Text
+                </MudText>
+            </MudListItem>
+        }
+    </MudList>
+
     @if (typingUsers.Any())
     {
-        <div>
+        <MudText Typo="Typo.caption" Class="mt-2 text-secondary">
             @string.Join(", ", typingUsers) is typing...
-        </div>
+        </MudText>
     }
-</MudItem>
 
-<input Class="mt-2" @oninput="NotifyTyping" @bind-value="Message" placeholder="Type a message" />
-
-<MudButton Class="mt-2" OnClick="SendMessage" Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Margin="Margin.Dense">
-    Send
-</MudButton>
+    <MudGrid Class="mt-2">
+        <MudItem xs="9">
+            <MudTextField @bind-Value="Message" Placeholder="Type a message..." Variant="Variant.Outlined" FullWidth="true" Immediate="true" onkeypress="@(NotifyTyping)" />
+        </MudItem>
+        <MudItem xs="3">
+            <MudButton OnClick="SendMessage" Variant="Variant.Filled" Color="Color.Primary" FullWidth="true">
+                Send
+            </MudButton>
+        </MudItem>
+    </MudGrid>
+</MudPaper>

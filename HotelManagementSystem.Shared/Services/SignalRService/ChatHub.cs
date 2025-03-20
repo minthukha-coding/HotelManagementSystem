@@ -63,7 +63,7 @@ public class ChatHub : Hub
     {
         try
         {
-            await Clients.All.SendAsync("ReceiveTypingNotification", user);
+            await Clients.Others.SendAsync("ReceiveTypingNotification", user);
         }
         catch (Exception ex)
         {
