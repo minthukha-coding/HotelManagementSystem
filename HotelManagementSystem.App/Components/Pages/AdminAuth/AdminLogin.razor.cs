@@ -45,7 +45,7 @@ public partial class AdminLogin
                 _authStateProvider.NotifyUserAuthentication(token);
                 await JS.InvokeVoidAsync("notiflixNotify.success", "Login successful!");
                 await Task.Delay(1000);
-                _goto.NavigateTo("/rooms");
+                _goto.NavigateTo("/dashboard");
             }
             else
             {

@@ -1,0 +1,114 @@
+﻿@page "/dashboard"
+
+<MudPaper Class="p-4">
+
+    <MudText Typo="Typo.h5">Hotel Management Dashboard</MudText>
+    <MudGrid Class="mt-4">
+        <MudItem xs="12" sm="6" md="3">
+            <MudCard>
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">Total Bookings</MudText>
+                    <MudText Typo="Typo.subtitle1">@TotalBookings</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3">
+            <MudCard>
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">Total Customers</MudText>
+                    <MudText Typo="Typo.subtitle1">@TotalCustomers</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3">
+            <MudCard>
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">Available Rooms</MudText>
+                    <MudText Typo="Typo.subtitle1">@AvailableRooms</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3">
+            <MudCard>
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">Total Revenue</MudText>
+                    <MudText Typo="Typo.subtitle1">$@TotalRevenue</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+
+    <MudDivider Class="my-4" />
+
+    <MudText Typo="Typo.h6">Latest Bookings</MudText>
+    <MudTable Items="@RecentBookings" Hover="true">
+        <HeaderContent>
+            <MudTh>Customer</MudTh>
+            <MudTh>Room</MudTh>
+            <MudTh>Check-In</MudTh>
+            <MudTh>Check-Out</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>@context.CustomerId</MudTd>
+            <MudTd>@context.RoomId</MudTd>
+            <MudTd>@context.CheckInDate.ToShortDateString()</MudTd>
+            <MudTd>@context.CheckOutDate.ToShortDateString()</MudTd>
+        </RowTemplate>
+    </MudTable>
+
+</MudPaper>
+
+@code {
+    int TotalBookings;
+    int TotalCustomers;
+    int AvailableRooms;
+    decimal TotalRevenue;
+
+    List<Booking> RecentBookings = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        TotalBookings = 90;
+        TotalCustomers = 43;
+        AvailableRooms = 32;
+        TotalRevenue = 63;
+        RecentBookings = new List<Booking>
+        {
+            new Booking{
+                CustomerId = "C001",
+                RoomId = "R101",
+                CheckInDate = DateTime.Now.AddDays(-2),
+                CheckOutDate = DateTime.Now
+            },
+            new Booking{
+                CustomerId = "C002",
+                RoomId = "R102",
+                CheckInDate = DateTime.Now.AddDays(-1),
+                CheckOutDate = DateTime.Now
+            },
+            new Booking{
+                CustomerId = "C003",
+                RoomId = "R103",
+                CheckInDate = DateTime.Now,
+                CheckOutDate = DateTime.Now.AddDays(2)
+            },
+            new Booking{
+                CustomerId = "C004",
+                RoomId = "R104",
+                CheckInDate = DateTime.Now,
+                CheckOutDate = DateTime.Now.AddDays(3)
+            }
+        };
+    }
+
+    private class Booking
+    {
+        public string CustomerId { get; set; }
+        public string RoomId { get; set; }
+        public DateTime CheckInDate { get; set; }
+        public DateTime CheckOutDate { get; set; }
+    }
+}
