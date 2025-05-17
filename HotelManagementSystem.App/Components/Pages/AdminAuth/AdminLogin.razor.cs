@@ -14,6 +14,12 @@ public partial class AdminLogin
     [Inject] JwtAuthStateProviderService _authStateProvider { get; set; }
     [Inject] LocalStorageService _localStorage { get; set; }
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        loginModel.Email = "test@gmail.com";
+        loginModel.Password = "test";
+        Login();
+    }
     private string EmailValidation(string email)
     {
         if (string.IsNullOrWhiteSpace(email))

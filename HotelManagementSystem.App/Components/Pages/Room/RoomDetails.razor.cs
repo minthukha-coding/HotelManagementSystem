@@ -1,4 +1,5 @@
-﻿using HotelManagementSystem.Shared.Services.JwtService;
+﻿using HotelManagementSystem.App.Components.Pages.Dialogs;
+using HotelManagementSystem.Shared.Services.JwtService;
 using Microsoft.AspNetCore.Components;
 
 namespace HotelManagementSystem.App.Components.Pages.Room;
@@ -99,6 +100,25 @@ public partial class RoomDetails
         {
             // Handle error (e.g., show an error message)
         }
+    }
+
+    private async Task ShowDeleteConfirmation()
+    {
+        var parameters = new DialogParameters();
+
+        var options = new DialogOptions()
+        {
+            CloseButton = false,
+            MaxWidth = MaxWidth.ExtraExtraLarge
+        };
+
+        //var dialog = DialogService.Show<ConfirmDeleteDialog>("Confirm Delete", parameters, options);
+        //var result = await dialog.Result;
+
+        //if (!result!.Canceled)
+        //{
+        //    await DeleteRoom();
+        //}
     }
 
     private Color GetRoomStatus(string status)

@@ -1,5 +1,4 @@
 ﻿@page "/rooms/details/{roomId}"
-
 @inject NavigationManager Navigation
 
 <MudContainer>
@@ -69,7 +68,7 @@
             <MudButton MudVariant="MudVariant.Outlined" Color="Color.Warning" OnClick="BackToRooms" Class="mr-2">Back</MudButton>
             <MudButton MudVariant="MudVariant.Outlined" Color="Color.Surface" OnClick="BookDetailsForRoomAvaliable" Class="mr-2">View Booking</MudButton>
             <MudButton MudVariant="MudVariant.Outlined" Color="Color.Primary" OnClick="EditRoom" Class="mr-2">Edit Room</MudButton>
-            <MudButton MudVariant="MudVariant.Outlined" Color="Color.Error" OnClick="DeleteRoom">Delete Room</MudButton>
+            <MudButton MudVariant="MudVariant.Outlined" Color="Color.Error" OnClick="ShowDeleteConfirmation">Delete Room</MudButton>
         </div>
     }
 </MudContainer> 
