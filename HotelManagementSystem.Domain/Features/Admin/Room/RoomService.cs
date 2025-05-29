@@ -1,9 +1,4 @@
-﻿using HotelManagementSystem.Database.Db;
-using HotelManagementSystem.Domain.Features.Booking;
-using HotelManagementSystem.Shared;
-using Microsoft.EntityFrameworkCore;
-
-namespace HotelManagementSystem.Domain.Features.Room;
+﻿namespace HotelManagementSystem.Domain.Features.Admin.Room;
 
 public class RoomService
 {
@@ -41,7 +36,7 @@ public class RoomService
 
     public async Task<Result<RoomModel>> AddRoomAsync(RoomModel roomModel)
     {
-        if (roomModel == null)
+        if (roomModel is null)
         {
             return Result<RoomModel>.FailureResult("Room model cannot be null.");
         }
@@ -194,28 +189,30 @@ public class RoomService
 
     public async Task<string> UploadFileAsync(IBrowserFile file)
     {
-        // Define the local directory to save the images
-        //var uploadDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "roomphotos");
-        var uploadDirectory = Path.Combine("D:\\SharedUploads", "roomphotos");
-
-        // Ensure the directory exists
-        if (!Directory.Exists(uploadDirectory))
+        try
         {
-            Directory.CreateDirectory(uploadDirectory);
+            var uploadDirectory = Path.Combine("D:\\SharedUploads", "roomphotos");
+
+            if (!Directory.Exists(uploadDirectory))
+            {
+                Directory.CreateDirectory(uploadDirectory);
+            }
+        
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.Name);
+            var filePath = Path.Combine(uploadDirectory, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.OpenReadStream().CopyToAsync(stream);
+            }
+
+            return $"/uploads/roomphotos/{fileName}";
         }
-
-        // Generate a unique file name to avoid conflicts
-        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.Name);
-        var filePath = Path.Combine(uploadDirectory, fileName);
-
-        // Save the file to the local path
-        using (var stream = new FileStream(filePath, FileMode.Create))
+        catch (Exception e)
         {
-            await file.OpenReadStream().CopyToAsync(stream);
+            Console.WriteLine(e);
+            throw;
         }
-
-        // Return the relative path to the file (for use in the database)
-        return $"/uploads/roomphotos/{fileName}";
     }
 
     public async Task<Result<RoomModel>> GetRoomByIdAsync(string roomId)

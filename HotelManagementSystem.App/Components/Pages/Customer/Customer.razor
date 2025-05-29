@@ -17,7 +17,7 @@
             <MudTd DataLabel="Phone">@context.Phone</MudTd>
             <MudTd DataLabel="Address">@context.Address</MudTd>
             <MudTd DataLabel="Actions">
-                <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="() => DeleteCustomer(context.CustomerId)" />
+                <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="() => ShowDeleteConfirmation(context.CustomerId)" />
             </MudTd>
         </RowTemplate>
     </MudTable>

@@ -9,15 +9,14 @@
 @using HotelManagementSystem.App
 @using HotelManagementSystem.App.Components
 @using HotelManagementSystem.App.Components.Layout
+@using HotelManagementSystem.Domain.Features.Admin.AdminAuth
+@using HotelManagementSystem.Domain.Features.Admin.Room
 @using MudBlazor
 @inject IJSRuntime JS
-@inject Domain.Features.User.UserServices _userService
-@inject Domain.Features.Room.RoomService _roomService
+@inject UserServices _userService
+@inject RoomService _roomService
 @inject Domain.Features.Booking.BookingService _bookingService
 @inject Domain.Features.Admin.Customer.CustomerService _customerService
 @inject NavigationManager _goto
-@using HotelManagementSystem.Domain.Features.Room
-@using HotelManagementSystem.Domain.Features.User
-@using HotelManagementSystem.Shared
-@inject Shared.Services.EmailService _emailService
 @inject IDialogService DialogService
+@inject  HotelManagementSystem.Shared.Services.EmailService _emailService;

@@ -4,11 +4,13 @@ using Serilog;
 using System.Net.Mail;
 using System.Net;
 using HotelManagementSystem.Shared.Services;
-using HotelManagementSystem.Shared.Services.JwtService;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.IdentityModel.Tokens.Jwt;
+using HotelManagementSystem.Domain.Features.Admin.AdminAuth;
 using Microsoft.Extensions.FileProviders;
 using HotelManagementSystem.Domain.Features.Admin.Customer;
+using HotelManagementSystem.Domain.Features.Admin.Room;
+using HotelManagementSystem.Shared.Services.SignalRService;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,5 +1,4 @@
-﻿using HotelManagementSystem.Shared.Services.JwtService;
-using Microsoft.AspNetCore.Components;
+﻿using HotelManagementSystem.Domain.Features.Admin.Room;
 
 namespace HotelManagementSystem.App.Components.Pages.Room;
 
@@ -78,6 +77,7 @@ public partial class AddRoom
         }
         catch (Exception ex)
         {
+            await JS.InvokeVoidAsync("notiflixNotify.error", "Something was wrong.");
             await JS.InvokeVoidAsync("manageLoading", "remove");
         }
     }

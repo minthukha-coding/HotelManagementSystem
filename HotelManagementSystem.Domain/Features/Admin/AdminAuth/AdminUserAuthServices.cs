@@ -1,8 +1,6 @@
-﻿using HotelManagementSystem.Database.Db;
-using HotelManagementSystem.Domain.Features.Customer.Auth;
-using HotelManagementSystem.Shared.Services.JwtService;
+﻿using HotelManagementSystem.Shared.Services.JwtService;
 
-namespace HotelManagementSystem.Domain.Features.User;
+namespace HotelManagementSystem.Domain.Features.Admin.AdminAuth;
 
 public partial class UserServices
 {

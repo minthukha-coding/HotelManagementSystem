@@ -1,4 +1,5 @@
-﻿using HotelManagementSystem.Shared;
+﻿using HotelManagementSystem.Domain.Features.Admin.Room;
+using HotelManagementSystem.Shared;
 
 namespace HotelManagementSystem.CustomerApp.Components.Pages.Room;
 

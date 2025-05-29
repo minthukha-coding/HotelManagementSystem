@@ -1,4 +1,5 @@
-﻿using HotelManagementSystem.Domain.Features.Booking;
+﻿using HotelManagementSystem.Domain.Features.Admin.Room;
+using HotelManagementSystem.Domain.Features.Booking;
 using HotelManagementSystem.Shared;
 using HotelManagementSystem.Shared.Services.JwtService;
 using Microsoft.AspNetCore.Components.Authorization;

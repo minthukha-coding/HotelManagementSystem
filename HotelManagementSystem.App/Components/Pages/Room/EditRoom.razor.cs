@@ -1,5 +1,4 @@
-﻿using HotelManagementSystem.Shared.Services.JwtService;
-using Microsoft.AspNetCore.Components;
+﻿using HotelManagementSystem.Domain.Features.Admin.Room;
 
 namespace HotelManagementSystem.App.Components.Pages.Room;
 

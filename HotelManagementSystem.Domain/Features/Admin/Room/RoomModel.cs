@@ -1,4 +1,4 @@
-﻿namespace HotelManagementSystem.Domain.Features.Room;
+﻿namespace HotelManagementSystem.Domain.Features.Admin.Room;
 
 public class RoomModel
 {

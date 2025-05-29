@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using HotelManagementSystem.Domain.Features.Admin.AdminAuth;
 
 namespace HotelManagementSystem.App.Components.Pages.AdminAuth;
 

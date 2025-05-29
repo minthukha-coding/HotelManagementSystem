@@ -1,7 +1,4 @@
-﻿using HotelManagementSystem.Shared.Services.JwtService;
-using Microsoft.AspNetCore.Components;
-
-namespace HotelManagementSystem.App.Components.Pages.Booking;
+﻿namespace HotelManagementSystem.App.Components.Pages.Booking;
 
 public partial class BookingDetails
 {

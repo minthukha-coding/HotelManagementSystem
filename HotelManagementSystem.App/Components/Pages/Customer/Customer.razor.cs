@@ -1,4 +1,5 @@
-﻿using HotelManagementSystem.Database.Db;
+﻿using HotelManagementSystem.App.Components.Pages.Shared.Dialogs;
+using HotelManagementSystem.Database.Db;
 using HotelManagementSystem.Domain.Features.Admin.Customer;
 
 namespace HotelManagementSystem.App.Components.Pages.Customer;
@@ -24,6 +25,27 @@ public partial class Customer
         }
     }
 
+    private async Task ShowDeleteConfirmation(string customerId)
+    {
+        var parameters = new DialogParameters();
+        
+        parameters.Add("Text", "this customer");
+
+        var options = new DialogOptions()
+        {
+            CloseButton = false,
+            MaxWidth = MaxWidth.ExtraExtraLarge
+        };
+
+        var dialog = DialogService.Show<ConfirmDeleteDialog>("Confirm Delete", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result!.Canceled)
+        {
+            await DeleteCustomer(customerId);
+        }
+    }
+    
     private async Task DeleteCustomer(string customerId)
     {
         await JS.InvokeVoidAsync("manageLoading", "show");

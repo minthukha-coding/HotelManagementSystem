@@ -10,8 +10,9 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using MudBlazor.Services;
 using System.Text;
-using HotelManagementSystem.App;
+using HotelManagementSystem.Domain.Features.Admin.Room;
 using HotelManagementSystem.Domain.Features.Customer.CustomerInfo;
+using HotelManagementSystem.Shared.Services.SignalRService;
 
 var builder = WebApplication.CreateBuilder(args);
 

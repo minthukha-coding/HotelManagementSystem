@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
+using Microsoft.AspNetCore.SignalR;
 
-namespace HotelManagementSystem.App;
+namespace HotelManagementSystem.Shared.Services.SignalRService;
 
 public class ChatHub : Hub
 {

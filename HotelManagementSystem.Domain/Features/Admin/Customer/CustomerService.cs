@@ -1,5 +1,4 @@
-﻿using HotelManagementSystem.Domain.Features.User;
-using HotelManagementSystem.Shared.Services.JwtService;
+﻿using HotelManagementSystem.Shared.Services.JwtService;
 
 namespace HotelManagementSystem.Domain.Features.Admin.Customer;
 

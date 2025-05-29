@@ -1,7 +1,6 @@
-﻿using HotelManagementSystem.Shared.Services.JwtService;
-using HotelManagementSystem.Shared.Services;
-using Microsoft.AspNetCore.Components;
+﻿using HotelManagementSystem.Shared.Services;
 using System.Text.RegularExpressions;
+using HotelManagementSystem.Domain.Features.Admin.AdminAuth;
 
 namespace HotelManagementSystem.App.Components.Pages.AdminAuth;
 

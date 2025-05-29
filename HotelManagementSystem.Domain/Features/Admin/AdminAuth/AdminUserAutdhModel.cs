@@ -1,4 +1,4 @@
-﻿namespace HotelManagementSystem.Domain.Features.User;
+﻿namespace HotelManagementSystem.Domain.Features.Admin.AdminAuth;
 
 public class UserModel
 {

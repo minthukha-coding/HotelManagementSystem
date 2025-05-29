@@ -1,5 +1,4 @@
 ﻿using HotelManagementSystem.Database.Db;
-using Microsoft.AspNetCore.Components;
 
 namespace HotelManagementSystem.App.Components.Pages.Booking;
 

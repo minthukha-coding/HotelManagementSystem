@@ -1,4 +1,5 @@
-﻿using HotelManagementSystem.Shared.Services.JwtService;
+﻿using HotelManagementSystem.Domain.Features.Admin.Room;
+using HotelManagementSystem.Shared.Services.JwtService;
 
 namespace HotelManagementSystem.CustomerApp.Components.Pages.Booking;
 

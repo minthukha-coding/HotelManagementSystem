@@ -4,14 +4,15 @@
 
 <MudContainer MaxWidth="MaxWidth.Small" Class="mt-8">
     <MudPaper Class="pa-4">
+        <MudImage Src="favicon.png" Height="50" Width="50 " Class="mx-auto"/>
         <MudText Typo="Typo.h5" Class="mb-4 text-center">Admin Register</MudText>
         <MudForm @ref="form">
             <MudGrid>
                 <MudItem xs="12" Class="mb-1">
-                    <MudTextField Label="Username" @bind-Value="username" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true" />
+                    <MudTextField Label="Username" @bind-Value="username" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true"/>
                 </MudItem>
                 <MudItem xs="12" Class="mb-1">
-                    <MudTextField Label="Email" @bind-Value="email" Validation="@EmailValidation" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true" />
+                    <MudTextField Label="Email" @bind-Value="email" Validation="@EmailValidation" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true"/>
                 </MudItem>
                 <MudItem xs="12" Class="mb-1">
                     <MudTextField Label="Password" @bind-Value="password" Type="password" Required="true" Immediate="true" MudVariant="MudVariant.Outlined" FullWidth="true"/>

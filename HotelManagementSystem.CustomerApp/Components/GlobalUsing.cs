@@ -1,7 +1,6 @@
 ﻿global using Microsoft.JSInterop;
 global using HotelManagementSystem.Domain.Features.Customer.Auth;
 global using MudBlazor;
-global using HotelManagementSystem.Domain.Features.Room;
 global using Microsoft.AspNetCore.Components;
 global using HotelManagementSystem.Domain.Features.Booking;
 global using System.IdentityModel.Tokens.Jwt;

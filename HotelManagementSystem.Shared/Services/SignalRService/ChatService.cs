@@ -1,8 +1,6 @@
-﻿using Azure.Identity;
-using HotelManagementSystem.Shared;
-using Microsoft.AspNetCore.SignalR.Client;
+﻿using Microsoft.AspNetCore.SignalR.Client;
 
-namespace HotelManagementSystem.App;
+namespace HotelManagementSystem.Shared.Services.SignalRService;
 
 public class ChatService
 {

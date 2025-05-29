@@ -1,6 +1,5 @@
-﻿using HotelManagementSystem.App.Components.Pages.Dialogs;
-using HotelManagementSystem.Shared.Services.JwtService;
-using Microsoft.AspNetCore.Components;
+﻿using HotelManagementSystem.App.Components.Pages.Shared.Dialogs;
+using HotelManagementSystem.Domain.Features.Admin.Room;
 
 namespace HotelManagementSystem.App.Components.Pages.Room;
 
@@ -91,14 +90,10 @@ public partial class RoomDetails
         var result = await _roomService.DeleteRoomAsync(roomId);
         if (result.IsSuccess)
         {
+            await JS.InvokeVoidAsync("notiflixNotify.success", result.Message!.ToString());
             await JS.InvokeVoidAsync("manageLoading", "remove");
 
-            // Optionally, show a success message
             Navigation.NavigateTo("/rooms");
-        }
-        else
-        {
-            // Handle error (e.g., show an error message)
         }
     }
 
@@ -106,19 +101,21 @@ public partial class RoomDetails
     {
         var parameters = new DialogParameters();
 
+        parameters.Add("Text", "this room");
+        
         var options = new DialogOptions()
         {
             CloseButton = false,
             MaxWidth = MaxWidth.ExtraExtraLarge
         };
 
-        //var dialog = DialogService.Show<ConfirmDeleteDialog>("Confirm Delete", parameters, options);
-        //var result = await dialog.Result;
+        var dialog = DialogService.Show<ConfirmDeleteDialog>("Confirm Delete", parameters, options);
+        var result = await dialog.Result;
 
-        //if (!result!.Canceled)
-        //{
-        //    await DeleteRoom();
-        //}
+        if (!result!.Canceled)
+        {
+            await DeleteRoom();
+        }
     }
 
     private Color GetRoomStatus(string status)

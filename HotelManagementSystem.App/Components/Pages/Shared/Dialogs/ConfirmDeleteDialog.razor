@@ -1,19 +1,10 @@
 ﻿@using MudBlazor
 
-@* <MudDialog>
-    <Title>Confirm Delete</Title>
-    <Content>Are you sure you want to delete this room?</Content>
-    <Buttons>
-        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="Cancel">No</MudButton>
-        <MudButton Variant="Variant.Text" Color="Color.Error" OnClick="Delete">Yes</MudButton>
-    </Buttons>
-</MudDialog> *@
-
 <MudDialog>
-    <TitleContent>Confirm Delete</TitleContent>
+    <TitleContent>Confirm</TitleContent>
     <DialogContent>
         <MudText Typo="Typo.subtitle1">
-            Are you sure you want to delete this room?
+            Are you sure you want to delete @Text?
         </MudText>
     </DialogContent>
     <DialogActions>
@@ -26,6 +17,9 @@
 @code {
     [CascadingParameter] IMudDialogInstance MudDialog { get; set; }
 
+    [Parameter]
+    public string Text { get; set; }
+    
     void Cancel() => MudDialog.Cancel();
     void Delete() => MudDialog.Close(DialogResult.Ok(true));
 }
